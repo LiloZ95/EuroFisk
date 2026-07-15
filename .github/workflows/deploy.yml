@@ -29,14 +29,6 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Configure Pages
-        # enablement: true turns on GitHub Pages (Actions source) automatically on the
-        # first run, so you don't have to flip it in Settings. If your org blocks this,
-        # enable it manually: Settings → Pages → Source → GitHub Actions.
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Install dependencies
         run: npm ci
 
