@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions the deploy step needs to publish to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only run one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configure Pages
+        # enablement: true turns on GitHub Pages (Actions source) automatically on the
+        # first run, so you don't have to flip it in Settings. If your org blocks this,
+        # enable it manually: Settings → Pages → Source → GitHub Actions.
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Tells vite.config.ts to use base '/EuroFisk/' for the project site
+          DEPLOY_TARGET: gh-pages
+
+      - name: Add SPA fallback + disable Jekyll
+        # 404.html = a copy of index.html so deep links (e.g. /EuroFisk/menu) load the
+        # SPA instead of a hard 404; .nojekyll stops Pages from post-processing the build.
+        run: |
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

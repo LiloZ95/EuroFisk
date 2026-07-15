@@ -10,6 +10,13 @@ import { sans, display } from "@/app/lib/styles";
 
 const NAV_ROUTES = ["/", "/menu", "/reviews", "/#kontakt"];
 
+// Vite injects the deploy base path here ("/EuroFisk/" on GitHub Pages, "/" locally).
+// Absolute in-page anchors like "/#kontakt" must include it, or they resolve to the
+// domain root instead of the app root when served from a sub-path.
+const BASE = import.meta.env.BASE_URL;
+const anchorHref = (route: string) => `${BASE}${route.replace(/^\//, "")}`;
+const KONTAKT_HREF = anchorHref("/#kontakt");
+
 export default function Root() {
   const { lang, setLang } = useLang();
   const t = T[lang];
@@ -55,7 +62,7 @@ export default function Root() {
               const active = isActive(route);
               const cls = `text-sm font-medium transition-colors relative ${active ? "text-primary" : "text-foreground/65 hover:text-primary"}`;
               return route.startsWith("/#") ? (
-                <a key={label} href={route} className={cls} style={sans}>{label}</a>
+                <a key={label} href={anchorHref(route)} className={cls} style={sans}>{label}</a>
               ) : (
                 <Link key={label} to={route} className={cls} style={sans}>
                   {label}
@@ -76,7 +83,7 @@ export default function Root() {
               <span className="text-base leading-none">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
               {lang === "sv" ? "EN" : "SV"}
             </button>
-            <a href="/#kontakt"
+            <a href={KONTAKT_HREF}
               className="bg-primary text-primary-foreground px-5 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors"
               style={sans}>
               {t.navBook}
@@ -109,7 +116,7 @@ export default function Root() {
             {navLabels.map((label, i) => {
               const route = NAV_ROUTES[i];
               return route.startsWith("/#") ? (
-                <a key={label} href={route}
+                <a key={label} href={anchorHref(route)}
                   className="text-sm font-medium text-foreground/65 hover:text-primary transition-colors"
                   onClick={() => setNavOpen(false)}>{label}</a>
               ) : (
@@ -118,7 +125,7 @@ export default function Root() {
                   onClick={() => setNavOpen(false)}>{label}</Link>
               );
             })}
-            <a href="/#kontakt"
+            <a href={KONTAKT_HREF}
               className="bg-primary text-primary-foreground px-5 py-2.5 rounded text-sm font-semibold text-center"
               onClick={() => setNavOpen(false)}>
               {t.navBook}
@@ -153,7 +160,7 @@ export default function Root() {
               {navLabels.map((label, i) => {
                 const route = NAV_ROUTES[i];
                 return route.startsWith("/#") ? (
-                  <a key={label} href={route} className="text-white/55 text-sm hover:text-white transition-colors">{label}</a>
+                  <a key={label} href={anchorHref(route)} className="text-white/55 text-sm hover:text-white transition-colors">{label}</a>
                 ) : (
                   <Link key={label} to={route} className="text-white/55 text-sm hover:text-white transition-colors">{label}</Link>
                 );
