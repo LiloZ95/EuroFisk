@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Instagram, Facebook } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { useLang } from "@/app/lib/LangContext";
@@ -97,11 +97,13 @@ export default function Root() {
           </div>
         </div>
 
+        <AnimatePresence>
         {navOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden bg-white border-t border-border px-5 py-5 flex flex-col gap-4 overflow-hidden"
           >
             {navLabels.map((label, i) => {
@@ -123,6 +125,7 @@ export default function Root() {
             </a>
           </motion.div>
         )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* ── PAGE (animated on route change) ── */}

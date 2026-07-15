@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Instagram, Facebook } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { useLang } from "@/app/lib/LangContext";
@@ -8,11 +8,11 @@ import { T } from "@/app/lib/translations";
 import { heroImg, exteriorImg, interiorImg } from "@/app/lib/images";
 import { display, sans } from "@/app/lib/styles";
 import { FadeUp, FadeIn, FadeUpGroup, LineReveal } from "@/app/lib/animations";
+// Self-hosted hero loop (Mixkit free license). Swap this file for EuroFisk's
+// own cooking footage anytime — keep it a compressed 720p MP4 for fast load.
+import heroVideo from "@/imports/hero-grill-salmon.mp4";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-
-// Drop in EuroFisk's actual cooking video URL here (MP4 recommended for autoplay)
-const HERO_VIDEO_URL = "https://videos.pexels.com/video-files/3258532/3258532-uhd_2560_1440_30fps.mp4";
 
 const GALLERY_PHOTOS = [
   { url: "https://images.unsplash.com/photo-1556814901-18c866c057da?w=600&q=80", alt: "Fish on the grill" },
@@ -28,6 +28,7 @@ const GALLERY_PHOTOS = [
 export default function HomePage() {
   const { lang } = useLang();
   const t = T[lang];
+  const reduce = useReducedMotion();
   const [form, setForm] = useState({ name: "", phone: "", date: "", time: "", guests: "2", note: "" });
   const [submitted, setSubmitted] = useState(false);
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
@@ -36,17 +37,24 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0D1F3C] pt-16">
-        {/* Background video — falls back to poster image if video fails */}
-        <video
+        {/* Background video — self-hosted loop, slow cinematic zoom.
+            Falls back to the poster image if the video can't play. */}
+        <motion.video
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           poster={heroImg as unknown as string}
           className="absolute inset-0 w-full h-full object-cover"
-          src={HERO_VIDEO_URL}
+          src={heroVideo}
+          initial={{ scale: 1.04 }}
+          animate={reduce ? { scale: 1.04 } : { scale: 1.14 }}
+          transition={reduce ? undefined : { duration: 22, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/85 via-[#0D1F3C]/50 to-[#0D1F3C]/20" />
+        {/* Cinematic overlays: directional gradient for headline contrast + bottom vignette for depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/92 via-[#0D1F3C]/65 to-[#0D1F3C]/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/70 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-5 lg:px-10 py-20 w-full">
           <div className="max-w-xl">
@@ -60,7 +68,7 @@ export default function HomePage() {
               {t.heroBadge}
             </motion.div>
 
-            <h1 className="text-5xl lg:text-[5.5rem] font-normal text-white leading-[1.05] mb-6" style={display}>
+            <h1 className="text-[clamp(2.75rem,6vw+1rem,5.5rem)] font-normal text-white leading-[1.05] mb-6" style={display}>
               <LineReveal delay={0.25}>{t.heroTitle1}</LineReveal>
               <LineReveal delay={0.4}><em className="not-italic text-[#5FB3F5]">{t.heroTitle2}</em></LineReveal>
               <LineReveal delay={0.55}>{t.heroTitle3}</LineReveal>

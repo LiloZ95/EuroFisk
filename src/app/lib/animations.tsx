@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -13,12 +13,13 @@ interface Props {
 export function FadeUp({ children, delay = 0, className = "" }: Props) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const reduce = useReducedMotion();
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={reduce ? false : { opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.65, ease, delay }}
+      transition={{ duration: 0.65, ease, delay: reduce ? 0 : delay }}
       className={className}
     >
       {children}
@@ -30,12 +31,13 @@ export function FadeUp({ children, delay = 0, className = "" }: Props) {
 export function FadeIn({ children, delay = 0, className = "" }: Props) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const reduce = useReducedMotion();
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
+      initial={reduce ? false : { opacity: 0 }}
       animate={inView ? { opacity: 1 } : undefined}
-      transition={{ duration: 0.8, ease, delay }}
+      transition={{ duration: 0.8, ease, delay: reduce ? 0 : delay }}
       className={className}
     >
       {children}
@@ -55,14 +57,15 @@ export function FadeUpGroup({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const reduce = useReducedMotion();
   return (
     <div ref={ref} className={className}>
       {children.map((child, i) => (
         <motion.div
           key={i}
-          initial={{ opacity: 0, y: 28 }}
+          initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.55, ease, delay: i * stagger }}
+          transition={{ duration: 0.55, ease, delay: reduce ? 0 : i * stagger }}
         >
           {child}
         </motion.div>
@@ -73,12 +76,13 @@ export function FadeUpGroup({
 
 /** Text line reveal — clips text and slides up from below */
 export function LineReveal({ children, delay = 0, className = "" }: Props) {
+  const reduce = useReducedMotion();
   return (
     <div className={`overflow-hidden ${className}`}>
       <motion.div
-        initial={{ y: "105%" }}
+        initial={reduce ? false : { y: "105%" }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.75, ease, delay }}
+        transition={{ duration: 0.75, ease, delay: reduce ? 0 : delay }}
       >
         {children}
       </motion.div>
@@ -88,9 +92,10 @@ export function LineReveal({ children, delay = 0, className = "" }: Props) {
 
 /** Wraps page route content with a smooth fade-in on mount */
 export function PageEnter({ children }: { children: React.ReactNode }) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={reduce ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
