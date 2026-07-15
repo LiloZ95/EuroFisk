@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Instagram, Facebook } from "lucide-react";
+import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Instagram, Facebook, CalendarDays, UtensilsCrossed, Bike, ShoppingBag } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
@@ -13,6 +13,20 @@ import { FadeUp, FadeIn, FadeUpGroup, LineReveal } from "@/app/lib/animations";
 import heroVideo from "@/imports/hero-grill-salmon.mp4";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+// EuroFisk's WhatsApp number — international format, DIGITS ONLY (no +, spaces or dashes).
+//   +46 730 56 68 13  ->  "46730566813"
+// Change this one line to redirect where booking messages are sent.
+const WHATSAPP_NUMBER = "96181275462";
+
+/** Official WhatsApp glyph — lucide-react ships no brand icons. */
+function WhatsAppIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.887 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 005.71 1.447h.006c6.585 0 11.946-5.335 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/>
+    </svg>
+  );
+}
 
 const GALLERY_PHOTOS = [
   { url: "https://images.unsplash.com/photo-1556814901-18c866c057da?w=600&q=80", alt: "Fish on the grill" },
@@ -29,9 +43,48 @@ export default function HomePage() {
   const { lang } = useLang();
   const t = T[lang];
   const reduce = useReducedMotion();
-  const [form, setForm] = useState({ name: "", phone: "", date: "", time: "", guests: "2", note: "" });
+  const [mode, setMode] = useState<"book" | "order">("book");
+  const [fulfillment, setFulfillment] = useState<"delivery" | "takeaway">("delivery");
+  const [form, setForm] = useState({ name: "", phone: "", date: "", time: "", guests: "2", note: "", address: "", order: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [waUrl, setWaUrl] = useState("");
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  // Build a WhatsApp deep link pre-filled for the chosen intent (localised to the current language).
+  const buildWaUrl = () => {
+    let lines: string[];
+    if (mode === "book") {
+      const guestWord = form.guests === "1" ? t.guestSingular : t.guestPlural;
+      lines = [
+        t.waMsgIntro,
+        "",
+        `🙋 ${t.waLblName}: ${form.name}`,
+        `📅 ${t.waLblDate}: ${form.date}`,
+        `⏰ ${t.waLblTime}: ${form.time}`,
+        `👥 ${t.waLblGuests}: ${form.guests} ${guestWord}`,
+        `📞 ${t.waLblPhone}: ${form.phone}`,
+      ];
+    } else {
+      const isDelivery = fulfillment === "delivery";
+      lines = [isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway, "", `🙋 ${t.waLblName}: ${form.name}`];
+      if (isDelivery && form.address.trim()) lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
+      if (form.time) lines.push(`⏰ ${isDelivery ? t.waLblDelivery : t.waLblPickup}: ${form.time}`);
+      if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
+      lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
+    }
+    if (form.note.trim()) lines.push(`📝 ${t.waLblNote}: ${form.note}`);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const url = buildWaUrl();
+    setWaUrl(url);
+    setSubmitted(true);
+    // Attempt to open WhatsApp within the click gesture; the success screen has a
+    // tappable fallback button in case the browser blocks the auto-open.
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <>
@@ -399,17 +452,79 @@ export default function HomePage() {
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5"
+                    className="w-16 h-16 rounded-full bg-[#25D366]/15 text-[#25D366] flex items-center justify-center mx-auto mb-5"
                   >
-                    <span className="text-3xl text-primary">✓</span>
+                    <WhatsAppIcon size={30} />
                   </motion.div>
-                  <h3 className="text-2xl font-normal text-foreground mb-2" style={display}>{t.successTitle}</h3>
-                  <p className="text-muted-foreground text-sm" style={sans}>{t.successSub}</p>
-                  <button onClick={() => setSubmitted(false)} className="mt-6 text-sm text-primary font-semibold underline underline-offset-4 hover:text-accent transition-colors" style={sans}>{t.successAgain}</button>
+                  <h3 className="text-2xl font-normal text-foreground mb-2" style={display}>{t.waSuccessTitle}</h3>
+                  <p className="text-muted-foreground text-sm max-w-xs mx-auto" style={sans}>{t.waSuccessSub}</p>
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-[#1eb959] transition-colors"
+                    style={sans}
+                  >
+                    <WhatsAppIcon size={18} /> {t.waCta}
+                  </a>
+                  <p className="text-muted-foreground/70 text-xs mt-3" style={sans}>{t.waHelper}</p>
+                  <button onClick={() => setSubmitted(false)} className="mt-5 text-sm text-primary font-semibold underline underline-offset-4 hover:text-accent transition-colors" style={sans}>{t.successAgain}</button>
                 </div>
               ) : (
-                <form className="grid grid-cols-1 gap-4" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
-                  <h3 className="text-xl font-normal text-foreground" style={display}>{t.formTitle}</h3>
+                <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
+                  {/* Intent selector — the customer chooses booking vs ordering */}
+                  <div className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl">
+                    {([
+                      ["book", t.modeBook, CalendarDays],
+                      ["order", t.modeOrder, UtensilsCrossed],
+                    ] as ["book" | "order", string, React.ElementType][]).map(([m, label, Icon]) => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setMode(m)}
+                        aria-pressed={mode === m}
+                        className={`relative flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-colors ${mode === m ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+                        style={sans}
+                      >
+                        {mode === m && (
+                          <motion.span
+                            layoutId="mode-pill"
+                            className="absolute inset-0 bg-primary rounded-lg shadow-sm"
+                            transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
+                          />
+                        )}
+                        <span className="relative z-10 flex items-center gap-2"><Icon size={16} /> {label}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Delivery vs takeaway — only when ordering */}
+                  {mode === "order" && (
+                    <motion.div
+                      initial={reduce ? false : { opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25, ease }}
+                      className="grid grid-cols-2 gap-2"
+                    >
+                      {([
+                        ["delivery", t.fulfillDelivery, Bike],
+                        ["takeaway", t.fulfillTakeaway, ShoppingBag],
+                      ] as ["delivery" | "takeaway", string, React.ElementType][]).map(([f, label, Icon]) => (
+                        <button
+                          key={f}
+                          type="button"
+                          onClick={() => setFulfillment(f)}
+                          aria-pressed={fulfillment === f}
+                          className={`flex items-center justify-center gap-2 py-2.5 rounded-lg border text-sm font-semibold transition-colors ${fulfillment === f ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}
+                          style={sans}
+                        >
+                          <Icon size={16} /> {label}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+
+                  {/* Name + phone (always required) */}
                   {[
                     { label: t.formName, key: "name", type: "text", ph: t.formNamePh },
                     { label: t.formPhone, key: "phone", type: "tel", ph: t.formPhonePh },
@@ -421,32 +536,68 @@ export default function HomePage() {
                         className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
                     </div>
                   ))}
-                  <div className="grid grid-cols-2 gap-4">
-                    {[{ label: t.formDate, key: "date", type: "date" }, { label: t.formTime, key: "time", type: "time" }].map((f) => (
-                      <div key={f.key}>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
-                        <input type={f.type} required value={form[f.key as keyof typeof form]}
-                          onChange={(e) => set(f.key, e.target.value)}
-                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formGuests}</label>
-                    <select value={form.guests} onChange={(e) => set("guests", e.target.value)}
-                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans}>
-                      {["1","2","3","4","5","6","7","8","9","10+"].map((n) => (
-                        <option key={n} value={n}>{n} {n === "1" ? t.guestSingular : t.guestPlural}</option>
-                      ))}
-                    </select>
-                  </div>
+
+                  {/* Intent-specific fields — swap with a soft fade */}
+                  <motion.div
+                    key={mode + fulfillment}
+                    initial={reduce ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-1 gap-4"
+                  >
+                    {mode === "book" ? (
+                      <>
+                        <div className="grid grid-cols-2 gap-4">
+                          {[{ label: t.formDate, key: "date", type: "date" }, { label: t.formTime, key: "time", type: "time" }].map((f) => (
+                            <div key={f.key}>
+                              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
+                              <input type={f.type} required value={form[f.key as keyof typeof form]}
+                                onChange={(e) => set(f.key, e.target.value)}
+                                className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
+                            </div>
+                          ))}
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formGuests}</label>
+                          <select value={form.guests} onChange={(e) => set("guests", e.target.value)}
+                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans}>
+                            {["1","2","3","4","5","6","7","8","9","10+"].map((n) => (
+                              <option key={n} value={n}>{n} {n === "1" ? t.guestSingular : t.guestPlural}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {fulfillment === "delivery" && (
+                          <div>
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formAddress}</label>
+                            <textarea rows={2} required placeholder={t.formAddressPh} value={form.address}
+                              onChange={(e) => set("address", e.target.value)}
+                              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
+                          </div>
+                        )}
+                        <div>
+                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "delivery" ? t.formDeliveryTime : t.formPickupTime}</label>
+                          <input type="time" value={form.time} onChange={(e) => set("time", e.target.value)}
+                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formOrder}</label>
+                          <textarea rows={3} placeholder={t.formOrderPh} value={form.order}
+                            onChange={(e) => set("order", e.target.value)}
+                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formNote}</label>
                     <textarea rows={3} placeholder={t.formNotePh} value={form.note} onChange={(e) => set("note", e.target.value)}
                       className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
                   </div>
-                  <button type="submit" className="w-full bg-primary text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex items-center justify-center gap-2 mt-1" style={sans}>
-                    {t.formSubmit} <ArrowRight size={16} />
+                  <button type="submit" className="w-full bg-[#25D366] text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-[#1eb959] transition-colors flex items-center justify-center gap-2 mt-1" style={sans}>
+                    {t.formSubmit} <WhatsAppIcon size={17} />
                   </button>
                 </form>
               )}
