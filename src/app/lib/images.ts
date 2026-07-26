@@ -1,4 +1,4 @@
-import logoImg from "@/imports/710474426_18110152417785649_6054328865922182777_n.jpg";
+import logoImg from "@/imports/eurofisk-logo-transparent.png";
 import heroImg from "@/imports/720946626_18111809275785649_9222392841617946435_n.jpg";
 import foodSpreadImg from "@/imports/719301082_18111809287785649_8243644206559662839_n.jpg";
 import shrimpPlatterImg from "@/imports/725191264_18113287450785649_8734965326228817069_n.jpg";

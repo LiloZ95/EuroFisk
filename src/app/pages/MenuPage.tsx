@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { ImageIcon } from "lucide-react";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
 import { MENU_DATA } from "@/app/lib/menuData";
 import { display, sans } from "@/app/lib/styles";
 import { FadeUp, FadeUpGroup } from "@/app/lib/animations";
+import { SiteLink } from "@/app/lib/siteRouter";
 
 export default function MenuPage() {
   const { lang } = useLang();
@@ -33,31 +35,41 @@ export default function MenuPage() {
       <div className="bg-primary text-white py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-5 lg:px-10">
           <FadeUp>
-            <p className="text-[#5FB3F5] text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.menuPageLabel}</p>
+            <p className="text-[#C7E5FF] text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.menuPageLabel}</p>
             <h1 className="text-5xl lg:text-7xl font-normal mb-3" style={display}>{t.menuPageTitle}</h1>
-            <p className="text-white/65 max-w-lg" style={sans}>{t.menuPageSub}</p>
+            <p className="text-white/85 max-w-lg" style={sans}>{t.menuPageSub}</p>
           </FadeUp>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-5 lg:px-10 py-12">
-        {/* Mobile pills */}
-        <div className="lg:hidden mb-8 -mx-5 px-5 overflow-x-auto flex gap-2 pb-2" style={{ scrollbarWidth: "none" }}>
+        {/* Mobile category navigation stays available throughout the long menu. */}
+        <nav
+          aria-label={lang === "sv" ? "Menykategorier" : "Menu categories"}
+          className="lg:hidden sticky top-16 z-30 mb-8 -mx-5 px-5 py-3 overflow-x-auto flex gap-2 bg-background/95 backdrop-blur-md border-b border-border"
+          style={{ scrollbarWidth: "none" }}
+        >
           {categories.map((cat) => (
-            <button key={cat.id} onClick={() => scrollTo(cat.id)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeId === cat.id ? "bg-primary text-white" : "bg-secondary text-foreground"}`}
+            <button
+              key={cat.id}
+              onClick={() => scrollTo(cat.id)}
+              aria-current={activeId === cat.id ? "true" : undefined}
+              className={`min-h-11 flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeId === cat.id ? "bg-primary text-white" : "bg-secondary text-foreground"}`}
               style={sans}>
               {cat.label}
             </button>
           ))}
-        </div>
+        </nav>
 
         <div className="flex gap-10 items-start">
           {/* Sticky sidebar */}
           <aside className="hidden lg:flex flex-col gap-1 sticky top-24 w-52 flex-shrink-0">
             {categories.map((cat) => (
-              <button key={cat.id} onClick={() => scrollTo(cat.id)}
-                className={`text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${activeId === cat.id ? "bg-primary text-white shadow-sm" : "text-muted-foreground hover:text-primary hover:bg-primary/8"}`}
+              <button
+                key={cat.id}
+                onClick={() => scrollTo(cat.id)}
+                aria-current={activeId === cat.id ? "true" : undefined}
+                className={`min-h-11 text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${activeId === cat.id ? "bg-primary text-white shadow-sm" : "text-muted-foreground hover:text-primary hover:bg-primary/8"}`}
                 style={sans}>
                 {cat.label}
               </button>
@@ -70,13 +82,16 @@ export default function MenuPage() {
           {/* Items */}
           <div className="flex-1 min-w-0 flex flex-col gap-14">
             {categories.map((cat, catIndex) => (
-              <section key={cat.id} id={cat.id} ref={(el) => { sectionRefs.current[cat.id] = el; }}>
+              <section key={cat.id} id={cat.id} className="scroll-mt-32" ref={(el) => { sectionRefs.current[cat.id] = el; }}>
                 <FadeUp delay={catIndex * 0.05}>
                   <div className="flex items-center gap-3 mb-5">
                     <h2 className="text-3xl font-normal text-foreground" style={display}>{cat.label}</h2>
                     <div className="flex-1 h-px bg-border" />
                     <span className="text-muted-foreground text-sm" style={sans}>{cat.items.length} {t.menuDishes}</span>
                   </div>
+                  {cat.note && (
+                    <p className="text-sm text-muted-foreground -mt-2 mb-5 max-w-2xl" style={sans}>{cat.note}</p>
+                  )}
                 </FadeUp>
                 <FadeUpGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3" stagger={0.06}>
                   {cat.items.map((item) => (
@@ -92,8 +107,25 @@ export default function MenuPage() {
                             </span>
                           )}
                         </div>
+                        {item.arabic && (
+                          <p lang="ar" dir="rtl" className="w-fit text-primary/80 text-base font-semibold leading-tight mb-2">
+                            {item.arabic}
+                          </p>
+                        )}
                         <p className="text-muted-foreground text-xs leading-relaxed mb-3" style={sans}>{item.desc}</p>
-                        <span className="text-primary font-bold text-sm" style={sans}>{item.price}</span>
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-primary font-bold text-sm" style={sans}>{item.price}</span>
+                          {item.orderable !== false && (
+                            <SiteLink
+                              to={{ pathname: "/", search: `?order=${encodeURIComponent(item.name)}`, hash: "#kontakt" }}
+                              className="min-h-11 inline-flex items-center justify-center rounded-lg border border-primary/25 px-3 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
+                              aria-label={`${lang === "sv" ? "Beställ" : "Order"} ${item.name}`}
+                              style={sans}
+                            >
+                              {lang === "sv" ? "Beställ" : "Order"}
+                            </SiteLink>
+                          )}
+                        </div>
                       </div>
 
                       {/* Circular photo */}
@@ -104,11 +136,15 @@ export default function MenuPage() {
                             alt={item.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       ) : (
-                        <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full flex-shrink-0 bg-primary/8 border-2 border-border flex items-center justify-center">
-                          <span className="text-2xl">🐟</span>
+                        <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full flex-shrink-0 bg-primary/8 border-2 border-dashed border-primary/20 flex flex-col items-center justify-center gap-1 text-primary/55">
+                          <ImageIcon size={20} aria-hidden="true" />
+                          <span className="text-[9px] font-semibold text-center px-2 leading-tight" style={sans}>
+                            {lang === "sv" ? "Foto kommer" : "Photo coming"}
+                          </span>
                         </div>
                       )}
                     </div>

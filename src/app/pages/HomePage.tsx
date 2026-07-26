@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Instagram, Facebook, CalendarDays, UtensilsCrossed, Bike, ShoppingBag } from "lucide-react";
+import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Bike, ShoppingBag, Navigation } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
@@ -11,13 +10,14 @@ import { FadeUp, FadeIn, FadeUpGroup, LineReveal } from "@/app/lib/animations";
 // Self-hosted hero loop (Mixkit free license). Swap this file for EuroFisk's
 // own cooking footage anytime — keep it a compressed 720p MP4 for fast load.
 import heroVideo from "@/imports/hero-grill-salmon.mp4";
+import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 // EuroFisk's WhatsApp number — international format, DIGITS ONLY (no +, spaces or dashes).
 //   +46 730 56 68 13  ->  "46730566813"
 // Change this one line to redirect where booking messages are sent.
-const WHATSAPP_NUMBER = "96181275462";
+const WHATSAPP_NUMBER = "46730566813";
 
 /** Official WhatsApp glyph — lucide-react ships no brand icons. */
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
@@ -28,50 +28,41 @@ function WhatsAppIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-const GALLERY_PHOTOS = [
-  { url: "https://images.unsplash.com/photo-1556814901-18c866c057da?w=600&q=80", alt: "Fish on the grill" },
-  { url: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=600&q=80", alt: "Shrimp platter" },
-  { url: "https://images.unsplash.com/photo-1625489539789-39bb40ed9a8a?w=600&q=80", alt: "Chef preparing fish" },
-  { url: "https://images.unsplash.com/photo-1584300005420-38486f627b07?w=600&q=80", alt: "Fish dish" },
-  { url: "https://images.unsplash.com/photo-1559742811-822873691df8?w=600&q=80", alt: "Grilled shrimp with lime" },
-  { url: "https://images.unsplash.com/photo-1717465962264-517140fe69b1?w=600&q=80", alt: "Fish from the oven" },
-  { url: "https://images.unsplash.com/photo-1761095596599-dd7b3bee6287?w=600&q=80", alt: "Fish skewers on grill" },
-  { url: "https://images.unsplash.com/photo-1666437469803-c6d5ba853a50?w=600&q=80", alt: "Seafood plate" },
-];
-
 export default function HomePage() {
   const { lang } = useLang();
   const t = T[lang];
   const reduce = useReducedMotion();
-  const [mode, setMode] = useState<"book" | "order">("book");
+  const location = useSiteLocation();
   const [fulfillment, setFulfillment] = useState<"delivery" | "takeaway">("delivery");
-  const [form, setForm] = useState({ name: "", phone: "", date: "", time: "", guests: "2", note: "", address: "", order: "" });
+  const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", address: "", order: "" });
   const [submitted, setSubmitted] = useState(false);
   const [waUrl, setWaUrl] = useState("");
+  const [playHeroVideo, setPlayHeroVideo] = useState(false);
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  // Build a WhatsApp deep link pre-filled for the chosen intent (localised to the current language).
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+    const updateVideo = () => setPlayHeroVideo(media.matches);
+    updateVideo();
+    media.addEventListener("change", updateVideo);
+    return () => media.removeEventListener("change", updateVideo);
+  }, []);
+
+  useEffect(() => {
+    const selectedDish = new URLSearchParams(location.search).get("order");
+    if (!selectedDish) return;
+    setFulfillment("takeaway");
+    setForm((current) => ({ ...current, order: current.order || selectedDish }));
+  }, [location.search]);
+
+  // Build a WhatsApp deep link with the order pre-filled (localised to the current language).
   const buildWaUrl = () => {
-    let lines: string[];
-    if (mode === "book") {
-      const guestWord = form.guests === "1" ? t.guestSingular : t.guestPlural;
-      lines = [
-        t.waMsgIntro,
-        "",
-        `🙋 ${t.waLblName}: ${form.name}`,
-        `📅 ${t.waLblDate}: ${form.date}`,
-        `⏰ ${t.waLblTime}: ${form.time}`,
-        `👥 ${t.waLblGuests}: ${form.guests} ${guestWord}`,
-        `📞 ${t.waLblPhone}: ${form.phone}`,
-      ];
-    } else {
-      const isDelivery = fulfillment === "delivery";
-      lines = [isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway, "", `🙋 ${t.waLblName}: ${form.name}`];
-      if (isDelivery && form.address.trim()) lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
-      if (form.time) lines.push(`⏰ ${isDelivery ? t.waLblDelivery : t.waLblPickup}: ${form.time}`);
-      if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
-      lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
-    }
+    const isDelivery = fulfillment === "delivery";
+    const lines = [isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway, "", `🙋 ${t.waLblName}: ${form.name}`];
+    if (isDelivery && form.address.trim()) lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
+    if (form.time) lines.push(`⏰ ${isDelivery ? t.waLblDelivery : t.waLblPickup}: ${form.time}`);
+    if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
+    lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
     if (form.note.trim()) lines.push(`📝 ${t.waLblNote}: ${form.note}`);
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
@@ -89,27 +80,36 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0D1F3C] pt-16">
+      <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0D1F3C] pt-16">
         {/* Background video — self-hosted loop, slow cinematic zoom.
             Falls back to the poster image if the video can't play. */}
-        <motion.video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroImg as unknown as string}
-          className="absolute inset-0 w-full h-full object-cover"
-          src={heroVideo}
-          initial={{ scale: 1.04 }}
-          animate={reduce ? { scale: 1.04 } : { scale: 1.14 }}
-          transition={reduce ? undefined : { duration: 22, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-        />
+        {playHeroVideo ? (
+          <motion.video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroImg as unknown as string}
+            className="absolute inset-0 w-full h-full object-cover"
+            src={heroVideo}
+            initial={{ scale: 1.04 }}
+            animate={{ scale: 1.14 }}
+            transition={{ duration: 22, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+          />
+        ) : (
+          <img
+            src={heroImg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
         {/* Cinematic overlays: directional gradient for headline contrast + bottom vignette for depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/92 via-[#0D1F3C]/65 to-[#0D1F3C]/35" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/70 via-transparent to-transparent" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-5 lg:px-10 py-20 w-full">
+        <div className="relative z-10 max-w-6xl mx-auto px-5 lg:px-10 py-12 sm:py-16 md:py-20 w-full flex-1 flex items-center">
           <div className="max-w-xl">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -143,9 +143,9 @@ export default function HomePage() {
               transition={{ duration: 0.6, ease, delay: 0.9 }}
               className="flex flex-wrap gap-3"
             >
-              <Link to="/menu" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-accent transition-colors" style={sans}>
+              <SiteLink to="/menu" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-accent transition-colors" style={sans}>
                 {t.heroMenu} <ArrowRight size={16} />
-              </Link>
+              </SiteLink>
               <a href="#kontakt" className="inline-flex items-center gap-2 bg-white/12 border border-white/30 text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-white/22 backdrop-blur-sm transition-colors" style={sans}>
                 {t.heroBook}
               </a>
@@ -157,7 +157,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease, delay: 1.05 }}
-          className="absolute bottom-0 left-0 right-0 bg-primary/90 backdrop-blur-sm"
+          className="relative z-10 md:absolute md:bottom-0 md:left-0 md:right-0 bg-primary/95 backdrop-blur-sm"
         >
           <div className="max-w-6xl mx-auto px-5 lg:px-10 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 md:divide-x divide-white/20">
             {([
@@ -168,7 +168,7 @@ export default function HomePage() {
               <div key={i} className="flex items-center gap-3 text-white md:px-6 first:pl-0">
                 <Icon size={17} className="text-[#5FB3F5] flex-shrink-0" />
                 <div>
-                  <p className="text-white/55 text-xs uppercase tracking-wider" style={sans}>{label}</p>
+                  <p className="text-white/80 text-xs uppercase tracking-wider" style={sans}>{label}</p>
                   <p className="text-white text-sm font-medium">{val}</p>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function HomePage() {
           {t.featured.map((d) => (
             <div key={d.name} className="group overflow-hidden rounded-xl bg-card border border-border hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300">
               <div className="aspect-square overflow-hidden">
-                <ImageWithFallback src={d.img} alt={d.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <ImageWithFallback src={d.img} alt={d.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="p-5">
                 <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-1" style={sans}>{d.tag}</p>
@@ -199,9 +199,9 @@ export default function HomePage() {
           ))}
         </FadeUpGroup>
         <FadeUp className="text-center">
-          <Link to="/menu" className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-200" style={sans}>
+          <SiteLink to="/menu" className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-200" style={sans}>
             {t.viewFullMenu} <ChevronRight size={16} />
-          </Link>
+          </SiteLink>
         </FadeUp>
       </section>
 
@@ -218,17 +218,18 @@ export default function HomePage() {
             className="flex gap-3 overflow-x-auto pb-2 px-5 lg:px-10"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
           >
-            {GALLERY_PHOTOS.map((photo, i) => (
+            {t.gallery.map((photo, i) => (
               <div
                 key={i}
                 className="relative flex-none overflow-hidden rounded-2xl bg-secondary group"
                 style={{ width: "300px", height: "380px" }}
               >
                 <img
-                  src={photo.url}
+                  src={photo.img}
                   alt={photo.alt}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -252,9 +253,11 @@ export default function HomePage() {
           <FadeIn delay={0.1}>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-primary/15">
-                <ImageWithFallback
-                  src={heroImg}
-                  alt="EuroFisk founder"
+                  <ImageWithFallback
+                    src={heroImg}
+                    alt="EuroFisk founder"
+                    loading="lazy"
+                    decoding="async"
                   className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent" />
@@ -311,9 +314,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:h-[420px]">
             {/* Interior — large left */}
             <FadeUp className="lg:col-span-7 h-64 lg:h-full relative overflow-hidden rounded-2xl bg-secondary group" delay={0.1}>
-              <ImageWithFallback
-                src={interiorImg}
-                alt="EuroFisk dining room interior"
+                <ImageWithFallback
+                  src={interiorImg}
+                  alt="EuroFisk dining room interior"
+                  loading="lazy"
+                  decoding="async"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
@@ -330,6 +335,8 @@ export default function HomePage() {
                 <ImageWithFallback
                   src={exteriorImg}
                   alt="EuroFisk exterior"
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
@@ -342,7 +349,7 @@ export default function HomePage() {
 
               {/* Info card */}
               <div className="bg-primary rounded-2xl p-6 text-white flex-shrink-0">
-                <p className="text-[#5FB3F5] text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
+                <p className="text-[#C7E5FF] text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
                 <div className="flex flex-col gap-3 mt-3">
                   {([
                     [Clock, t.infoHoursVal],
@@ -366,15 +373,15 @@ export default function HomePage() {
       <section className="py-16 lg:py-24 bg-primary text-white">
         <div className="max-w-6xl mx-auto px-5 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <FadeUp>
-            <p className="text-[#5FB3F5] text-sm font-semibold tracking-widest uppercase mb-4" style={sans}>{t.aboutLabel}</p>
+            <p className="text-[#C7E5FF] text-sm font-semibold tracking-widest uppercase mb-4" style={sans}>{t.aboutLabel}</p>
             <h2 className="text-3xl lg:text-5xl font-normal mb-6 leading-tight whitespace-pre-line" style={display}>{t.aboutTitle}</h2>
             <p className="text-white/75 leading-relaxed mb-5" style={sans}>{t.aboutP1}</p>
             <p className="text-white/75 leading-relaxed mb-10" style={sans}>{t.aboutP2}</p>
             <FadeUpGroup className="grid grid-cols-3 gap-5 pt-6 border-t border-white/20" stagger={0.12}>
               {t.aboutStats.map(([n, l]) => (
                 <div key={l}>
-                  <p className="text-4xl font-normal text-[#5FB3F5] mb-1" style={display}>{n}</p>
-                  <p className="text-white/55 text-xs uppercase tracking-wide" style={sans}>{l}</p>
+                  <p className="text-4xl font-normal text-[#C7E5FF] mb-1" style={display}>{n}</p>
+                  <p className="text-white/80 text-xs uppercase tracking-wide" style={sans}>{l}</p>
                 </div>
               ))}
             </FadeUpGroup>
@@ -382,7 +389,7 @@ export default function HomePage() {
           <FadeIn delay={0.2}>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <ImageWithFallback src={exteriorImg} alt="EuroFisk exterior" className="w-full h-full object-cover" />
+                <ImageWithFallback src={exteriorImg} alt="EuroFisk exterior" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <motion.div
                 initial={{ opacity: 0, x: -20, y: 10 }}
@@ -411,9 +418,9 @@ export default function HomePage() {
               <h3 className="text-3xl font-normal text-foreground mb-1" style={display}>{t.reviewText}</h3>
               <p className="text-muted-foreground" style={sans}>{t.reviewSub}</p>
             </div>
-            <Link to="/reviews" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex-shrink-0" style={sans}>
+            <SiteLink to="/reviews" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex-shrink-0" style={sans}>
               {t.navReviews} <ChevronRight size={16} />
-            </Link>
+            </SiteLink>
           </div>
         </section>
       </FadeUp>
@@ -438,9 +445,18 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors" aria-label="Instagram"><Instagram size={16} /></a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors" aria-label="Facebook"><Facebook size={16} /></a>
+            <div className="flex flex-wrap gap-3">
+              <a href="tel:+46730566813" className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
+                <Phone size={16} /> {lang === "sv" ? "Ring oss" : "Call us"}
+              </a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=EuroFisk%20Eskilstuna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
+              >
+                <Navigation size={16} /> {lang === "sv" ? "Hitta hit" : "Directions"}
+              </a>
             </div>
           </FadeUp>
 
@@ -471,24 +487,28 @@ export default function HomePage() {
                   <button onClick={() => setSubmitted(false)} className="mt-5 text-sm text-primary font-semibold underline underline-offset-4 hover:text-accent transition-colors" style={sans}>{t.successAgain}</button>
                 </div>
               ) : (
-                <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
-                  {/* Intent selector — the customer chooses booking vs ordering */}
-                  <div className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl">
+                <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit} aria-describedby="whatsapp-privacy">
+                  {/* Fulfillment selector — delivery or takeaway (primary choice) */}
+                  <div
+                    className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl"
+                    role="group"
+                    aria-label={lang === "sv" ? "Välj leverans eller avhämtning" : "Choose delivery or takeaway"}
+                  >
                     {([
-                      ["book", t.modeBook, CalendarDays],
-                      ["order", t.modeOrder, UtensilsCrossed],
-                    ] as ["book" | "order", string, React.ElementType][]).map(([m, label, Icon]) => (
+                      ["delivery", t.fulfillDelivery, Bike],
+                      ["takeaway", t.fulfillTakeaway, ShoppingBag],
+                    ] as ["delivery" | "takeaway", string, React.ElementType][]).map(([f, label, Icon]) => (
                       <button
-                        key={m}
+                        key={f}
                         type="button"
-                        onClick={() => setMode(m)}
-                        aria-pressed={mode === m}
-                        className={`relative flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-colors ${mode === m ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+                        onClick={() => setFulfillment(f)}
+                        aria-pressed={fulfillment === f}
+                        className={`relative flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-colors ${fulfillment === f ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
                         style={sans}
                       >
-                        {mode === m && (
+                        {fulfillment === f && (
                           <motion.span
-                            layoutId="mode-pill"
+                            layoutId="fulfill-pill"
                             className="absolute inset-0 bg-primary rounded-lg shadow-sm"
                             transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
                           />
@@ -498,104 +518,64 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  {/* Delivery vs takeaway — only when ordering */}
-                  {mode === "order" && (
-                    <motion.div
-                      initial={reduce ? false : { opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25, ease }}
-                      className="grid grid-cols-2 gap-2"
-                    >
-                      {([
-                        ["delivery", t.fulfillDelivery, Bike],
-                        ["takeaway", t.fulfillTakeaway, ShoppingBag],
-                      ] as ["delivery" | "takeaway", string, React.ElementType][]).map(([f, label, Icon]) => (
-                        <button
-                          key={f}
-                          type="button"
-                          onClick={() => setFulfillment(f)}
-                          aria-pressed={fulfillment === f}
-                          className={`flex items-center justify-center gap-2 py-2.5 rounded-lg border text-sm font-semibold transition-colors ${fulfillment === f ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}
-                          style={sans}
-                        >
-                          <Icon size={16} /> {label}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-
                   {/* Name + phone (always required) */}
-                  {[
-                    { label: t.formName, key: "name", type: "text", ph: t.formNamePh },
-                    { label: t.formPhone, key: "phone", type: "tel", ph: t.formPhonePh },
-                  ].map((f) => (
-                    <div key={f.key}>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
-                      <input type={f.type} required placeholder={f.ph} value={form[f.key as keyof typeof form]}
-                        onChange={(e) => set(f.key, e.target.value)}
-                        className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
-                    </div>
-                  ))}
+                    {[
+                      { label: t.formName, key: "name", type: "text", ph: t.formNamePh, autoComplete: "name", inputMode: "text" as const },
+                      { label: t.formPhone, key: "phone", type: "tel", ph: t.formPhonePh, autoComplete: "tel", inputMode: "tel" as const },
+                    ].map((f) => (
+                      <div key={f.key}>
+                        <label htmlFor={`contact-${f.key}`} className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
+                        <input
+                          id={`contact-${f.key}`}
+                          name={f.key}
+                          type={f.type}
+                          required
+                          placeholder={f.ph}
+                          autoComplete={f.autoComplete}
+                          inputMode={f.inputMode}
+                          pattern={f.key === "phone" ? "[0-9+()\\s-]{7,20}" : undefined}
+                          value={form[f.key as keyof typeof form]}
+                          onChange={(e) => set(f.key, e.target.value)}
+                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
+                          style={sans}
+                        />
+                      </div>
+                    ))}
 
-                  {/* Intent-specific fields — swap with a soft fade */}
+                  {/* Fulfillment-specific fields — swap with a soft fade */}
                   <motion.div
-                    key={mode + fulfillment}
+                    key={fulfillment}
                     initial={reduce ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2 }}
                     className="grid grid-cols-1 gap-4"
                   >
-                    {mode === "book" ? (
-                      <>
-                        <div className="grid grid-cols-2 gap-4">
-                          {[{ label: t.formDate, key: "date", type: "date" }, { label: t.formTime, key: "time", type: "time" }].map((f) => (
-                            <div key={f.key}>
-                              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
-                              <input type={f.type} required value={form[f.key as keyof typeof form]}
-                                onChange={(e) => set(f.key, e.target.value)}
-                                className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
-                            </div>
-                          ))}
-                        </div>
-                        <div>
-                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formGuests}</label>
-                          <select value={form.guests} onChange={(e) => set("guests", e.target.value)}
-                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans}>
-                            {["1","2","3","4","5","6","7","8","9","10+"].map((n) => (
-                              <option key={n} value={n}>{n} {n === "1" ? t.guestSingular : t.guestPlural}</option>
-                            ))}
-                          </select>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        {fulfillment === "delivery" && (
-                          <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formAddress}</label>
-                            <textarea rows={2} required placeholder={t.formAddressPh} value={form.address}
-                              onChange={(e) => set("address", e.target.value)}
-                              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
-                          </div>
-                        )}
-                        <div>
-                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "delivery" ? t.formDeliveryTime : t.formPickupTime}</label>
-                          <input type="time" value={form.time} onChange={(e) => set("time", e.target.value)}
-                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors" style={sans} />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formOrder}</label>
-                          <textarea rows={3} placeholder={t.formOrderPh} value={form.order}
-                            onChange={(e) => set("order", e.target.value)}
-                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
-                        </div>
-                      </>
+                    {fulfillment === "delivery" && (
+                      <div>
+                        <label htmlFor="order-address" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formAddress}</label>
+                        <textarea id="order-address" name="address" autoComplete="street-address" rows={2} required placeholder={t.formAddressPh} value={form.address}
+                          onChange={(e) => set("address", e.target.value)}
+                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
+                      </div>
                     )}
+                    <div>
+                      <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "delivery" ? t.formDeliveryTime : t.formPickupTime}</label>
+                      <input id="order-time" name="time" type="time" required value={form.time} onChange={(e) => set("time", e.target.value)}
+                        className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors" style={sans} />
+                    </div>
+                    <div>
+                      <label htmlFor="order-details" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formOrder}</label>
+                      <textarea id="order-details" name="order" rows={3} required placeholder={t.formOrderPh} value={form.order}
+                        onChange={(e) => set("order", e.target.value)}
+                        className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
+                    </div>
                   </motion.div>
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formNote}</label>
-                    <textarea rows={3} placeholder={t.formNotePh} value={form.note} onChange={(e) => set("note", e.target.value)}
-                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:outline-none focus:border-primary/50 transition-colors resize-none" style={sans} />
+                    <label htmlFor="contact-note" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formNote}</label>
+                    <textarea id="contact-note" name="note" rows={3} placeholder={t.formNotePh} value={form.note} onChange={(e) => set("note", e.target.value)}
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
                   </div>
+                  <p id="whatsapp-privacy" className="text-xs leading-relaxed text-muted-foreground" style={sans}>{t.waPrivacy}</p>
                   <button type="submit" className="w-full bg-[#25D366] text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-[#1eb959] transition-colors flex items-center justify-center gap-2 mt-1" style={sans}>
                     {t.formSubmit} <WhatsAppIcon size={17} />
                   </button>

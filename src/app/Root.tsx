@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { useState, useEffect, type ReactNode } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Instagram, Facebook } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
 import { logoImg } from "@/app/lib/images";
 import { sans, display } from "@/app/lib/styles";
+import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const NAV_ROUTES = ["/", "/menu", "/reviews", "/#kontakt"];
 
@@ -17,10 +17,10 @@ const BASE = import.meta.env.BASE_URL;
 const anchorHref = (route: string) => `${BASE}${route.replace(/^\//, "")}`;
 const KONTAKT_HREF = anchorHref("/#kontakt");
 
-export default function Root() {
+export default function Root({ children }: { children: ReactNode }) {
   const { lang, setLang } = useLang();
   const t = T[lang];
-  const location = useLocation();
+  const location = useSiteLocation();
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -52,9 +52,13 @@ export default function Root() {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="max-w-6xl mx-auto px-5 lg:px-10 flex items-center justify-between h-16">
-          <Link to="/" className="hover:opacity-80 transition-opacity">
-            <ImageWithFallback src={logoImg} alt="EuroFisk logo" className="h-10 w-auto object-contain" />
-          </Link>
+          <SiteLink to="/" className="hover:opacity-80 transition-opacity" aria-label="EuroFisk">
+            <ImageWithFallback
+              src={logoImg}
+              alt="EuroFisk logo"
+              className="h-11 w-auto object-contain"
+            />
+          </SiteLink>
 
           <div className="hidden md:flex items-center gap-7">
             {navLabels.map((label, i) => {
@@ -64,7 +68,7 @@ export default function Root() {
               return route.startsWith("/#") ? (
                 <a key={label} href={anchorHref(route)} className={cls} style={sans}>{label}</a>
               ) : (
-                <Link key={label} to={route} className={cls} style={sans}>
+                <SiteLink key={label} to={route} className={cls} style={sans}>
                   {label}
                   {active && (
                     <motion.span
@@ -72,12 +76,13 @@ export default function Root() {
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
                     />
                   )}
-                </Link>
+                </SiteLink>
               );
             })}
 
             <button
               onClick={() => setLang(lang === "sv" ? "en" : "sv")}
+              aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
               className="flex items-center gap-1.5 border border-border rounded-full px-3 py-1.5 text-xs font-semibold text-foreground/55 hover:border-primary hover:text-primary transition-colors"
               style={sans}>
               <span className="text-base leading-none">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
@@ -93,12 +98,19 @@ export default function Root() {
           <div className="flex items-center gap-3 md:hidden">
             <button
               onClick={() => setLang(lang === "sv" ? "en" : "sv")}
-              className="flex items-center gap-1 border border-border rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/55"
+              aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
+              className="flex min-h-11 items-center gap-1 border border-border rounded-full px-3 py-2 text-xs font-semibold text-foreground/55"
               style={sans}>
               <span className="text-sm">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
               {lang === "sv" ? "EN" : "SV"}
             </button>
-            <button className="text-foreground p-1" onClick={() => setNavOpen(!navOpen)}>
+            <button
+              className="text-foreground min-h-11 min-w-11 p-2 flex items-center justify-center"
+              onClick={() => setNavOpen(!navOpen)}
+              aria-label={navOpen ? (lang === "sv" ? "Stäng menyn" : "Close menu") : (lang === "sv" ? "Öppna menyn" : "Open menu")}
+              aria-expanded={navOpen}
+              aria-controls="mobile-navigation"
+            >
               {navOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
@@ -107,6 +119,7 @@ export default function Root() {
         <AnimatePresence>
         {navOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -120,9 +133,9 @@ export default function Root() {
                   className="text-sm font-medium text-foreground/65 hover:text-primary transition-colors"
                   onClick={() => setNavOpen(false)}>{label}</a>
               ) : (
-                <Link key={label} to={route}
+                <SiteLink key={label} to={route}
                   className={`text-sm font-medium transition-colors ${isActive(route) ? "text-primary" : "text-foreground/65 hover:text-primary"}`}
-                  onClick={() => setNavOpen(false)}>{label}</Link>
+                  onClick={() => setNavOpen(false)}>{label}</SiteLink>
               );
             })}
             <a href={KONTAKT_HREF}
@@ -142,7 +155,7 @@ export default function Root() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
       >
-        <Outlet />
+        {children}
       </motion.div>
 
       {/* ── FOOTER ── */}
@@ -150,9 +163,13 @@ export default function Root() {
         <div className="max-w-6xl mx-auto px-5 lg:px-10 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <div className="bg-white inline-block rounded-lg p-2 mb-5">
-              <ImageWithFallback src={logoImg} alt="EuroFisk logo" className="h-8 w-auto object-contain" />
+              <ImageWithFallback
+                src={logoImg}
+                alt="EuroFisk logo"
+                className="h-10 w-auto object-contain"
+              />
             </div>
-            <p className="text-white/55 text-sm leading-relaxed">{t.footerSub}</p>
+            <p className="text-white/70 text-sm leading-relaxed">{t.footerSub}</p>
           </div>
           <div>
             <p className="text-white/35 text-xs uppercase tracking-widest mb-5 font-semibold" style={sans}>{t.footerNav}</p>
@@ -160,28 +177,31 @@ export default function Root() {
               {navLabels.map((label, i) => {
                 const route = NAV_ROUTES[i];
                 return route.startsWith("/#") ? (
-                  <a key={label} href={anchorHref(route)} className="text-white/55 text-sm hover:text-white transition-colors">{label}</a>
+                  <a key={label} href={anchorHref(route)} className="text-white/70 text-sm hover:text-white transition-colors">{label}</a>
                 ) : (
-                  <Link key={label} to={route} className="text-white/55 text-sm hover:text-white transition-colors">{label}</Link>
+                  <SiteLink key={label} to={route} className="text-white/70 text-sm hover:text-white transition-colors">{label}</SiteLink>
                 );
               })}
             </div>
           </div>
           <div>
             <p className="text-white/35 text-xs uppercase tracking-widest mb-5 font-semibold" style={sans}>{t.footerContact}</p>
-            <div className="flex flex-col gap-3 text-white/55 text-sm">
-              <span>0730 56 68 13</span>
-              <span>Centrum, Eskilstuna</span>
+            <div className="flex flex-col gap-3 text-white/65 text-sm">
+              <a href="tel:+46730566813" className="hover:text-white transition-colors">0730 56 68 13</a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=EuroFisk%20Eskilstuna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Centrum, Eskilstuna
+              </a>
               <span>{t.footerHours}</span>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <a href="#" className="text-white/35 hover:text-white transition-colors" aria-label="Instagram"><Instagram size={18} /></a>
-              <a href="#" className="text-white/35 hover:text-white transition-colors" aria-label="Facebook"><Facebook size={18} /></a>
             </div>
           </div>
         </div>
         <div className="border-t border-white/10">
-          <p className="text-center text-white/25 text-xs py-5" style={sans}>{t.footerCopy}</p>
+          <p className="text-center text-white/55 text-xs py-5" style={sans}>© {new Date().getFullYear()} {t.footerCopy}</p>
         </div>
       </footer>
     </div>
