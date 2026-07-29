@@ -1,14 +1,13 @@
 import { ExternalLink, MessageSquareText, Star } from "lucide-react";
+import { useBranch } from "@/app/lib/BranchContext";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
 import { display, sans } from "@/app/lib/styles";
 import { FadeUp } from "@/app/lib/animations";
 
-const GOOGLE_MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=EuroFisk%20Eskilstuna";
-
 export default function ReviewsPage() {
   const { lang } = useLang();
+  const { branch } = useBranch();
   const t = T[lang];
 
   const feedbackTopics =
@@ -41,7 +40,7 @@ export default function ReviewsPage() {
               <h2 className="text-3xl sm:text-4xl font-normal text-foreground mb-4" style={display}>{t.reviewText}</h2>
               <p className="text-muted-foreground leading-relaxed mb-8 max-w-xl">{t.reviewsPageSub}</p>
               <a
-                href={GOOGLE_MAPS_URL}
+                href={branch.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="min-h-12 inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-7 rounded-lg hover:bg-accent transition-colors text-sm"
@@ -65,7 +64,7 @@ export default function ReviewsPage() {
                 ))}
               </ul>
               <a
-                href={GOOGLE_MAPS_URL}
+                href={branch.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="min-h-12 inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-7 rounded-lg hover:bg-[#EAF4FF] transition-colors text-sm"

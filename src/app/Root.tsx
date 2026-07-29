@@ -1,113 +1,193 @@
-import { useState, useEffect, type ReactNode } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { CheckCircle2, ChevronDown, MapPin, Menu, X } from "lucide-react";
+import { BranchChooser } from "@/app/components/BranchChooser";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { useBranch } from "@/app/lib/BranchContext";
+import { stripBranchFromPath } from "@/app/lib/branches";
 import { useLang } from "@/app/lib/LangContext";
-import { T } from "@/app/lib/translations";
 import { logoImg } from "@/app/lib/images";
-import { sans, display } from "@/app/lib/styles";
-import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
-
-const NAV_ROUTES = ["/", "/menu", "/reviews", "/#kontakt"];
-
-// Vite injects the deploy base path here ("/EuroFisk/" on GitHub Pages, "/" locally).
-// Absolute in-page anchors like "/#kontakt" must include it, or they resolve to the
-// domain root instead of the app root when served from a sub-path.
-const BASE = import.meta.env.BASE_URL;
-const anchorHref = (route: string) => `${BASE}${route.replace(/^\//, "")}`;
-const KONTAKT_HREF = anchorHref("/#kontakt");
+import { SiteLink, useSiteLocation, type SiteDestination } from "@/app/lib/siteRouter";
+import { sans } from "@/app/lib/styles";
+import { T } from "@/app/lib/translations";
 
 export default function Root({ children }: { children: ReactNode }) {
   const { lang, setLang } = useLang();
   const t = T[lang];
   const location = useSiteLocation();
+  const { branch, openChooser, pathFor, switchNotice } = useBranch();
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     setNavOpen(false);
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    if (!location.hash) window.scrollTo(0, 0);
+  }, [location.hash, location.pathname]);
 
-  const navLabels = [t.navHome, t.navMenu, t.navReviews, t.navContact];
-  const isActive = (route: string) =>
-    route === "/" ? location.pathname === "/" : location.pathname.startsWith(route);
+  const currentPage = stripBranchFromPath(location.pathname);
 
-  const onLight = scrolled || location.pathname !== "/";
+  // Branch URLs are indexable separately, so the title and description have to name the
+  // branch the visitor actually landed on — otherwise both URLs compete for one snippet.
+  useEffect(() => {
+    const sv = lang === "sv";
+    const pageName =
+      currentPage === "/menu"
+        ? sv
+          ? "Meny"
+          : "Menu"
+        : currentPage === "/reviews"
+          ? sv
+            ? "Omdömen"
+            : "Reviews"
+          : null;
+    const site = `EuroFisk ${branch.area}`;
+
+    document.title = pageName
+      ? `${pageName} — ${site} | Malmö`
+      : `${site} | ${sv ? "Färsk fisk och skaldjur i Malmö" : "Fresh fish and seafood in Malmö"}`;
+
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute(
+        "content",
+        sv
+          ? `${branch.name} — ${branch.address}. ${branch.hours.summary.sv}. Se menyn och beställ via WhatsApp.`
+          : `${branch.name} — ${branch.address}. ${branch.hours.summary.en}. See the menu and order via WhatsApp.`,
+      );
+  }, [branch, currentPage, lang]);
+
+  const contactTo: SiteDestination = { pathname: pathFor(), hash: "#kontakt" };
+  const navItems: Array<{ label: string; page: string; to: SiteDestination }> = [
+    { label: t.navHome, page: "/", to: pathFor() },
+    { label: t.navMenu, page: "/menu", to: pathFor("/menu") },
+    { label: t.navReviews, page: "/reviews", to: pathFor("/reviews") },
+    { label: t.navContact, page: "#kontakt", to: contactTo },
+  ];
+  const onLight = scrolled || currentPage !== "/";
 
   return (
-    <div className="bg-background text-foreground min-h-screen" style={sans}>
-
-      {/* ── NAV ── */}
+    <div className="min-h-screen bg-background text-foreground" style={sans}>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${onLight ? "bg-white shadow-sm border-b border-border" : "bg-white/85 backdrop-blur-md"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          onLight
+            ? "border-b border-border bg-white shadow-sm"
+            : "bg-white/90 shadow-sm backdrop-blur-md"
+        }`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="max-w-6xl mx-auto px-5 lg:px-10 flex items-center justify-between h-16">
-          <SiteLink to="/" className="hover:opacity-80 transition-opacity" aria-label="EuroFisk">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 lg:px-8">
+          <SiteLink
+            to={pathFor()}
+            className="flex-shrink-0 transition-opacity hover:opacity-80"
+            aria-label={`EuroFisk ${branch.area}`}
+          >
             <ImageWithFallback
               src={logoImg}
-              alt="EuroFisk logo"
-              className="h-11 w-auto object-contain"
+              alt="EuroFisk"
+              className="h-10 w-auto object-contain sm:h-11"
             />
           </SiteLink>
 
-          <div className="hidden md:flex items-center gap-7">
-            {navLabels.map((label, i) => {
-              const route = NAV_ROUTES[i];
-              const active = isActive(route);
-              const cls = `text-sm font-medium transition-colors relative ${active ? "text-primary" : "text-foreground/65 hover:text-primary"}`;
-              return route.startsWith("/#") ? (
-                <a key={label} href={anchorHref(route)} className={cls} style={sans}>{label}</a>
-              ) : (
-                <SiteLink key={label} to={route} className={cls} style={sans}>
-                  {label}
-                  {active && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    />
-                  )}
-                </SiteLink>
-              );
-            })}
+          <div className="hidden items-center gap-4 lg:flex">
+            <div className="flex items-center gap-6">
+              {navItems.map((item) => {
+                const active = item.page !== "#kontakt" && currentPage === item.page;
+                return (
+                  <SiteLink
+                    key={item.label}
+                    to={item.to}
+                    className={`relative text-sm font-medium transition-colors ${
+                      active ? "text-primary" : "text-foreground/65 hover:text-primary"
+                    }`}
+                    style={sans}
+                  >
+                    {item.label}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute -bottom-1 inset-x-0 h-0.5 rounded-full bg-primary"
+                      />
+                    )}
+                  </SiteLink>
+                );
+              })}
+            </div>
+
+            <div className="h-6 w-px bg-border" aria-hidden="true" />
 
             <button
+              type="button"
+              onClick={openChooser}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-white px-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+              aria-label={`${lang === "sv" ? "Byt plats. Nu vald" : "Change location. Currently selected"}: ${branch.area}`}
+            >
+              <MapPin size={15} className="text-primary" aria-hidden="true" />
+              {branch.area}
+              <ChevronDown size={14} aria-hidden="true" />
+            </button>
+
+            <button
+              type="button"
               onClick={() => setLang(lang === "sv" ? "en" : "sv")}
               aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
-              className="flex items-center gap-1.5 border border-border rounded-full px-3 py-1.5 text-xs font-semibold text-foreground/55 hover:border-primary hover:text-primary transition-colors"
-              style={sans}>
-              <span className="text-base leading-none">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
+              className="flex min-h-11 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold text-foreground/60 transition-colors hover:border-primary hover:text-primary"
+            >
+              <span aria-hidden="true">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
               {lang === "sv" ? "EN" : "SV"}
             </button>
-            <a href={KONTAKT_HREF}
-              className="bg-primary text-primary-foreground px-5 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors"
-              style={sans}>
+
+            <SiteLink
+              to={contactTo}
+              className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-accent"
+            >
               {t.navBook}
-            </a>
+            </SiteLink>
           </div>
 
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex min-w-0 items-center gap-1.5 lg:hidden">
             <button
+              type="button"
+              onClick={openChooser}
+              className="inline-flex min-h-11 min-w-0 items-center gap-1.5 rounded-full border border-border px-2.5 text-xs font-semibold text-foreground"
+              aria-label={`${lang === "sv" ? "Byt plats. Nu vald" : "Change location. Currently selected"}: ${branch.area}`}
+            >
+              <MapPin size={14} className="flex-shrink-0 text-primary" aria-hidden="true" />
+              {/* No fixed width: the branch name is the only thing here allowed to shrink,
+                  so a long area name truncates instead of overflowing narrow phones. */}
+              <span className="truncate sm:max-w-32">{branch.area}</span>
+            </button>
+            {/* Stays in the header at every width — the flag alone on the narrowest phones,
+                so the language switch never hides behind the hamburger. */}
+            <button
+              type="button"
               onClick={() => setLang(lang === "sv" ? "en" : "sv")}
               aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
-              className="flex min-h-11 items-center gap-1 border border-border rounded-full px-3 py-2 text-xs font-semibold text-foreground/55"
-              style={sans}>
-              <span className="text-sm">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
-              {lang === "sv" ? "EN" : "SV"}
+              className="flex min-h-11 flex-shrink-0 items-center gap-1 rounded-full border border-border px-2.5 text-xs font-semibold text-foreground/60"
+            >
+              <span aria-hidden="true">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
+              <span className="hidden sm:inline">{lang === "sv" ? "EN" : "SV"}</span>
             </button>
             <button
-              className="text-foreground min-h-11 min-w-11 p-2 flex items-center justify-center"
-              onClick={() => setNavOpen(!navOpen)}
-              aria-label={navOpen ? (lang === "sv" ? "Stäng menyn" : "Close menu") : (lang === "sv" ? "Öppna menyn" : "Open menu")}
+              type="button"
+              className="flex min-h-11 min-w-11 flex-shrink-0 items-center justify-center p-2 text-foreground"
+              onClick={() => setNavOpen((open) => !open)}
+              aria-label={
+                navOpen
+                  ? lang === "sv"
+                    ? "Stäng menyn"
+                    : "Close menu"
+                  : lang === "sv"
+                    ? "Öppna menyn"
+                    : "Open menu"
+              }
               aria-expanded={navOpen}
               aria-controls="mobile-navigation"
             >
@@ -117,38 +197,62 @@ export default function Root({ children }: { children: ReactNode }) {
         </div>
 
         <AnimatePresence>
-        {navOpen && (
-          <motion.div
-            id="mobile-navigation"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden bg-white border-t border-border px-5 py-5 flex flex-col gap-4 overflow-hidden"
-          >
-            {navLabels.map((label, i) => {
-              const route = NAV_ROUTES[i];
-              return route.startsWith("/#") ? (
-                <a key={label} href={anchorHref(route)}
-                  className="text-sm font-medium text-foreground/65 hover:text-primary transition-colors"
-                  onClick={() => setNavOpen(false)}>{label}</a>
-              ) : (
-                <SiteLink key={label} to={route}
-                  className={`text-sm font-medium transition-colors ${isActive(route) ? "text-primary" : "text-foreground/65 hover:text-primary"}`}
-                  onClick={() => setNavOpen(false)}>{label}</SiteLink>
-              );
-            })}
-            <a href={KONTAKT_HREF}
-              className="bg-primary text-primary-foreground px-5 py-2.5 rounded text-sm font-semibold text-center"
-              onClick={() => setNavOpen(false)}>
-              {t.navBook}
-            </a>
-          </motion.div>
-        )}
+          {navOpen && (
+            <motion.div
+              id="mobile-navigation"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden border-t border-border bg-white px-5 py-5 lg:hidden"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setNavOpen(false);
+                  openChooser();
+                }}
+                className="mb-5 flex w-full items-center justify-between rounded-xl border border-primary/20 bg-primary/5 p-4 text-left"
+              >
+                <span>
+                  <span className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                    {lang === "sv" ? "Vald plats" : "Selected location"}
+                  </span>
+                  <span className="mt-1 block font-semibold text-primary">{branch.name}</span>
+                </span>
+                <span className="text-xs font-bold text-primary">
+                  {lang === "sv" ? "Byt" : "Change"}
+                </span>
+              </button>
+
+              <div className="flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <SiteLink
+                    key={item.label}
+                    to={item.to}
+                    className={`text-sm font-medium transition-colors ${
+                      item.page !== "#kontakt" && currentPage === item.page
+                        ? "text-primary"
+                        : "text-foreground/65 hover:text-primary"
+                    }`}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    {item.label}
+                  </SiteLink>
+                ))}
+                <SiteLink
+                  to={contactTo}
+                  className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground"
+                  onClick={() => setNavOpen(false)}
+                >
+                  {t.navBook}
+                </SiteLink>
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
       </motion.nav>
 
-      {/* ── PAGE (animated on route change) ── */}
       <motion.div
         key={location.pathname}
         initial={{ opacity: 0 }}
@@ -158,52 +262,90 @@ export default function Root({ children }: { children: ReactNode }) {
         {children}
       </motion.div>
 
-      {/* ── FOOTER ── */}
       <footer className="bg-foreground text-white">
-        <div className="max-w-6xl mx-auto px-5 lg:px-10 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-3 lg:px-10">
           <div>
-            <div className="bg-white inline-block rounded-lg p-2 mb-5">
-              <ImageWithFallback
-                src={logoImg}
-                alt="EuroFisk logo"
-                className="h-10 w-auto object-contain"
-              />
-            </div>
-            <p className="text-white/70 text-sm leading-relaxed">{t.footerSub}</p>
+            <ImageWithFallback
+              src={logoImg}
+              alt="EuroFisk"
+              className="mb-5 h-12 w-auto object-contain"
+            />
+            <p className="text-sm leading-relaxed text-white/70">
+              {lang === "sv"
+                ? `Färsk fisk och skaldjur i ${branch.area}, Malmö. Välkommen till oss!`
+                : `Fresh fish and seafood in ${branch.area}, Malmö. Come visit us!`}
+            </p>
           </div>
           <div>
-            <p className="text-white/35 text-xs uppercase tracking-widest mb-5 font-semibold" style={sans}>{t.footerNav}</p>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/35">
+              {t.footerNav}
+            </p>
             <div className="flex flex-col gap-3">
-              {navLabels.map((label, i) => {
-                const route = NAV_ROUTES[i];
-                return route.startsWith("/#") ? (
-                  <a key={label} href={anchorHref(route)} className="text-white/70 text-sm hover:text-white transition-colors">{label}</a>
-                ) : (
-                  <SiteLink key={label} to={route} className="text-white/70 text-sm hover:text-white transition-colors">{label}</SiteLink>
-                );
-              })}
+              {navItems.map((item) => (
+                <SiteLink
+                  key={item.label}
+                  to={item.to}
+                  className="text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </SiteLink>
+              ))}
             </div>
           </div>
           <div>
-            <p className="text-white/35 text-xs uppercase tracking-widest mb-5 font-semibold" style={sans}>{t.footerContact}</p>
-            <div className="flex flex-col gap-3 text-white/65 text-sm">
-              <a href="tel:+46730566813" className="hover:text-white transition-colors">0730 56 68 13</a>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/35">
+              {t.footerContact}
+            </p>
+            <div className="flex flex-col gap-3 text-sm text-white/65">
+              <strong className="font-semibold text-white">{branch.name}</strong>
+              <a href={branch.phoneHref} className="transition-colors hover:text-white">
+                {branch.phoneDisplay}
+              </a>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=EuroFisk%20Eskilstuna"
+                href={branch.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="transition-colors hover:text-white"
               >
-                Centrum, Eskilstuna
+                {branch.address}
               </a>
-              <span>{t.footerHours}</span>
+              <span>{branch.hours.summary[lang]}</span>
+              <button
+                type="button"
+                onClick={openChooser}
+                className="mt-1 self-start text-sm font-semibold text-[#8CCBFF] underline decoration-white/20 underline-offset-4 hover:text-white"
+              >
+                {lang === "sv" ? "Byt plats" : "Change location"}
+              </button>
             </div>
           </div>
         </div>
         <div className="border-t border-white/10">
-          <p className="text-center text-white/55 text-xs py-5" style={sans}>© {new Date().getFullYear()} {t.footerCopy}</p>
+          <p className="py-5 text-center text-xs text-white/55">
+            © {new Date().getFullYear()} {t.footerCopy}
+          </p>
         </div>
       </footer>
+
+      <BranchChooser />
+
+      <AnimatePresence>
+        {switchNotice && (
+          <motion.div
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            className="fixed bottom-5 left-1/2 z-[70] flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-center gap-3 rounded-xl bg-foreground px-5 py-4 text-sm font-medium text-white shadow-2xl"
+          >
+            <CheckCircle2 size={19} className="flex-shrink-0 text-[#8CCBFF]" aria-hidden="true" />
+            {lang === "sv"
+              ? `Du visar nu ${switchNotice}.`
+              : `You are now viewing ${switchNotice}.`}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

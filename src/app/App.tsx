@@ -1,4 +1,6 @@
 import { lazy, Suspense } from "react";
+import { BranchProvider, useBranch } from "./lib/BranchContext";
+import { stripBranchFromPath } from "./lib/branches";
 import { LangProvider } from "./lib/LangContext";
 import { SiteLink, SiteRouter, useSiteLocation } from "./lib/siteRouter";
 import Root from "./Root";
@@ -8,11 +10,13 @@ const MenuPage = lazy(() => import("./pages/MenuPage"));
 const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 
 function NotFoundPage() {
+  const { pathFor } = useBranch();
+
   return (
     <main className="min-h-[70vh] pt-32 px-5 text-center">
       <h1 className="text-4xl mb-4">Sidan hittades inte</h1>
       <p className="text-muted-foreground mb-8">The page you requested does not exist.</p>
-      <SiteLink to="/" className="inline-flex min-h-11 items-center rounded-lg bg-primary px-6 text-white font-semibold">
+      <SiteLink to={pathFor()} className="inline-flex min-h-11 items-center rounded-lg bg-primary px-6 text-white font-semibold">
         Till startsidan
       </SiteLink>
     </main>
@@ -21,11 +25,12 @@ function NotFoundPage() {
 
 function SiteRoutes() {
   const { pathname } = useSiteLocation();
+  const pagePath = stripBranchFromPath(pathname);
 
   let page;
-  if (pathname === "/") page = <HomePage />;
-  else if (pathname === "/menu") page = <MenuPage />;
-  else if (pathname === "/reviews") page = <ReviewsPage />;
+  if (pagePath === "/") page = <HomePage />;
+  else if (pagePath === "/menu") page = <MenuPage />;
+  else if (pagePath === "/reviews") page = <ReviewsPage />;
   else page = <NotFoundPage />;
 
   return (
@@ -41,7 +46,9 @@ export default function App() {
   return (
     <LangProvider>
       <SiteRouter>
-        <SiteRoutes />
+        <BranchProvider>
+          <SiteRoutes />
+        </BranchProvider>
       </SiteRouter>
     </LangProvider>
   );

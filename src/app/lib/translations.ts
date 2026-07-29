@@ -1,6 +1,4 @@
 import { guldsparidCard, laxfileCard, havsabborreCard, foodSpreadImg, rawFishImg, shrimpPlatterImg, interiorImg, exteriorImg } from "./images";
-import { MapPin, Clock, Phone } from "lucide-react";
-import type { ElementType } from "react";
 
 export const T = {
   sv: {
@@ -10,7 +8,7 @@ export const T = {
     navContact: "Kontakt",
     navBook: "Beställ mat",
 
-    heroBadge: "🐟 Färsk fisk varje dag — Eskilstuna",
+    heroBadge: "🐟 Färsk fisk varje dag",
     heroTitle1: "Äkta",
     heroTitle2: "havssmaker",
     heroTitle3: "från havet",
@@ -19,9 +17,9 @@ export const T = {
     heroBook: "Beställ mat",
 
     infoHours: "Öppet",
-    infoHoursVal: "Mån–Fre 11–20, Lör–Sön 11–21",
+    infoHoursVal: "Se vald plats",
     infoAddr: "Adress",
-    infoAddrVal: "Centrum, Eskilstuna",
+    infoAddrVal: "Malmö",
     infoPhone: "Telefon",
 
     featuredLabel: "Signaturrätter",
@@ -46,7 +44,7 @@ export const T = {
 
     aboutLabel: "Om EuroFisk",
     aboutTitle: "Passion för fisk\nsedan dag ett",
-    aboutP1: "EuroFisk startade med en enkel idé: att erbjuda Eskilstuna färsk, vällagad fisk till ett rimligt pris. Vi tar stolthet i varje grill, varje krydda och varje gäst vi välkomnar.",
+    aboutP1: "EuroFisk startade med en enkel idé: att erbjuda Malmö färsk, vällagad fisk till ett rimligt pris. Vi tar stolthet i varje grill, varje krydda och varje gäst vi välkomnar.",
     aboutP2: "Vår fisk levereras färsk varje dag. Vi lagar allt på beställning — ingen fisk väntar, allt serveras direkt från grillen till ditt bord.",
     aboutStats: [["100%", "Färsk fisk"], ["Dagligen", "Ny leverans"], ["Alla", "Välkomna"]] as [string, string][],
     reviewText: "Se aktuella omdömen på Google",
@@ -55,12 +53,6 @@ export const T = {
     contactLabel: "Beställ & Kontakt",
     contactTitle: "Vi ses snart!",
     contactSub: "Beställ mat för leverans eller avhämtning — välj nedan så tar vi hand om resten via WhatsApp.",
-    contactInfo: [
-      [MapPin, "Adress", "Centrum, Eskilstuna"],
-      [Clock, "Öppettider", "Mån–Fre 11:00–20:00\nLör–Sön 11:00–21:00"],
-      [Phone, "Telefon", "0730 56 68 13"],
-    ] as [ElementType, string, string][],
-
     formTitle: "Bokningsformulär",
     formName: "Namn", formNamePh: "Ditt namn",
     formPhone: "Telefonnummer", formPhonePh: "07XX XXX XXX",
@@ -99,7 +91,7 @@ export const T = {
     staffTitle: "Personen bakom smakerna",
     staffSub: "EuroFisk byggdes av en persons passion för färsk fisk och äkta smaker.",
     staffRole: "Grundare & Kökschef",
-    staffBio: "Med rötter i en lång tradition av fisklagning startade grundaren EuroFisk med en vision: att ta med havets bästa smaker till Eskilstuna. Varje dag väljer han fisken personligen och ser till att varje rätt håller högsta kvalitet.",
+    staffBio: "Med rötter i en lång tradition av fisklagning startade grundaren EuroFisk med en vision: att ta med havets bästa smaker till Malmö. Varje dag väljer han fisken personligen och ser till att varje rätt håller högsta kvalitet.",
     staffQuote: "Jag lagar mat som jag vill äta det själv — färskt, kryddigt och med hjärtat i varje grill.",
 
     placeLabel: "Vår restaurang",
@@ -123,9 +115,7 @@ export const T = {
     reviewsCta: "Lämna en recension",
     reviewsCtaSub: "Har du ätit hos oss? Vi uppskattar ditt omdöme.",
 
-    footerSub: "Färsk fisk och skaldjur i hjärtat av Eskilstuna. Välkommen till oss!",
     footerNav: "Navigera", footerContact: "Kontakt",
-    footerHours: "Mån–Fre 11–20 · Lör–Sön 11–21",
     footerCopy: "EuroFisk. Alla rättigheter förbehållna.",
   },
   en: {
@@ -135,7 +125,7 @@ export const T = {
     navContact: "Contact",
     navBook: "Order food",
 
-    heroBadge: "🐟 Fresh fish every day — Eskilstuna",
+    heroBadge: "🐟 Fresh fish every day",
     heroTitle1: "Authentic",
     heroTitle2: "ocean flavours",
     heroTitle3: "from the sea",
@@ -144,9 +134,9 @@ export const T = {
     heroBook: "Order food",
 
     infoHours: "Hours",
-    infoHoursVal: "Mon–Fri 11am–8pm, Sat–Sun 11am–9pm",
+    infoHoursVal: "See selected location",
     infoAddr: "Address",
-    infoAddrVal: "Centrum, Eskilstuna",
+    infoAddrVal: "Malmö",
     infoPhone: "Phone",
 
     featuredLabel: "Signature dishes",
@@ -171,7 +161,7 @@ export const T = {
 
     aboutLabel: "About EuroFisk",
     aboutTitle: "A passion for fish\nfrom day one",
-    aboutP1: "EuroFisk started with a simple idea: to bring Eskilstuna fresh, well-prepared fish at a fair price. We take pride in every grill, every spice and every guest we welcome.",
+    aboutP1: "EuroFisk started with a simple idea: to bring Malmö fresh, well-prepared fish at a fair price. We take pride in every grill, every spice and every guest we welcome.",
     aboutP2: "Our fish arrives fresh every day. Everything is made to order — nothing waits, everything goes straight from the grill to your table.",
     aboutStats: [["100%", "Fresh fish"], ["Daily", "New delivery"], ["All", "Welcome"]] as [string, string][],
     reviewText: "See current reviews on Google",
@@ -180,12 +170,6 @@ export const T = {
     contactLabel: "Order & Contact",
     contactTitle: "See you soon!",
     contactSub: "Order food for delivery or takeaway — pick below and we'll take care of the rest over WhatsApp.",
-    contactInfo: [
-      [MapPin, "Address", "Centrum, Eskilstuna"],
-      [Clock, "Opening hours", "Mon–Fri 11:00–20:00\nSat–Sun 11:00–21:00"],
-      [Phone, "Phone", "0730 56 68 13"],
-    ] as [ElementType, string, string][],
-
     formTitle: "Booking form",
     formName: "Name", formNamePh: "Your name",
     formPhone: "Phone number", formPhonePh: "+46 7XX XXX XXX",
@@ -224,7 +208,7 @@ export const T = {
     staffTitle: "The person behind the flavours",
     staffSub: "EuroFisk was built on one person's passion for fresh fish and honest cooking.",
     staffRole: "Founder & Head Chef",
-    staffBio: "Rooted in a long tradition of fish cooking, our founder started EuroFisk with a vision: to bring the best flavours of the sea to Eskilstuna. Every day he personally selects the fish and ensures every dish meets the highest quality.",
+    staffBio: "Rooted in a long tradition of fish cooking, our founder started EuroFisk with a vision: to bring the best flavours of the sea to Malmö. Every day he personally selects the fish and ensures every dish meets the highest quality.",
     staffQuote: "I cook the way I want to eat — fresh, spiced right, and with heart in every grill.",
 
     placeLabel: "Our restaurant",
@@ -248,9 +232,7 @@ export const T = {
     reviewsCta: "Leave a review",
     reviewsCtaSub: "Eaten with us? We appreciate your feedback.",
 
-    footerSub: "Fresh fish and seafood in the heart of Eskilstuna. Come visit us!",
     footerNav: "Navigate", footerContact: "Contact",
-    footerHours: "Mon–Fri 11–20 · Sat–Sun 11–21",
     footerCopy: "EuroFisk. All rights reserved.",
   },
 };

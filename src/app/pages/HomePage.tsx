@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Bike, ShoppingBag, Navigation } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { useBranch } from "@/app/lib/BranchContext";
 import { useLang } from "@/app/lib/LangContext";
 import { T } from "@/app/lib/translations";
 import { heroImg, exteriorImg, interiorImg } from "@/app/lib/images";
@@ -14,11 +15,6 @@ import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// EuroFisk's WhatsApp number — international format, DIGITS ONLY (no +, spaces or dashes).
-//   +46 730 56 68 13  ->  "46730566813"
-// Change this one line to redirect where booking messages are sent.
-const WHATSAPP_NUMBER = "46730566813";
-
 /** Official WhatsApp glyph — lucide-react ships no brand icons. */
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -30,6 +26,7 @@ function WhatsAppIcon({ size = 16 }: { size?: number }) {
 
 export default function HomePage() {
   const { lang } = useLang();
+  const { branch, openChooser, pathFor } = useBranch();
   const t = T[lang];
   const reduce = useReducedMotion();
   const location = useSiteLocation();
@@ -58,13 +55,18 @@ export default function HomePage() {
   // Build a WhatsApp deep link with the order pre-filled (localised to the current language).
   const buildWaUrl = () => {
     const isDelivery = fulfillment === "delivery";
-    const lines = [isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway, "", `🙋 ${t.waLblName}: ${form.name}`];
+    const lines = [
+      isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway,
+      "",
+      `📍 ${lang === "sv" ? "Plats" : "Location"}: ${branch.name}`,
+      `🙋 ${t.waLblName}: ${form.name}`,
+    ];
     if (isDelivery && form.address.trim()) lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
     if (form.time) lines.push(`⏰ ${isDelivery ? t.waLblDelivery : t.waLblPickup}: ${form.time}`);
     if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
     lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
     if (form.note.trim()) lines.push(`📝 ${t.waLblNote}: ${form.note}`);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+    return `https://wa.me/${branch.whatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -118,7 +120,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-7 backdrop-blur-sm"
               style={sans}
             >
-              {t.heroBadge}
+              {t.heroBadge} — {branch.area}
             </motion.div>
 
             <h1 className="text-[clamp(2.75rem,6vw+1rem,5.5rem)] font-normal text-white leading-[1.05] mb-6" style={display}>
@@ -143,7 +145,7 @@ export default function HomePage() {
               transition={{ duration: 0.6, ease, delay: 0.9 }}
               className="flex flex-wrap gap-3"
             >
-              <SiteLink to="/menu" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-accent transition-colors" style={sans}>
+              <SiteLink to={pathFor("/menu")} className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-accent transition-colors" style={sans}>
                 {t.heroMenu} <ArrowRight size={16} />
               </SiteLink>
               <a href="#kontakt" className="inline-flex items-center gap-2 bg-white/12 border border-white/30 text-white px-7 py-3.5 rounded font-semibold text-sm hover:bg-white/22 backdrop-blur-sm transition-colors" style={sans}>
@@ -161,9 +163,9 @@ export default function HomePage() {
         >
           <div className="max-w-6xl mx-auto px-5 lg:px-10 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 md:divide-x divide-white/20">
             {([
-              [Clock, t.infoHours, t.infoHoursVal],
-              [MapPin, t.infoAddr, t.infoAddrVal],
-              [Phone, t.infoPhone, "0730 56 68 13"],
+              [Clock, t.infoHours, branch.hours.summary[lang]],
+              [MapPin, t.infoAddr, branch.address],
+              [Phone, t.infoPhone, branch.phoneDisplay],
             ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
               <div key={i} className="flex items-center gap-3 text-white md:px-6 first:pl-0">
                 <Icon size={17} className="text-[#5FB3F5] flex-shrink-0" />
@@ -199,7 +201,7 @@ export default function HomePage() {
           ))}
         </FadeUpGroup>
         <FadeUp className="text-center">
-          <SiteLink to="/menu" className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-200" style={sans}>
+          <SiteLink to={pathFor("/menu")} className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-200" style={sans}>
             {t.viewFullMenu} <ChevronRight size={16} />
           </SiteLink>
         </FadeUp>
@@ -352,9 +354,9 @@ export default function HomePage() {
                 <p className="text-[#C7E5FF] text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
                 <div className="flex flex-col gap-3 mt-3">
                   {([
-                    [Clock, t.infoHoursVal],
-                    [MapPin, t.infoAddrVal],
-                    [Phone, "0730 56 68 13"],
+                    [Clock, branch.hours.summary[lang]],
+                    [MapPin, branch.address],
+                    [Phone, branch.phoneDisplay],
                   ] as [React.ElementType, string][]).map(([Icon, val], i) => (
                     <div key={i} className="flex items-center gap-2.5 text-white/75 text-sm">
                       <Icon size={14} className="text-[#5FB3F5] flex-shrink-0" />
@@ -418,7 +420,7 @@ export default function HomePage() {
               <h3 className="text-3xl font-normal text-foreground mb-1" style={display}>{t.reviewText}</h3>
               <p className="text-muted-foreground" style={sans}>{t.reviewSub}</p>
             </div>
-            <SiteLink to="/reviews" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex-shrink-0" style={sans}>
+            <SiteLink to={pathFor("/reviews")} className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex-shrink-0" style={sans}>
               {t.navReviews} <ChevronRight size={16} />
             </SiteLink>
           </div>
@@ -433,7 +435,11 @@ export default function HomePage() {
             <h2 className="text-3xl lg:text-5xl font-normal text-foreground mb-6" style={display}>{t.contactTitle}</h2>
             <p className="text-muted-foreground leading-relaxed mb-8" style={sans}>{t.contactSub}</p>
             <div className="flex flex-col gap-5 mb-8">
-              {t.contactInfo.map(([Icon, label, val], i) => (
+              {([
+                [MapPin, t.infoAddr, branch.address],
+                [Clock, t.infoHours, branch.hours.rows.map((row) => `${row.days[lang]} ${row.time}`).join("\n")],
+                [Phone, t.infoPhone, branch.phoneDisplay],
+              ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Icon size={16} className="text-primary" />
@@ -446,11 +452,11 @@ export default function HomePage() {
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <a href="tel:+46730566813" className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
+              <a href={branch.phoneHref} className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
                 <Phone size={16} /> {lang === "sv" ? "Ring oss" : "Call us"}
               </a>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=EuroFisk%20Eskilstuna"
+                href={branch.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
@@ -462,6 +468,26 @@ export default function HomePage() {
 
           <FadeUp delay={0.15}>
             <div className="bg-card border border-border rounded-2xl p-7 lg:p-9 shadow-lg shadow-primary/5">
+              <div className="mb-6 flex items-center justify-between gap-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+                    <MapPin size={16} aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                      {lang === "sv" ? "Din beställning skickas till" : "Your order will be sent to"}
+                    </p>
+                    <p className="truncate text-sm font-semibold text-foreground">{branch.name}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={openChooser}
+                  className="min-h-11 flex-shrink-0 px-2 text-xs font-bold text-primary underline decoration-primary/25 underline-offset-4"
+                >
+                  {lang === "sv" ? "Byt" : "Change"}
+                </button>
+              </div>
               {submitted ? (
                 <div className="text-center py-10">
                   <motion.div

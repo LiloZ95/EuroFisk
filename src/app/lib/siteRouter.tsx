@@ -25,7 +25,7 @@ export type SiteDestination =
 
 interface SiteRouterValue {
   location: SiteLocation;
-  navigate: (to: SiteDestination) => void;
+  navigate: (to: SiteDestination, options?: { replace?: boolean }) => void;
   hrefFor: (to: SiteDestination) => string;
 }
 
@@ -95,8 +95,9 @@ export function SiteRouter({ children }: { children: ReactNode }) {
 
   const value = useMemo<SiteRouterValue>(() => {
     const hrefFor = (to: SiteDestination) => browserHref(to, location);
-    const navigate = (to: SiteDestination) => {
-      window.history.pushState({}, "", hrefFor(to));
+    const navigate = (to: SiteDestination, options?: { replace?: boolean }) => {
+      const method = options?.replace ? "replaceState" : "pushState";
+      window.history[method]({}, "", hrefFor(to));
       setLocation(readLocation());
     };
     return { location, navigate, hrefFor };
@@ -109,6 +110,12 @@ export function useSiteLocation() {
   const context = useContext(SiteRouterContext);
   if (!context) throw new Error("useSiteLocation must be used inside SiteRouter");
   return context.location;
+}
+
+export function useSiteRouter() {
+  const context = useContext(SiteRouterContext);
+  if (!context) throw new Error("useSiteRouter must be used inside SiteRouter");
+  return context;
 }
 
 interface SiteLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
