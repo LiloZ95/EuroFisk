@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, UtensilsCrossed, ShoppingBag, Navigation, Fish, Flame, Heart } from "lucide-react";
+import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, UtensilsCrossed, ShoppingBag, Navigation, Fish, Flame, Heart, Truck } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { DeliveryBanner } from "@/app/components/DeliveryBanner";
 import { ReviewMarquee } from "@/app/components/ReviewMarquee";
 import { useBranch } from "@/app/lib/BranchContext";
 import { useT } from "@/app/lib/branchCopy";
@@ -18,8 +19,9 @@ import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/** No delivery: orders are either collected or eaten in. */
-type Fulfillment = "takeaway" | "dinein";
+/** Home delivery is free across Malmö from both branches; otherwise orders are collected
+ *  or eaten in. Only delivery asks for an address. */
+type Fulfillment = "delivery" | "takeaway" | "dinein";
 
 /** Emoji render differently on every OS and ignore currentColor, so the fact strip keys
  *  into the same lucide set as the rest of the page. */
@@ -52,7 +54,7 @@ export default function HomePage() {
   const reduce = useReducedMotion();
   const location = useSiteLocation();
   const [fulfillment, setFulfillment] = useState<Fulfillment>("takeaway");
-  const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", order: "" });
+  const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", order: "", address: "" });
   const [submitted, setSubmitted] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const [waUrl, setWaUrl] = useState("");
@@ -74,16 +76,24 @@ export default function HomePage() {
     setForm((current) => ({ ...current, order: current.order || selectedDish }));
   }, [location.search]);
 
+  // Everything that differs between the three modes, in one place — adding a fourth mode
+  // means adding one entry here rather than hunting down ternaries.
+  const modeCopy = {
+    delivery: { intro: t.waMsgIntroDelivery, timeLabel: t.formDeliveryTime, waTimeLabel: t.waLblDelivery },
+    takeaway: { intro: t.waMsgIntroTakeaway, timeLabel: t.formPickupTime, waTimeLabel: t.waLblPickup },
+    dinein: { intro: t.waMsgIntroDineIn, timeLabel: t.formVisitTime, waTimeLabel: t.waLblVisit },
+  }[fulfillment];
+
   // Build a WhatsApp deep link with the order pre-filled (localised to the current language).
   const buildWaUrl = () => {
-    const isDineIn = fulfillment === "dinein";
     const lines = [
-      isDineIn ? t.waMsgIntroDineIn : t.waMsgIntroTakeaway,
+      modeCopy.intro,
       "",
       `📍 ${t.waLblLocation}: ${branch.name}`,
       `🙋 ${t.waLblName}: ${form.name}`,
     ];
-    if (form.time) lines.push(`⏰ ${isDineIn ? t.waLblVisit : t.waLblPickup}: ${form.time}`);
+    if (fulfillment === "delivery") lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
+    if (form.time) lines.push(`⏰ ${modeCopy.waTimeLabel}: ${form.time}`);
     if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
     lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
     if (form.note.trim()) lines.push(`📝 ${t.waLblNote}: ${form.note}`);
@@ -92,6 +102,7 @@ export default function HomePage() {
 
   // Validated here rather than by the browser: native bubbles are unstyled, vanish on the
   // next click, and say "match the requested format" for a bad phone number.
+  // Key order matters: submit focuses the first failing field, so it follows the visual order.
   const errors: Record<string, string> = {
     name: form.name.trim() ? "" : t.errRequired,
     phone: !form.phone.trim()
@@ -99,6 +110,8 @@ export default function HomePage() {
       : /^[0-9+()\s-]{7,20}$/.test(form.phone.trim())
         ? ""
         : t.errPhone,
+    // Only asked for on delivery, so it must not block a takeaway or dine-in order.
+    address: fulfillment !== "delivery" || form.address.trim() ? "" : t.errRequired,
     time: !form.time
       ? t.errRequired
       : form.time >= branch.serviceHours.opens && form.time <= branch.serviceHours.closes
@@ -258,8 +271,15 @@ export default function HomePage() {
         </FadeUp>
       </section>
 
-      {/* ── GALLERY ── */}
-      <section id="galleri" className="py-16 lg:py-24 bg-card border-y border-border overflow-hidden">
+      {/* ── FREE DELIVERY PROMO ──
+          Sits between two pale sections on purpose: the solid blue block is the first
+          thing that breaks the page rhythm on the way down. */}
+      <DeliveryBanner onSelectDelivery={() => setFulfillment("delivery")} />
+
+      {/* ── GALLERY ──
+          Top border dropped: the promo's torn edge already hands over to this section,
+          and a straight rule across it would undo the tear. */}
+      <section id="galleri" className="py-16 lg:py-24 bg-card border-b border-border overflow-hidden">
         <FadeUp className="max-w-6xl mx-auto px-5 lg:px-10 mb-10 text-center">
           <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.galleryLabel}</p>
           <h2 className="text-4xl lg:text-5xl font-normal text-foreground" style={display}>{t.galleryTitle}</h2>
@@ -584,13 +604,16 @@ export default function HomePage() {
                   aria-describedby="whatsapp-privacy"
                   noValidate
                 >
-                  {/* Fulfillment selector — takeaway or dine in (primary choice) */}
+                  {/* Fulfillment selector — delivery, takeaway or dine in (primary choice).
+                      Icon sits above the label on phones: three labels side by side don't
+                      fit next to their icons at the narrowest width. */}
                   <div
-                    className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl"
+                    className="grid grid-cols-3 gap-1 p-1 bg-secondary rounded-xl"
                     role="group"
                     aria-label={t.fulfillGroupAria}
                   >
                     {([
+                      ["delivery", t.fulfillDelivery, Truck],
                       ["takeaway", t.fulfillTakeaway, ShoppingBag],
                       ["dinein", t.fulfillDineIn, UtensilsCrossed],
                     ] as [Fulfillment, string, React.ElementType][]).map(([f, label, Icon]) => (
@@ -599,7 +622,7 @@ export default function HomePage() {
                         type="button"
                         onClick={() => setFulfillment(f)}
                         aria-pressed={fulfillment === f}
-                        className={`relative flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-colors ${fulfillment === f ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+                        className={`relative flex items-center justify-center rounded-lg py-2 text-xs font-semibold transition-colors sm:py-2.5 sm:text-sm ${fulfillment === f ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
                         style={sans}
                       >
                         {fulfillment === f && (
@@ -609,10 +632,19 @@ export default function HomePage() {
                             transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
                           />
                         )}
-                        <span className="relative z-10 flex items-center gap-2"><Icon size={16} /> {label}</span>
+                        <span className="relative z-10 flex flex-col items-center gap-1 px-1 text-center leading-tight sm:flex-row sm:gap-2">
+                          <Icon size={16} className="flex-shrink-0" /> {label}
+                        </span>
                       </button>
                     ))}
                   </div>
+
+                  {fulfillment === "delivery" && (
+                    <p className="-mb-1 flex items-start gap-2 rounded-lg bg-primary/8 px-3 py-2.5 text-xs font-medium text-primary" style={sans}>
+                      <Truck size={15} aria-hidden="true" className="mt-px flex-shrink-0" />
+                      {t.deliveryFormNote}
+                    </p>
+                  )}
 
                   {/* Name + phone (always required) */}
                     {[
@@ -655,7 +687,8 @@ export default function HomePage() {
                       );
                     })}
 
-                  {/* Only the time label differs between the two — fade it on switch */}
+                  {/* The address field and the time label are what change between modes — fade
+                      the whole block on switch so the extra field doesn't just pop in. */}
                   <motion.div
                     key={fulfillment}
                     initial={reduce ? false : { opacity: 0 }}
@@ -663,8 +696,22 @@ export default function HomePage() {
                     transition={{ duration: 0.2 }}
                     className="grid grid-cols-1 gap-4"
                   >
+                    {fulfillment === "delivery" && (
+                      <div>
+                        <label htmlFor="order-address" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formAddress}</label>
+                        <input id="order-address" name="address" data-field="address" type="text" required
+                          placeholder={t.formAddressPh} autoComplete="street-address"
+                          aria-invalid={fieldError("address") ? true : undefined}
+                          aria-describedby={fieldError("address") ? "address-error" : undefined}
+                          value={form.address} onChange={(e) => set("address", e.target.value)}
+                          className={`w-full bg-background border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors ${
+                            fieldError("address") ? "border-destructive" : "border-border"
+                          }`} style={sans} />
+                        <FieldError id="address-error" message={fieldError("address")} />
+                      </div>
+                    )}
                     <div>
-                      <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "dinein" ? t.formVisitTime : t.formPickupTime}</label>
+                      <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{modeCopy.timeLabel}</label>
                       {/* min/max bound the picker to the branch's own opening hours, so a
                           03:00 pickup can no longer be submitted. */}
                       <input id="order-time" name="time" data-field="time" type="time" required
