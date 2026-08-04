@@ -19,7 +19,7 @@ export default function ReviewsPage() {
       <div className="bg-primary text-white py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-5 lg:px-10">
           <FadeUp>
-            <p className="text-[#C7E5FF] text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.reviewsPageLabel}</p>
+            <p className="text-sky-soft text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.reviewsPageLabel}</p>
             <h1 className="text-5xl lg:text-7xl font-normal mb-3" style={display}>{t.reviewsPageTitle}</h1>
             <p className="text-white/85 max-w-lg" style={sans}>{t.reviewsPageSub}</p>
           </FadeUp>
@@ -51,13 +51,13 @@ export default function ReviewsPage() {
 
           <FadeUp className="lg:col-span-2" delay={0.12}>
             <aside className="h-full rounded-2xl bg-primary text-white p-7 sm:p-10">
-              <MessageSquareText size={30} className="text-[#C7E5FF] mb-7" aria-hidden="true" />
+              <MessageSquareText size={30} className="text-sky-soft mb-7" aria-hidden="true" />
               <h2 className="text-3xl font-normal mb-3" style={display}>{t.reviewsCta}</h2>
               <p className="text-white/85 leading-relaxed mb-7">{t.reviewsCtaSub}</p>
               <ul className="space-y-3 mb-8">
                 {t.reviewsTopics.map((topic) => (
                   <li key={topic} className="flex items-start gap-3 text-sm text-white/90">
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C7E5FF] flex-shrink-0" />
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-sky-soft flex-shrink-0" />
                     {topic}
                   </li>
                 ))}
@@ -66,7 +66,7 @@ export default function ReviewsPage() {
                 href={branch.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-12 inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-7 rounded-lg hover:bg-[#EAF4FF] transition-colors text-sm"
+                className="min-h-12 inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-7 rounded-lg hover:bg-sky-tint transition-colors text-sm"
               >
                 {t.reviewsShare} <ExternalLink size={15} />
               </a>

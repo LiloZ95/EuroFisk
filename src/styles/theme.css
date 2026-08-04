@@ -31,6 +31,14 @@
   --chart-4: #0D1F3C;
   --chart-5: #A8C8EE;
   --radius: 0.5rem;
+  /* Brand colours that were previously hard-coded in components. */
+  --ink: #0D1F3C;          /* deep navy: hero/footer ground, image scrims */
+  --sky: #5FB3F5;          /* bright accent on navy */
+  --sky-soft: #C7E5FF;     /* labels on primary */
+  --sky-link: #8CCBFF;     /* links on navy */
+  --sky-tint: #EAF4FF;     /* hover wash on white */
+  --whatsapp: #25D366;
+  --whatsapp-hover: #1eb959;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #030213;
@@ -109,6 +117,13 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-ink: var(--ink);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --color-sky-link: var(--sky-link);
+  --color-sky-tint: var(--sky-tint);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -134,7 +149,9 @@
   */
 
   html {
-    font-size: var(--font-size);
+    /* Percentage, not px: a px value here overrides the reader's browser
+       font-size preference and there is no way for them to get it back. */
+    font-size: 100%;
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
   }

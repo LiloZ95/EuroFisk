@@ -15,6 +15,8 @@ export interface Branch {
   phoneHref: string;
   whatsappNumber: string;
   menuType: BranchMenuType;
+  /** Widest daily window, used to bound the pickup/arrival time input. */
+  serviceHours: { opens: string; closes: string };
   hours: {
     summary: Record<Lang, string>;
     rows: Array<{
@@ -42,6 +44,7 @@ export const BRANCHES: Record<BranchId, Branch> = {
     phoneHref: "tel:+46790164813",
     whatsappNumber: "46790164813",
     menuType: "portion",
+    serviceHours: { opens: "10:00", closes: "20:00" },
     hours: {
       summary: {
         sv: `Mån–tis ${ltr("10–19")} · Ons–sön ${ltr("10–20")}`,
@@ -72,6 +75,7 @@ export const BRANCHES: Record<BranchId, Branch> = {
     phoneHref: "tel:+46790164813",
     whatsappNumber: "46790164813",
     menuType: "kg",
+    serviceHours: { opens: "09:00", closes: "18:00" },
     hours: {
       summary: {
         sv: `Alla dagar ${ltr("09–18")}`,

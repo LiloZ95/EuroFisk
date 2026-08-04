@@ -38,7 +38,7 @@ export function ReviewCard({ review }: { review: Review }) {
         </span>
       </figcaption>
       {review.originalLang && (
-        <p className="mt-3 text-[11px] italic text-muted-foreground/80">{t.reviewsTranslated}</p>
+        <p className="mt-3 text-xs italic text-muted-foreground">{t.reviewsTranslated}</p>
       )}
     </figure>
   );

@@ -19,7 +19,7 @@ type BranchOverrides = Partial<Record<Lang, Partial<Translation>>>;
 const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
   "ostra-sorgenfri": {
     sv: {
-      heroBadge: "🧊 Dagens fångst på is",
+      heroBadge: "Dagens fångst på is",
       heroTitle1: "Färsk fisk",
       heroTitle2: "per kilo",
       heroTitle3: "ur disken",
@@ -64,7 +64,7 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
         "Beställ färsk fisk för avhämtning eller ät hos oss — välj nedan så tar vi hand om resten via WhatsApp.",
     },
     en: {
-      heroBadge: "🧊 Today's catch on ice",
+      heroBadge: "Today's catch on ice",
       heroTitle1: "Fresh fish",
       heroTitle2: "by the kilo",
       // Kept as short as the line it replaces ("from the sea") — the h1 clamps up to
@@ -110,7 +110,7 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
         "Order fresh fish for pickup or to eat in — pick below and we'll take care of the rest over WhatsApp.",
     },
     ar: {
-      heroBadge: "🧊 صيد اليوم على الثلج",
+      heroBadge: "صيد اليوم على الثلج",
       heroTitle1: "سمك طازج",
       heroTitle2: "بالكيلو",
       heroTitle3: "من الثلج مباشرة",

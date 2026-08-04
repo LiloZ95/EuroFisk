@@ -13,31 +13,16 @@ import { useLang } from "@/app/lib/LangContext";
 import { display, sans } from "@/app/lib/styles";
 
 export function BranchChooser() {
-  const {
-    branchId,
-    chooserOpen,
-    hasSelectedBranch,
-    selectBranch,
-    setChooserOpen,
-  } = useBranch();
+  const { branchId, chooserOpen, hasSelectedBranch, selectBranch, setChooserOpen } = useBranch();
   const { lang } = useLang();
   const t = useT();
 
   return (
     <Dialog open={chooserOpen} onOpenChange={setChooserOpen}>
-      <DialogContent
-        showCloseButton={hasSelectedBranch}
-        className="max-w-2xl gap-0 overflow-hidden border-0 p-0"
-        onEscapeKeyDown={(event) => {
-          if (!hasSelectedBranch) event.preventDefault();
-        }}
-        onPointerDownOutside={(event) => {
-          if (!hasSelectedBranch) event.preventDefault();
-        }}
-      >
+      <DialogContent className="max-w-2xl gap-0 overflow-hidden border-0 p-0">
         <div className="bg-primary px-6 py-7 text-white sm:px-8">
           <DialogHeader>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C7E5FF]" style={sans}>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-soft" style={sans}>
               {t.chooserLabel}
             </p>
             <DialogTitle className="text-3xl font-normal leading-tight sm:text-4xl" style={display}>

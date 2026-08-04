@@ -24,6 +24,9 @@ interface BranchContextValue {
   branchId: BranchId;
   hasSelectedBranch: boolean;
   chooserOpen: boolean;
+  /** True while the visitor is on the default branch and has not confirmed or dismissed it. */
+  showLocationBar: boolean;
+  dismissLocationBar: () => void;
   switchNotice: string | null;
   openChooser: () => void;
   setChooserOpen: (open: boolean) => void;
@@ -48,9 +51,11 @@ export function BranchProvider({ children }: { children: ReactNode }) {
   const [hasSelectedBranch, setHasSelectedBranch] = useState(
     Boolean(pathBranch || storedBranch),
   );
-  const [chooserOpen, setChooserOpenState] = useState(
-    !pathBranch && !storedBranch,
-  );
+  // First-time visitors are NOT gated behind the chooser: they land on the default branch
+  // and see the page immediately. `hasSelectedBranch` stays false so the header can invite
+  // them to confirm, but nothing blocks the content.
+  const [chooserOpen, setChooserOpenState] = useState(false);
+  const [locationBarDismissed, setLocationBarDismissed] = useState(false);
   const [switchNotice, setSwitchNotice] = useState<string | null>(null);
 
   useEffect(() => {
@@ -106,11 +111,12 @@ export function BranchProvider({ children }: { children: ReactNode }) {
       branchId,
       hasSelectedBranch,
       chooserOpen,
+      showLocationBar: !hasSelectedBranch && !locationBarDismissed,
+      dismissLocationBar: () => setLocationBarDismissed(true),
       switchNotice,
       openChooser: () => setChooserOpenState(true),
-      setChooserOpen: (open) => {
-        if (open || hasSelectedBranch) setChooserOpenState(open);
-      },
+      // Always dismissible now — the dialog is a deliberate action, never a wall.
+      setChooserOpen: setChooserOpenState,
       selectBranch,
       pathFor: (pagePath = "/") => branchPath(branchId, pagePath),
     };
@@ -118,6 +124,7 @@ export function BranchProvider({ children }: { children: ReactNode }) {
     branchId,
     chooserOpen,
     hasSelectedBranch,
+    locationBarDismissed,
     location.hash,
     location.pathname,
     location.search,

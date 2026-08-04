@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CheckCircle2, ChevronDown, MapPin, Menu, X } from "lucide-react";
 import { BranchChooser } from "@/app/components/BranchChooser";
@@ -9,7 +9,7 @@ import { useT } from "@/app/lib/branchCopy";
 import { useBranch } from "@/app/lib/BranchContext";
 import { stripBranchFromPath } from "@/app/lib/branches";
 import { useLang } from "@/app/lib/LangContext";
-import { logoImg } from "@/app/lib/images";
+import { logoImg, LOGO_SIZE } from "@/app/lib/images";
 import { SiteLink, useSiteLocation, type SiteDestination } from "@/app/lib/siteRouter";
 import { sans } from "@/app/lib/styles";
 import { fmt } from "@/app/lib/translations";
@@ -18,8 +18,10 @@ export default function Root({ children }: { children: ReactNode }) {
   const { lang } = useLang();
   const t = useT();
   const location = useSiteLocation();
-  const { branch, openChooser, pathFor, switchNotice } = useBranch();
+  const { branch, branchId, openChooser, pathFor, selectBranch, switchNotice, showLocationBar, dismissLocationBar } =
+    useBranch();
   const [navOpen, setNavOpen] = useState(false);
+  const navToggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -32,6 +34,19 @@ export default function Root({ children }: { children: ReactNode }) {
     setNavOpen(false);
     if (!location.hash) window.scrollTo(0, 0);
   }, [location.hash, location.pathname]);
+
+  // The mobile panel behaves like any dismissible overlay: Escape closes it and focus
+  // goes back to the control that opened it, instead of being stranded mid-document.
+  useEffect(() => {
+    if (!navOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setNavOpen(false);
+      navToggleRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [navOpen]);
 
   const currentPage = stripBranchFromPath(location.pathname);
 
@@ -77,6 +92,13 @@ export default function Root({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground" style={sans}>
+      <a
+        href="#content"
+        className="sr-only rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80]"
+      >
+        {t.skipToContent}
+      </a>
+
       <motion.nav
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           onLight
@@ -85,7 +107,7 @@ export default function Root({ children }: { children: ReactNode }) {
         }`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 lg:px-8">
           <SiteLink
@@ -96,6 +118,8 @@ export default function Root({ children }: { children: ReactNode }) {
             <ImageWithFallback
               src={logoImg}
               alt="EuroFisk"
+              width={LOGO_SIZE.width}
+              height={LOGO_SIZE.height}
               className="h-10 w-auto object-contain sm:h-11"
             />
           </SiteLink>
@@ -164,6 +188,7 @@ export default function Root({ children }: { children: ReactNode }) {
                 so the language switch never hides behind the hamburger. */}
             <LangSwitcher compact />
             <button
+              ref={navToggleRef}
               type="button"
               className="flex min-h-11 min-w-11 flex-shrink-0 items-center justify-center p-2 text-foreground"
               onClick={() => setNavOpen((open) => !open)}
@@ -231,14 +256,15 @@ export default function Root({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </motion.nav>
 
-      <motion.div
+      <motion.main
+        id="content"
         key={location.pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
         {children}
-      </motion.div>
+      </motion.main>
 
       <footer className="bg-foreground text-white">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-3 lg:px-10">
@@ -246,6 +272,9 @@ export default function Root({ children }: { children: ReactNode }) {
             <ImageWithFallback
               src={logoImg}
               alt="EuroFisk"
+              width={LOGO_SIZE.width}
+              height={LOGO_SIZE.height}
+              loading="lazy"
               className="mb-5 h-12 w-auto object-contain"
             />
             <p className="text-sm leading-relaxed text-white/70">
@@ -253,7 +282,7 @@ export default function Root({ children }: { children: ReactNode }) {
             </p>
           </div>
           <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/35">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/70">
               {t.footerNav}
             </p>
             <div className="flex flex-col gap-3">
@@ -269,7 +298,7 @@ export default function Root({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/35">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-widest text-white/70">
               {t.footerContact}
             </p>
             <div className="flex flex-col gap-3 text-sm text-white/65">
@@ -289,7 +318,7 @@ export default function Root({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 onClick={openChooser}
-                className="mt-1 self-start text-sm font-semibold text-[#8CCBFF] underline decoration-white/20 underline-offset-4 hover:text-white"
+                className="mt-1 self-start text-sm font-semibold text-sky-link underline decoration-white/20 underline-offset-4 hover:text-white"
               >
                 {t.locationChange}
               </button>
@@ -305,6 +334,51 @@ export default function Root({ children }: { children: ReactNode }) {
 
       <BranchChooser />
 
+      {/* Replaces the old blocking modal. The page renders on the default branch straight
+          away; this only asks the visitor to confirm, and it can be ignored or dismissed. */}
+      <AnimatePresence>
+        {showLocationBar && (
+          <motion.div
+            role="region"
+            aria-label={t.locationChange}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-white shadow-[0_-8px_30px_rgba(13,31,60,0.12)]"
+          >
+            <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:px-10">
+              <MapPin size={16} className="flex-shrink-0 text-primary" aria-hidden="true" />
+              <p className="min-w-0 flex-1 text-sm text-foreground">
+                {fmt(t.locationBarText, { area: branch.area })}
+              </p>
+              <button
+                type="button"
+                onClick={() => selectBranch(branchId)}
+                className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-accent"
+              >
+                {t.locationBarConfirm}
+              </button>
+              <button
+                type="button"
+                onClick={openChooser}
+                className="min-h-11 px-2 text-sm font-semibold text-primary underline underline-offset-4"
+              >
+                {t.locationChange}
+              </button>
+              <button
+                type="button"
+                onClick={dismissLocationBar}
+                aria-label={t.locationBarDismiss}
+                className="flex min-h-11 min-w-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <X size={16} aria-hidden="true" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {switchNotice && (
           <motion.div
@@ -313,9 +387,11 @@ export default function Root({ children }: { children: ReactNode }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
-            className="fixed bottom-5 left-1/2 z-[70] flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-center gap-3 rounded-xl bg-foreground px-5 py-4 text-sm font-medium text-white shadow-2xl"
+            className={`fixed left-1/2 z-[70] flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-center gap-3 rounded-xl bg-foreground px-5 py-4 text-sm font-medium text-white shadow-2xl ${
+              showLocationBar ? "bottom-24" : "bottom-5"
+            }`}
           >
-            <CheckCircle2 size={19} className="flex-shrink-0 text-[#8CCBFF]" aria-hidden="true" />
+            <CheckCircle2 size={19} className="flex-shrink-0 text-sky-link" aria-hidden="true" />
             {fmt(t.switchNotice, { branch: switchNotice })}
           </motion.div>
         )}

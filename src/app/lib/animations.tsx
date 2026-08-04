@@ -19,7 +19,7 @@ export function FadeUp({ children, delay = 0, className = "" }: Props) {
       ref={ref}
       initial={reduce ? false : { opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.65, ease, delay: reduce ? 0 : delay }}
+      transition={{ duration: 0.4, ease, delay: reduce ? 0 : delay }}
       className={className}
     >
       {children}
@@ -37,7 +37,7 @@ export function FadeIn({ children, delay = 0, className = "" }: Props) {
       ref={ref}
       initial={reduce ? false : { opacity: 0 }}
       animate={inView ? { opacity: 1 } : undefined}
-      transition={{ duration: 0.8, ease, delay: reduce ? 0 : delay }}
+      transition={{ duration: 0.45, ease, delay: reduce ? 0 : delay }}
       className={className}
     >
       {children}
@@ -65,7 +65,7 @@ export function FadeUpGroup({
           key={i}
           initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.55, ease, delay: reduce ? 0 : i * stagger }}
+          transition={{ duration: 0.4, ease, delay: reduce ? 0 : i * stagger }}
         >
           {child}
         </motion.div>
@@ -82,7 +82,7 @@ export function LineReveal({ children, delay = 0, className = "" }: Props) {
       <motion.div
         initial={reduce ? false : { y: "105%" }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.75, ease, delay: reduce ? 0 : delay }}
+        transition={{ duration: 0.5, ease, delay: reduce ? 0 : delay }}
       >
         {children}
       </motion.div>
@@ -97,7 +97,7 @@ export function PageEnter({ children }: { children: React.ReactNode }) {
     <motion.div
       initial={reduce ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       {children}
     </motion.div>

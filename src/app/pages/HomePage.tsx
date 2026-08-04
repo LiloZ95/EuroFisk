@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, UtensilsCrossed, ShoppingBag, Navigation } from "lucide-react";
+import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, UtensilsCrossed, ShoppingBag, Navigation, Fish, Flame, Heart } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { ReviewMarquee } from "@/app/components/ReviewMarquee";
 import { useBranch } from "@/app/lib/BranchContext";
@@ -21,6 +21,20 @@ const ease = [0.22, 1, 0.36, 1] as const;
 /** No delivery: orders are either collected or eaten in. */
 type Fulfillment = "takeaway" | "dinein";
 
+/** Emoji render differently on every OS and ignore currentColor, so the fact strip keys
+ *  into the same lucide set as the rest of the page. */
+const FACT_ICONS: Record<string, React.ElementType> = { fish: Fish, flame: Flame, heart: Heart };
+
+/** Error text sits directly under its field, not in a summary at the top of the form. */
+function FieldError({ id, message }: { id: string; message: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} role="alert" className="mt-1.5 text-xs font-medium text-destructive" style={sans}>
+      {message}
+    </p>
+  );
+}
+
 /** Official WhatsApp glyph — lucide-react ships no brand icons. */
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -40,6 +54,7 @@ export default function HomePage() {
   const [fulfillment, setFulfillment] = useState<Fulfillment>("takeaway");
   const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", order: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const [waUrl, setWaUrl] = useState("");
   const [playHeroVideo, setPlayHeroVideo] = useState(false);
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
@@ -75,8 +90,36 @@ export default function HomePage() {
     return `https://wa.me/${branch.whatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Validated here rather than by the browser: native bubbles are unstyled, vanish on the
+  // next click, and say "match the requested format" for a bad phone number.
+  const errors: Record<string, string> = {
+    name: form.name.trim() ? "" : t.errRequired,
+    phone: !form.phone.trim()
+      ? t.errRequired
+      : /^[0-9+()\s-]{7,20}$/.test(form.phone.trim())
+        ? ""
+        : t.errPhone,
+    time: !form.time
+      ? t.errRequired
+      : form.time >= branch.serviceHours.opens && form.time <= branch.serviceHours.closes
+        ? ""
+        : fmt(t.errTime, branch.serviceHours),
+    order: form.order.trim() ? "" : t.errRequired,
+  };
+  const fieldError = (key: string) => (showErrors ? errors[key] : "");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (Object.values(errors).some(Boolean)) {
+      setShowErrors(true);
+      // Send focus to the first thing that needs fixing instead of leaving the visitor
+      // to hunt for it.
+      const firstBad = Object.keys(errors).find((key) => errors[key]);
+      e.currentTarget
+        .querySelector<HTMLElement>(`[data-field="${firstBad}"]`)
+        ?.focus();
+      return;
+    }
     const url = buildWaUrl();
     setWaUrl(url);
     setSubmitted(true);
@@ -88,7 +131,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0D1F3C] pt-16">
+      <section className="relative min-h-screen flex flex-col overflow-hidden bg-ink pt-16">
         {/* Background video — self-hosted loop, slow cinematic zoom.
             Falls back to the poster image if the video can't play. */}
         {playHeroVideo ? (
@@ -115,8 +158,8 @@ export default function HomePage() {
         )}
         {/* Cinematic overlays: directional gradient for headline contrast + bottom vignette for depth.
             The headline sits on the inline-start edge, so the dark end of the gradient follows it in RTL. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/92 via-[#0D1F3C]/65 to-[#0D1F3C]/35 rtl:bg-gradient-to-l" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/92 via-ink/65 to-ink/35 rtl:bg-gradient-to-l" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-5 lg:px-10 py-12 sm:py-16 md:py-20 w-full flex-1 flex items-center">
           <div className="max-w-xl">
@@ -127,12 +170,13 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-7 backdrop-blur-sm"
               style={sans}
             >
+              <Fish size={14} aria-hidden="true" />
               {t.heroBadge} — {branch.area}
             </motion.div>
 
             <h1 className="text-[clamp(2.75rem,6vw+1rem,5.5rem)] font-normal text-white leading-[1.05] mb-6" style={display}>
               <LineReveal delay={0.25}>{t.heroTitle1}</LineReveal>
-              <LineReveal delay={0.4}><em className="not-italic text-[#5FB3F5]">{t.heroTitle2}</em></LineReveal>
+              <LineReveal delay={0.4}><em className="not-italic text-sky">{t.heroTitle2}</em></LineReveal>
               <LineReveal delay={0.55}>{t.heroTitle3}</LineReveal>
             </h1>
 
@@ -175,7 +219,7 @@ export default function HomePage() {
               [Phone, t.infoPhone, branch.phoneDisplay],
             ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
               <div key={i} className="flex items-center gap-3 text-white md:px-6 first:ps-0">
-                <Icon size={17} className="text-[#5FB3F5] flex-shrink-0" />
+                <Icon size={17} className="text-sky flex-shrink-0" />
                 <div>
                   <p className="text-white/80 text-xs uppercase tracking-wider" style={sans}>{label}</p>
                   <p className="text-white text-sm font-medium">{val}</p>
@@ -223,9 +267,14 @@ export default function HomePage() {
 
         {/* Horizontal scroll strip — full bleed, no side padding */}
         <FadeIn delay={0.15}>
+          {/* tabIndex + role: the scrollbar is hidden, so without these the rail is
+              unreachable by keyboard and invisible to assistive tech. */}
           <div
-            className="flex gap-3 overflow-x-auto pb-2 px-5 lg:px-10"
+            className="flex gap-3 overflow-x-auto px-5 pb-2 focus-visible:outline-none lg:px-10"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+            tabIndex={0}
+            role="group"
+            aria-label={t.galleryTitle}
           >
             {t.gallery.map((photo, i) => (
               <div
@@ -240,9 +289,10 @@ export default function HomePage() {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 start-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-xs font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full" style={sans}>{photo.alt}</span>
+                {/* Always visible, not hover-gated: on touch the hover state never fires. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" />
+                <div className="absolute bottom-4 start-4 end-4">
+                  <span className="text-white text-xs font-medium" style={sans}>{photo.alt}</span>
                 </div>
               </div>
             ))}
@@ -269,7 +319,7 @@ export default function HomePage() {
                     decoding="async"
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               </div>
               {/* Role badge */}
               <div className="absolute bottom-5 inset-x-5">
@@ -294,13 +344,16 @@ export default function HomePage() {
 
               {/* Key facts */}
               <div className="grid grid-cols-3 gap-5 pt-4 border-t border-border">
-                {t.facts.map(([emoji, title, sub]) => (
-                  <div key={title} className="text-center">
-                    <p className="text-2xl mb-1">{emoji}</p>
-                    <p className="text-foreground text-sm font-semibold" style={sans}>{title}</p>
-                    <p className="text-muted-foreground text-xs" style={sans}>{sub}</p>
-                  </div>
-                ))}
+                {t.facts.map(([iconKey, title, sub]) => {
+                  const Icon = FACT_ICONS[iconKey] ?? Fish;
+                  return (
+                    <div key={title} className="text-center">
+                      <Icon size={22} className="mx-auto mb-2 text-primary" aria-hidden="true" />
+                      <p className="text-foreground text-sm font-semibold" style={sans}>{title}</p>
+                      <p className="text-muted-foreground text-xs" style={sans}>{sub}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </FadeUp>
@@ -326,10 +379,10 @@ export default function HomePage() {
                   decoding="async"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
               <div className="absolute bottom-5 start-5">
                 <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                  🍽️ {t.fulfillDineIn}
+                  <UtensilsCrossed size={14} aria-hidden="true" /> {t.fulfillDineIn}
                 </span>
               </div>
             </FadeUp>
@@ -344,17 +397,17 @@ export default function HomePage() {
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
                 <div className="absolute bottom-5 start-5">
                   <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                    🥡 {t.fulfillTakeaway}
+                    <ShoppingBag size={14} aria-hidden="true" /> {t.fulfillTakeaway}
                   </span>
                 </div>
               </div>
 
               {/* Info card */}
               <div className="bg-primary rounded-2xl p-6 text-white flex-shrink-0">
-                <p className="text-[#C7E5FF] text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
+                <p className="text-sky-soft text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
                 <div className="flex flex-col gap-3 mt-3">
                   {([
                     [Clock, branch.hours.summary[lang]],
@@ -362,7 +415,7 @@ export default function HomePage() {
                     [Phone, branch.phoneDisplay],
                   ] as [React.ElementType, string][]).map(([Icon, val], i) => (
                     <div key={i} className="flex items-center gap-2.5 text-white/75 text-sm">
-                      <Icon size={14} className="text-[#5FB3F5] flex-shrink-0" />
+                      <Icon size={14} className="text-sky flex-shrink-0" />
                       <span style={sans}>{val}</span>
                     </div>
                   ))}
@@ -378,14 +431,14 @@ export default function HomePage() {
       <section className="py-16 lg:py-24 bg-primary text-white">
         <div className="max-w-6xl mx-auto px-5 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <FadeUp>
-            <p className="text-[#C7E5FF] text-sm font-semibold tracking-widest uppercase mb-4" style={sans}>{t.aboutLabel}</p>
+            <p className="text-sky-soft text-sm font-semibold tracking-widest uppercase mb-4" style={sans}>{t.aboutLabel}</p>
             <h2 className="text-3xl lg:text-5xl font-normal mb-6 leading-tight whitespace-pre-line" style={display}>{t.aboutTitle}</h2>
             <p className="text-white/75 leading-relaxed mb-5" style={sans}>{t.aboutP1}</p>
             <p className="text-white/75 leading-relaxed mb-10" style={sans}>{t.aboutP2}</p>
             <FadeUpGroup className="grid grid-cols-3 gap-5 pt-6 border-t border-white/20" stagger={0.12}>
               {t.aboutStats.map(([n, l]) => (
                 <div key={l}>
-                  <p className="text-4xl font-normal text-[#C7E5FF] mb-1" style={display}>{n}</p>
+                  <p className="text-4xl font-normal text-sky-soft mb-1" style={display}>{n}</p>
                   <p className="text-white/80 text-xs uppercase tracking-wide" style={sans}>{l}</p>
                 </div>
               ))}
@@ -425,7 +478,7 @@ export default function HomePage() {
               {t.navReviews} <ChevronRight size={16} />
             </SiteLink>
             {reviews.length > 0 && (
-              <p className="mt-5 text-xs text-muted-foreground/80" style={sans}>
+              <p className="mt-5 text-xs text-muted-foreground" style={sans}>
                 {fmt(t.reviewsSourceNote, { date: capturedOnLabel(lang) })}
               </p>
             )}
@@ -501,12 +554,12 @@ export default function HomePage() {
                 </button>
               </div>
               {submitted ? (
-                <div className="text-center py-10">
+                <div className="text-center py-10" role="status" aria-live="polite">
                   <motion.div
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="w-16 h-16 rounded-full bg-[#25D366]/15 text-[#25D366] flex items-center justify-center mx-auto mb-5"
+                    className="w-16 h-16 rounded-full bg-whatsapp/15 text-whatsapp flex items-center justify-center mx-auto mb-5"
                   >
                     <WhatsAppIcon size={30} />
                   </motion.div>
@@ -516,16 +569,21 @@ export default function HomePage() {
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-[#1eb959] transition-colors"
+                    className="mt-6 inline-flex items-center justify-center gap-2 bg-whatsapp text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-whatsapp-hover transition-colors"
                     style={sans}
                   >
                     <WhatsAppIcon size={18} /> {t.waCta}
                   </a>
-                  <p className="text-muted-foreground/70 text-xs mt-3" style={sans}>{t.waHelper}</p>
+                  <p className="text-muted-foreground text-xs mt-3" style={sans}>{t.waHelper}</p>
                   <button onClick={() => setSubmitted(false)} className="mt-5 text-sm text-primary font-semibold underline underline-offset-4 hover:text-accent transition-colors" style={sans}>{t.successAgain}</button>
                 </div>
               ) : (
-                <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit} aria-describedby="whatsapp-privacy">
+                <form
+                  className="grid grid-cols-1 gap-4"
+                  onSubmit={handleSubmit}
+                  aria-describedby="whatsapp-privacy"
+                  noValidate
+                >
                   {/* Fulfillment selector — takeaway or dine in (primary choice) */}
                   <div
                     className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl"
@@ -560,25 +618,42 @@ export default function HomePage() {
                     {[
                       { label: t.formName, key: "name", type: "text", ph: t.formNamePh, autoComplete: "name", inputMode: "text" as const },
                       { label: t.formPhone, key: "phone", type: "tel", ph: t.formPhonePh, autoComplete: "tel", inputMode: "tel" as const },
-                    ].map((f) => (
-                      <div key={f.key}>
-                        <label htmlFor={`contact-${f.key}`} className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
-                        <input
-                          id={`contact-${f.key}`}
-                          name={f.key}
-                          type={f.type}
-                          required
-                          placeholder={f.ph}
-                          autoComplete={f.autoComplete}
-                          inputMode={f.inputMode}
-                          pattern={f.key === "phone" ? "[0-9+()\\s-]{7,20}" : undefined}
-                          value={form[f.key as keyof typeof form]}
-                          onChange={(e) => set(f.key, e.target.value)}
-                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
-                          style={sans}
-                        />
-                      </div>
-                    ))}
+                    ].map((f) => {
+                      const error = fieldError(f.key);
+                      const hint = f.key === "phone" ? t.formPhoneHint : undefined;
+                      const describedBy = [
+                        error ? `${f.key}-error` : null,
+                        hint ? `${f.key}-hint` : null,
+                      ].filter(Boolean).join(" ");
+
+                      return (
+                        <div key={f.key}>
+                          <label htmlFor={`contact-${f.key}`} className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{f.label}</label>
+                          <input
+                            id={`contact-${f.key}`}
+                            name={f.key}
+                            data-field={f.key}
+                            type={f.type}
+                            required
+                            placeholder={f.ph}
+                            autoComplete={f.autoComplete}
+                            inputMode={f.inputMode}
+                            aria-invalid={error ? true : undefined}
+                            aria-describedby={describedBy || undefined}
+                            value={form[f.key as keyof typeof form]}
+                            onChange={(e) => set(f.key, e.target.value)}
+                            className={`w-full bg-background border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors ${
+                              error ? "border-destructive" : "border-border"
+                            }`}
+                            style={sans}
+                          />
+                          {hint && (
+                            <p id={`${f.key}-hint`} className="mt-1.5 text-xs text-muted-foreground" style={sans}>{hint}</p>
+                          )}
+                          <FieldError id={`${f.key}-error`} message={error} />
+                        </div>
+                      );
+                    })}
 
                   {/* Only the time label differs between the two — fade it on switch */}
                   <motion.div
@@ -590,23 +665,40 @@ export default function HomePage() {
                   >
                     <div>
                       <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "dinein" ? t.formVisitTime : t.formPickupTime}</label>
-                      <input id="order-time" name="time" type="time" required value={form.time} onChange={(e) => set("time", e.target.value)}
-                        className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors" style={sans} />
+                      {/* min/max bound the picker to the branch's own opening hours, so a
+                          03:00 pickup can no longer be submitted. */}
+                      <input id="order-time" name="time" data-field="time" type="time" required
+                        min={branch.serviceHours.opens} max={branch.serviceHours.closes}
+                        aria-invalid={fieldError("time") ? true : undefined}
+                        aria-describedby={fieldError("time") ? "time-error" : "time-hint"}
+                        value={form.time} onChange={(e) => set("time", e.target.value)}
+                        className={`w-full bg-background border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors ${
+                          fieldError("time") ? "border-destructive" : "border-border"
+                        }`} style={sans} />
+                      <p id="time-hint" className="mt-1.5 text-xs text-muted-foreground" style={sans}>
+                        {branch.hours.summary[lang]}
+                      </p>
+                      <FieldError id="time-error" message={fieldError("time")} />
                     </div>
                     <div>
                       <label htmlFor="order-details" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formOrder}</label>
-                      <textarea id="order-details" name="order" rows={3} required placeholder={t.formOrderPh} value={form.order}
+                      <textarea id="order-details" name="order" data-field="order" rows={3} required placeholder={t.formOrderPh} value={form.order}
                         onChange={(e) => set("order", e.target.value)}
-                        className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
+                        aria-invalid={fieldError("order") ? true : undefined}
+                        aria-describedby={fieldError("order") ? "order-error" : undefined}
+                        className={`w-full bg-background border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none ${
+                          fieldError("order") ? "border-destructive" : "border-border"
+                        }`} style={sans} />
+                      <FieldError id="order-error" message={fieldError("order")} />
                     </div>
                   </motion.div>
                   <div>
                     <label htmlFor="contact-note" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formNote}</label>
                     <textarea id="contact-note" name="note" rows={3} placeholder={t.formNotePh} value={form.note} onChange={(e) => set("note", e.target.value)}
-                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
                   </div>
                   <p id="whatsapp-privacy" className="text-xs leading-relaxed text-muted-foreground" style={sans}>{t.waPrivacy}</p>
-                  <button type="submit" className="w-full bg-[#25D366] text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-[#1eb959] transition-colors flex items-center justify-center gap-2 mt-1" style={sans}>
+                  <button type="submit" className="w-full bg-whatsapp text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-whatsapp-hover transition-colors flex items-center justify-center gap-2 mt-1" style={sans}>
                     {t.formSubmit} <WhatsAppIcon size={17} />
                   </button>
                 </form>

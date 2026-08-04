@@ -25,7 +25,7 @@ function MenuHeader({
     <div className="bg-primary py-16 text-white lg:py-24">
       <div className="mx-auto max-w-6xl px-5 lg:px-10">
         <FadeUp>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#C7E5FF]" style={sans}>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-sky-soft" style={sans}>
             {label}
           </p>
           <h1 className="mb-3 text-5xl font-normal lg:text-7xl" style={display}>
@@ -56,10 +56,14 @@ function orderDestination(pathname: string, orderText: string): SiteDestination 
 function MenuItemCard({
   item,
   priceUnit,
+  showPhoto,
   t,
 }: {
   item: MenuItem;
   priceUnit?: string;
+  /** False when no item in the category has a photo — 14 identical dashed circles
+   *  is noise, not a signal. */
+  showPhoto: boolean;
   t: Translation;
 }) {
   const { pathFor } = useBranch();
@@ -102,7 +106,7 @@ function MenuItemCard({
                 <SiteLink
                   key={option.label}
                   to={orderDestination(pathFor(), orderText)}
-                  className="group/price min-w-0 flex-1 basis-24 rounded-xl border border-border bg-secondary/55 px-3 py-2 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+                  className="group/price flex min-h-11 min-w-0 flex-1 basis-24 flex-col justify-center rounded-xl border border-border bg-secondary/55 px-3 py-2 transition-colors hover:border-primary hover:bg-primary hover:text-white"
                   aria-label={`${t.orderCta} ${item.name}, ${option.label}`}
                 >
                   <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground transition-colors group-hover/price:text-white/70">
@@ -131,7 +135,7 @@ function MenuItemCard({
         )}
       </div>
 
-      {item.photo ? (
+      {!showPhoto ? null : item.photo ? (
         <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-border shadow-sm transition-colors group-hover:border-primary/30 lg:h-24 lg:w-24">
           <img
             src={item.photo}
@@ -144,7 +148,7 @@ function MenuItemCard({
       ) : (
         <div className="flex h-20 w-20 flex-shrink-0 flex-col items-center justify-center gap-1 rounded-full border-2 border-dashed border-primary/20 bg-primary/8 text-primary/55 lg:h-24 lg:w-24">
           <ImageIcon size={20} aria-hidden="true" />
-          <span className="px-2 text-center text-[9px] font-semibold leading-tight">
+          <span className="px-2 text-center text-[10px] font-semibold leading-tight">
             {t.photoComing}
           </span>
         </div>
@@ -186,6 +190,9 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
   const scrollTo = (id: string) =>
     sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
 
+  // A single-entry "jump to section" nav is decoration, not navigation.
+  const showCategoryNav = categories.length > 1;
+
   const askLink = (className: string) => (
     <a
       href={branch.phoneHref}
@@ -201,6 +208,7 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
       <MenuHeader label={t.menuPageLabel} title={t.menuPageTitle} subtitle={t.menuPageSub} />
 
       <div className="mx-auto max-w-6xl px-5 py-12 lg:px-10">
+        {showCategoryNav && (
         <nav
           aria-label={t.menuCategoriesAria}
           className="sticky top-16 z-30 -mx-5 mb-8 flex gap-2 overflow-x-auto border-b border-border bg-background/95 px-5 py-3 backdrop-blur-md lg:hidden"
@@ -222,8 +230,10 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
             </button>
           ))}
         </nav>
+        )}
 
         <div className="flex items-start gap-10">
+          {showCategoryNav && (
           <aside className="sticky top-24 hidden w-52 flex-shrink-0 flex-col gap-1 lg:flex">
             {categories.map((category) => (
               <button
@@ -245,6 +255,7 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
               {askLink("w-full")}
             </div>
           </aside>
+          )}
 
           <div className="flex min-w-0 flex-1 flex-col gap-14">
             {categories.map((category, categoryIndex) => (
@@ -279,6 +290,7 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
                       key={item.name}
                       item={item}
                       priceUnit={category.priceUnit}
+                      showPhoto={category.items.some((entry) => entry.photo)}
                       t={t}
                     />
                   ))}
@@ -288,7 +300,7 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
 
             <div className="flex flex-col items-start gap-4 pb-8">
               <p className="text-sm text-muted-foreground">{t.menuNote}</p>
-              {askLink("lg:hidden")}
+              {askLink(showCategoryNav ? "lg:hidden" : "")}
             </div>
           </div>
         </div>

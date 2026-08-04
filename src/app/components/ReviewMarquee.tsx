@@ -53,6 +53,10 @@ export function ReviewMarquee({ reviews }: { reviews: Review[] }) {
   const [interacting, setInteracting] = useState(false);
   const duration = Math.max(32, reviews.length * 5.5);
   const stopped = paused || interacting;
+  // The keyframe translates the track by -50%, which only loops seamlessly while one copy
+  // is wider than the viewport. Östra Sorgenfri has 8 reviews (~2850px) and would show a
+  // gap on an ultrawide display, so short sets are doubled inside each copy.
+  const perCopy = reviews.length >= 12 ? reviews : [...reviews, ...reviews];
 
   return (
     <div
@@ -68,6 +72,10 @@ export function ReviewMarquee({ reviews }: { reviews: Review[] }) {
       <div
         className={`review-marquee-viewport ${reduce ? "overflow-x-auto" : "overflow-hidden"}`}
         dir="ltr"
+        // Only the reduced-motion fallback scrolls, so only it needs to take focus.
+        tabIndex={reduce ? 0 : undefined}
+        role={reduce ? "group" : undefined}
+        aria-label={reduce ? t.reviewsListTitle : undefined}
       >
         <div
           className={`flex w-max ${reduce ? "gap-5 px-5 lg:px-10" : "review-marquee-track"}`}
@@ -92,7 +100,7 @@ export function ReviewMarquee({ reviews }: { reviews: Review[] }) {
                   className="flex gap-5 pe-5"
                   aria-hidden={copy === 1 ? "true" : undefined}
                 >
-                  {reviews.map((review, index) => (
+                  {perCopy.map((review, index) => (
                     <MarqueeCard key={`${copy}-${review.author}-${index}`} review={review} />
                   ))}
                 </div>
@@ -108,7 +116,7 @@ export function ReviewMarquee({ reviews }: { reviews: Review[] }) {
             type="button"
             onClick={() => setPaused((value) => !value)}
             aria-label={paused ? t.reviewsResume : t.reviewsPause}
-            className="flex h-10 items-center gap-2 rounded-full border border-border bg-white px-4 text-xs font-semibold text-primary transition-colors hover:border-primary hover:bg-primary hover:text-white"
+            className="flex min-h-11 items-center gap-2 rounded-full border border-border bg-white px-5 text-xs font-semibold text-primary transition-colors hover:border-primary hover:bg-primary hover:text-white"
             style={sans}
           >
             {paused ? <Play size={14} /> : <Pause size={14} />}
