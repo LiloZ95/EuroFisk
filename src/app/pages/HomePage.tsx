@@ -8,13 +8,10 @@ import { useBranch } from "@/app/lib/BranchContext";
 import { useT } from "@/app/lib/branchCopy";
 import { capturedOnLabel, reviewsFor } from "@/app/lib/reviews";
 import { useLang } from "@/app/lib/LangContext";
-import { heroImg, exteriorImg, interiorImg } from "@/app/lib/images";
+import { imagesFor } from "@/app/lib/branchImages";
 import { display, sans } from "@/app/lib/styles";
 import { fmt } from "@/app/lib/translations";
 import { FadeUp, FadeIn, FadeUpGroup, LineReveal } from "@/app/lib/animations";
-// Self-hosted hero loop (Mixkit free license). Swap this file for EuroFisk's
-// own cooking footage anytime — keep it a compressed 720p MP4 for fast load.
-import heroVideo from "@/imports/hero-grill-salmon.mp4";
 import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -50,6 +47,7 @@ export default function HomePage() {
   const { lang, dir } = useLang();
   const { branch, branchId, openChooser, pathFor } = useBranch();
   const reviews = reviewsFor(branchId);
+  const media = imagesFor(branchId);
   const t = useT();
   const reduce = useReducedMotion();
   const location = useSiteLocation();
@@ -62,12 +60,16 @@ export default function HomePage() {
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
-    const updateVideo = () => setPlayHeroVideo(media.matches);
+    if (!media.heroVideo) {
+      setPlayHeroVideo(false);
+      return;
+    }
+    const query = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+    const updateVideo = () => setPlayHeroVideo(query.matches);
     updateVideo();
-    media.addEventListener("change", updateVideo);
-    return () => media.removeEventListener("change", updateVideo);
-  }, []);
+    query.addEventListener("change", updateVideo);
+    return () => query.removeEventListener("change", updateVideo);
+  }, [media.heroVideo]);
 
   useEffect(() => {
     const selectedDish = new URLSearchParams(location.search).get("order");
@@ -147,23 +149,23 @@ export default function HomePage() {
       <section className="relative min-h-screen flex flex-col overflow-hidden bg-ink pt-16">
         {/* Background video — self-hosted loop, slow cinematic zoom.
             Falls back to the poster image if the video can't play. */}
-        {playHeroVideo ? (
+        {playHeroVideo && media.heroVideo ? (
           <motion.video
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            poster={heroImg as unknown as string}
+            poster={media.hero as unknown as string}
             className="absolute inset-0 w-full h-full object-cover"
-            src={heroVideo}
+            src={media.heroVideo}
             initial={{ scale: 1.04 }}
             animate={{ scale: 1.14 }}
             transition={{ duration: 22, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
           />
         ) : (
           <img
-            src={heroImg}
+            src={media.hero}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"
@@ -333,7 +335,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-primary/15">
                   <ImageWithFallback
-                    src={heroImg}
+                    src={media.hero}
                     alt="EuroFisk founder"
                     loading="lazy"
                     decoding="async"
@@ -393,7 +395,7 @@ export default function HomePage() {
             {/* Interior — large left */}
             <FadeUp className="lg:col-span-7 h-64 lg:h-full relative overflow-hidden rounded-2xl bg-secondary group" delay={0.1}>
                 <ImageWithFallback
-                  src={interiorImg}
+                  src={media.interior}
                   alt="EuroFisk dining room interior"
                   loading="lazy"
                   decoding="async"
@@ -411,7 +413,7 @@ export default function HomePage() {
             <FadeUp className="lg:col-span-5 lg:h-full flex flex-col gap-4" delay={0.2}>
               <div className="relative overflow-hidden rounded-2xl bg-secondary group flex-1 min-h-0">
                 <ImageWithFallback
-                  src={exteriorImg}
+                  src={media.exterior}
                   alt="EuroFisk exterior"
                   loading="lazy"
                   decoding="async"
@@ -467,7 +469,7 @@ export default function HomePage() {
           <FadeIn delay={0.2}>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <ImageWithFallback src={exteriorImg} alt="EuroFisk exterior" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <ImageWithFallback src={media.exterior} alt="EuroFisk exterior" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <motion.div
                 initial={{ opacity: 0, x: dir === "rtl" ? 20 : -20, y: 10 }}

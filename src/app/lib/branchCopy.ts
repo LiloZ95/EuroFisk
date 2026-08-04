@@ -1,7 +1,13 @@
 import { useMemo } from "react";
 import { useBranch } from "./BranchContext";
 import type { BranchId } from "./branches";
-import { guldsparidCard, havsabborreCard, laxfileCard } from "./images";
+import breamOnIce from "@/imports/ostra-sorgenfri/bream-on-ice.webp";
+import salmonFillets from "@/imports/ostra-sorgenfri/salmon-fillets.webp";
+import prawns from "@/imports/ostra-sorgenfri/prawns.webp";
+import sardinesOnIce from "@/imports/ostra-sorgenfri/sardines-on-ice.webp";
+import crabsOnIce from "@/imports/ostra-sorgenfri/crabs-on-ice.webp";
+import gurnardSquid from "@/imports/ostra-sorgenfri/gurnard-squid.webp";
+import stallExterior from "@/imports/ostra-sorgenfri/stall-exterior.webp";
 import { useLang, type Lang } from "./LangContext";
 import { T, type Translation } from "./translations";
 
@@ -31,26 +37,17 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
       featuredTitle: "Dagens färskaste",
       featuredSub:
         "Fångsten kommer in färsk varje dag. Välj din fisk hel på is och betala per kilo.",
-      // The photos are still the shared ones — swap them here when the counter gets its own.
       featured: [
-        {
-          img: guldsparidCard,
-          name: "Guldsparid",
-          tag: "Mild och lättlagad",
-          desc: "Hel färsk guldsparid på is — köp per kilo, rå eller tillagad",
-        },
-        {
-          img: laxfileCard,
-          name: "Lax",
-          tag: "Alltid populär",
-          desc: "Färsk lax i disken — hel eller filead på plats",
-        },
-        {
-          img: havsabborreCard,
-          name: "Havsabborre",
-          tag: "Fast och saftig",
-          desc: "Hel havsabborre på is — vi rensar och grillar om du vill",
-        },
+        { img: breamOnIce, name: "Guldsparid", tag: "Mild och lättlagad", desc: "Hel färsk guldsparid på is — köp per kilo, rå eller tillagad" },
+        { img: salmonFillets, name: "Lax", tag: "Alltid populär", desc: "Färsk lax i disken — hel eller filead på plats" },
+        { img: prawns, name: "Räkor", tag: "Kokta samma dag", desc: "Färska räkor ur disken — köp per kilo" },
+      ],
+      gallery: [
+        { img: gurnardSquid, alt: "Röd knorrhane och bläckfisk på is" },
+        { img: sardinesOnIce, alt: "Färska sardiner på is" },
+        { img: crabsOnIce, alt: "Blåkrabbor på is i disken" },
+        { img: prawns, alt: "Nykokta räkor" },
+        { img: stallExterior, alt: "EuroFisks fiskdisk i Östra Sorgenfri utifrån" },
       ],
       viewFullMenu: "Se hela utbudet",
 
@@ -79,24 +76,16 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
       featuredSub:
         "The catch comes in fresh every day. Pick your fish whole on ice and pay by the kilo.",
       featured: [
-        {
-          img: guldsparidCard,
-          name: "Gilt-head Bream",
-          tag: "Mild and easy",
-          desc: "Whole fresh bream on ice — sold by the kilo, raw or prepared",
-        },
-        {
-          img: laxfileCard,
-          name: "Salmon",
-          tag: "Always a favourite",
-          desc: "Fresh salmon at the counter — whole or filleted on the spot",
-        },
-        {
-          img: havsabborreCard,
-          name: "Sea Bass",
-          tag: "Firm and juicy",
-          desc: "Whole sea bass on ice — we clean and grill it if you like",
-        },
+        { img: breamOnIce, name: "Gilt-head Bream", tag: "Mild and easy", desc: "Whole fresh bream on ice — sold by the kilo, raw or prepared" },
+        { img: salmonFillets, name: "Salmon", tag: "Always a favourite", desc: "Fresh salmon at the counter — whole or filleted on the spot" },
+        { img: prawns, name: "Prawns", tag: "Cooked the same day", desc: "Fresh prawns from the counter — sold by the kilo" },
+      ],
+      gallery: [
+        { img: gurnardSquid, alt: "Red gurnard and squid on ice" },
+        { img: sardinesOnIce, alt: "Fresh sardines on ice" },
+        { img: crabsOnIce, alt: "Blue crabs on ice at the counter" },
+        { img: prawns, alt: "Freshly cooked prawns" },
+        { img: stallExterior, alt: "The EuroFisk fish counter in Östra Sorgenfri from outside" },
       ],
       viewFullMenu: "See the full counter",
 
@@ -122,24 +111,16 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
       featuredTitle: "الأطزج اليوم",
       featuredSub: "يصلنا الصيد طازجاً كل يوم. اختر سمكتك كاملة على الثلج وادفع بالكيلو.",
       featured: [
-        {
-          img: guldsparidCard,
-          name: "اجاج",
-          tag: "طعم خفيف وسهل",
-          desc: "سمكة اجاج كاملة طازجة على الثلج — تُباع بالكيلو، نيئة أو محضَّرة",
-        },
-        {
-          img: laxfileCard,
-          name: "سلمون",
-          tag: "المفضّل دائماً",
-          desc: "سلمون طازج في الثلاجة — كامل أو مقطّع فيليه أمامك",
-        },
-        {
-          img: havsabborreCard,
-          name: "قاروص",
-          tag: "قوام متماسك وطريّ",
-          desc: "سمكة قاروص كاملة على الثلج — ننظّفها ونشويها لك إن أحببت",
-        },
+        { img: breamOnIce, name: "اجاج", tag: "طعم خفيف وسهل", desc: "سمكة اجاج كاملة طازجة على الثلج — تُباع بالكيلو، نيئة أو محضَّرة" },
+        { img: salmonFillets, name: "سلمون", tag: "المفضّل دائماً", desc: "سلمون طازج في الثلاجة — كامل أو مقطّع فيليه أمامك" },
+        { img: prawns, name: "روبيان", tag: "مسلوق في نفس اليوم", desc: "روبيان طازج من الثلاجة — يُباع بالكيلو" },
+      ],
+      gallery: [
+        { img: gurnardSquid, alt: "سمك الحرّ الأحمر والحبار على الثلج" },
+        { img: sardinesOnIce, alt: "سردين طازج على الثلج" },
+        { img: crabsOnIce, alt: "سلطعون أزرق على الثلج في الثلاجة" },
+        { img: prawns, alt: "روبيان مسلوق طازج" },
+        { img: stallExterior, alt: "محل EuroFisk للسمك في Östra Sorgenfri من الخارج" },
       ],
       viewFullMenu: "شاهد كل المتوفّر",
 
