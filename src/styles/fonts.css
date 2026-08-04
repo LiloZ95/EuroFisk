@@ -1,1 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+/* Latin: DM Serif Display (headings) + Outfit (body).
+   Arabic: Amiri (headings) + Cairo (body) — neither Latin family ships Arabic glyphs, so
+   they are listed as fallbacks in src/app/lib/styles.ts and picked up per glyph. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700&display=swap');

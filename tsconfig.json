@@ -29,6 +29,7 @@
     "src/app/pages/**/*.tsx",
     "src/app/lib/**/*.ts",
     "src/app/lib/**/*.tsx",
+    "src/app/components/*.tsx",
     "src/app/components/figma/**/*.tsx"
   ]
 }

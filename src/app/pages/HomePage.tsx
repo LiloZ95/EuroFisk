@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, Bike, ShoppingBag, Navigation } from "lucide-react";
+import { MapPin, Clock, Phone, ArrowRight, Star, ChevronRight, UtensilsCrossed, ShoppingBag, Navigation } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { ReviewMarquee } from "@/app/components/ReviewMarquee";
 import { useBranch } from "@/app/lib/BranchContext";
+import { useT } from "@/app/lib/branchCopy";
+import { capturedOnLabel, reviewsFor } from "@/app/lib/reviews";
 import { useLang } from "@/app/lib/LangContext";
-import { T } from "@/app/lib/translations";
 import { heroImg, exteriorImg, interiorImg } from "@/app/lib/images";
 import { display, sans } from "@/app/lib/styles";
+import { fmt } from "@/app/lib/translations";
 import { FadeUp, FadeIn, FadeUpGroup, LineReveal } from "@/app/lib/animations";
 // Self-hosted hero loop (Mixkit free license). Swap this file for EuroFisk's
 // own cooking footage anytime — keep it a compressed 720p MP4 for fast load.
@@ -14,6 +17,9 @@ import heroVideo from "@/imports/hero-grill-salmon.mp4";
 import { SiteLink, useSiteLocation } from "@/app/lib/siteRouter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+/** No delivery: orders are either collected or eaten in. */
+type Fulfillment = "takeaway" | "dinein";
 
 /** Official WhatsApp glyph — lucide-react ships no brand icons. */
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
@@ -25,13 +31,14 @@ function WhatsAppIcon({ size = 16 }: { size?: number }) {
 }
 
 export default function HomePage() {
-  const { lang } = useLang();
-  const { branch, openChooser, pathFor } = useBranch();
-  const t = T[lang];
+  const { lang, dir } = useLang();
+  const { branch, branchId, openChooser, pathFor } = useBranch();
+  const reviews = reviewsFor(branchId);
+  const t = useT();
   const reduce = useReducedMotion();
   const location = useSiteLocation();
-  const [fulfillment, setFulfillment] = useState<"delivery" | "takeaway">("delivery");
-  const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", address: "", order: "" });
+  const [fulfillment, setFulfillment] = useState<Fulfillment>("takeaway");
+  const [form, setForm] = useState({ name: "", phone: "", time: "", note: "", order: "" });
   const [submitted, setSubmitted] = useState(false);
   const [waUrl, setWaUrl] = useState("");
   const [playHeroVideo, setPlayHeroVideo] = useState(false);
@@ -54,15 +61,14 @@ export default function HomePage() {
 
   // Build a WhatsApp deep link with the order pre-filled (localised to the current language).
   const buildWaUrl = () => {
-    const isDelivery = fulfillment === "delivery";
+    const isDineIn = fulfillment === "dinein";
     const lines = [
-      isDelivery ? t.waMsgIntroDelivery : t.waMsgIntroTakeaway,
+      isDineIn ? t.waMsgIntroDineIn : t.waMsgIntroTakeaway,
       "",
-      `📍 ${lang === "sv" ? "Plats" : "Location"}: ${branch.name}`,
+      `📍 ${t.waLblLocation}: ${branch.name}`,
       `🙋 ${t.waLblName}: ${form.name}`,
     ];
-    if (isDelivery && form.address.trim()) lines.push(`🏠 ${t.waLblAddress}: ${form.address}`);
-    if (form.time) lines.push(`⏰ ${isDelivery ? t.waLblDelivery : t.waLblPickup}: ${form.time}`);
+    if (form.time) lines.push(`⏰ ${isDineIn ? t.waLblVisit : t.waLblPickup}: ${form.time}`);
     if (form.order.trim()) lines.push(`🍴 ${t.waLblOrder}: ${form.order}`);
     lines.push(`📞 ${t.waLblPhone}: ${form.phone}`);
     if (form.note.trim()) lines.push(`📝 ${t.waLblNote}: ${form.note}`);
@@ -107,8 +113,9 @@ export default function HomePage() {
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        {/* Cinematic overlays: directional gradient for headline contrast + bottom vignette for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/92 via-[#0D1F3C]/65 to-[#0D1F3C]/35" />
+        {/* Cinematic overlays: directional gradient for headline contrast + bottom vignette for depth.
+            The headline sits on the inline-start edge, so the dark end of the gradient follows it in RTL. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C]/92 via-[#0D1F3C]/65 to-[#0D1F3C]/35 rtl:bg-gradient-to-l" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/70 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-5 lg:px-10 py-12 sm:py-16 md:py-20 w-full flex-1 flex items-center">
@@ -167,7 +174,7 @@ export default function HomePage() {
               [MapPin, t.infoAddr, branch.address],
               [Phone, t.infoPhone, branch.phoneDisplay],
             ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
-              <div key={i} className="flex items-center gap-3 text-white md:px-6 first:pl-0">
+              <div key={i} className="flex items-center gap-3 text-white md:px-6 first:ps-0">
                 <Icon size={17} className="text-[#5FB3F5] flex-shrink-0" />
                 <div>
                   <p className="text-white/80 text-xs uppercase tracking-wider" style={sans}>{label}</p>
@@ -234,7 +241,7 @@ export default function HomePage() {
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-4 start-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-white text-xs font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full" style={sans}>{photo.alt}</span>
                 </div>
               </div>
@@ -265,7 +272,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/60 via-transparent to-transparent" />
               </div>
               {/* Role badge */}
-              <div className="absolute bottom-5 left-5 right-5">
+              <div className="absolute bottom-5 inset-x-5">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-5 py-4">
                   <p className="text-white font-semibold text-lg" style={display}>EuroFisk</p>
                   <p className="text-white/70 text-sm" style={sans}>{t.staffRole}</p>
@@ -277,7 +284,7 @@ export default function HomePage() {
           <FadeUp delay={0.2}>
             <div className="flex flex-col gap-7">
               {/* Quote */}
-              <div className="relative pl-6 border-l-4 border-primary">
+              <div className="relative ps-6 border-s-4 border-primary">
                 <p className="text-2xl lg:text-3xl font-normal text-foreground leading-snug italic" style={display}>
                   "{t.staffQuote}"
                 </p>
@@ -287,11 +294,7 @@ export default function HomePage() {
 
               {/* Key facts */}
               <div className="grid grid-cols-3 gap-5 pt-4 border-t border-border">
-                {([
-                  ["🐟", lang === "sv" ? "Färsk fisk" : "Fresh fish", lang === "sv" ? "Varje dag" : "Every day"],
-                  ["🔥", lang === "sv" ? "Grillat" : "Grilled", lang === "sv" ? "På riktigt" : "The real way"],
-                  ["❤️", lang === "sv" ? "Med kärlek" : "With love", lang === "sv" ? "Alltid" : "Always"],
-                ] as [string, string, string][]).map(([emoji, title, sub]) => (
+                {t.facts.map(([emoji, title, sub]) => (
                   <div key={title} className="text-center">
                     <p className="text-2xl mb-1">{emoji}</p>
                     <p className="text-foreground text-sm font-semibold" style={sans}>{title}</p>
@@ -324,9 +327,9 @@ export default function HomePage() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5">
+              <div className="absolute bottom-5 start-5">
                 <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                  🪑 {t.placeCapacity}
+                  🍽️ {t.fulfillDineIn}
                 </span>
               </div>
             </FadeUp>
@@ -342,9 +345,9 @@ export default function HomePage() {
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1F3C]/55 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5">
+                <div className="absolute bottom-5 start-5">
                   <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                    🌿 {t.placeTerrace}
+                    🥡 {t.fulfillTakeaway}
                   </span>
                 </div>
               </div>
@@ -394,11 +397,11 @@ export default function HomePage() {
                 <ImageWithFallback src={exteriorImg} alt="EuroFisk exterior" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <motion.div
-                initial={{ opacity: 0, x: -20, y: 10 }}
+                initial={{ opacity: 0, x: dir === "rtl" ? 20 : -20, y: 10 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease, delay: 0.4 }}
-                className="absolute -bottom-5 -left-5 bg-white rounded-xl p-4 shadow-xl flex items-center gap-3"
+                className="absolute -bottom-5 -start-5 bg-white rounded-xl p-4 shadow-xl flex items-center gap-3"
               >
                 <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />)}</div>
                 <div>
@@ -411,21 +414,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── REVIEWS TEASER ── */}
-      <FadeUp>
-        <section className="py-16 bg-card border-y border-border">
-          <div className="max-w-6xl mx-auto px-5 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <div className="flex gap-1 mb-2">{[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />)}</div>
-              <h3 className="text-3xl font-normal text-foreground mb-1" style={display}>{t.reviewText}</h3>
-              <p className="text-muted-foreground" style={sans}>{t.reviewSub}</p>
-            </div>
-            <SiteLink to={pathFor("/reviews")} className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors flex-shrink-0" style={sans}>
+      {/* ── REVIEWS ── */}
+      <section className="overflow-hidden border-y border-border bg-card py-16 lg:py-24">
+        <div className="mx-auto mb-10 max-w-6xl px-5 text-center lg:mb-14 lg:px-10">
+          <FadeUp className="flex flex-col items-center">
+            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.reviewsPageLabel}</p>
+            <h2 className="text-3xl lg:text-4xl font-normal text-foreground mb-3" style={display}>{t.reviewText}</h2>
+            <p className="text-muted-foreground mb-6" style={sans}>{t.reviewSub}</p>
+            <SiteLink to={pathFor("/reviews")} className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-accent transition-colors" style={sans}>
               {t.navReviews} <ChevronRight size={16} />
             </SiteLink>
-          </div>
-        </section>
-      </FadeUp>
+            {reviews.length > 0 && (
+              <p className="mt-5 text-xs text-muted-foreground/80" style={sans}>
+                {fmt(t.reviewsSourceNote, { date: capturedOnLabel(lang) })}
+              </p>
+            )}
+          </FadeUp>
+        </div>
+
+        {reviews.length > 0 && (
+          <FadeIn delay={0.15}>
+            <ReviewMarquee reviews={reviews} />
+          </FadeIn>
+        )}
+      </section>
 
       {/* ── CONTACT ── */}
       <section id="kontakt" className="py-20 lg:py-28 max-w-6xl mx-auto px-5 lg:px-10">
@@ -453,7 +465,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <a href={branch.phoneHref} className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
-                <Phone size={16} /> {lang === "sv" ? "Ring oss" : "Call us"}
+                <Phone size={16} /> {t.callUs}
               </a>
               <a
                 href={branch.mapsUrl}
@@ -461,7 +473,7 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="min-h-11 inline-flex items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
               >
-                <Navigation size={16} /> {lang === "sv" ? "Hitta hit" : "Directions"}
+                <Navigation size={16} /> {t.directions}
               </a>
             </div>
           </FadeUp>
@@ -475,7 +487,7 @@ export default function HomePage() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                      {lang === "sv" ? "Din beställning skickas till" : "Your order will be sent to"}
+                      {t.orderSentTo}
                     </p>
                     <p className="truncate text-sm font-semibold text-foreground">{branch.name}</p>
                   </div>
@@ -485,7 +497,7 @@ export default function HomePage() {
                   onClick={openChooser}
                   className="min-h-11 flex-shrink-0 px-2 text-xs font-bold text-primary underline decoration-primary/25 underline-offset-4"
                 >
-                  {lang === "sv" ? "Byt" : "Change"}
+                  {t.changeShort}
                 </button>
               </div>
               {submitted ? (
@@ -514,16 +526,16 @@ export default function HomePage() {
                 </div>
               ) : (
                 <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit} aria-describedby="whatsapp-privacy">
-                  {/* Fulfillment selector — delivery or takeaway (primary choice) */}
+                  {/* Fulfillment selector — takeaway or dine in (primary choice) */}
                   <div
                     className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-xl"
                     role="group"
-                    aria-label={lang === "sv" ? "Välj leverans eller avhämtning" : "Choose delivery or takeaway"}
+                    aria-label={t.fulfillGroupAria}
                   >
                     {([
-                      ["delivery", t.fulfillDelivery, Bike],
                       ["takeaway", t.fulfillTakeaway, ShoppingBag],
-                    ] as ["delivery" | "takeaway", string, React.ElementType][]).map(([f, label, Icon]) => (
+                      ["dinein", t.fulfillDineIn, UtensilsCrossed],
+                    ] as [Fulfillment, string, React.ElementType][]).map(([f, label, Icon]) => (
                       <button
                         key={f}
                         type="button"
@@ -568,7 +580,7 @@ export default function HomePage() {
                       </div>
                     ))}
 
-                  {/* Fulfillment-specific fields — swap with a soft fade */}
+                  {/* Only the time label differs between the two — fade it on switch */}
                   <motion.div
                     key={fulfillment}
                     initial={reduce ? false : { opacity: 0 }}
@@ -576,16 +588,8 @@ export default function HomePage() {
                     transition={{ duration: 0.2 }}
                     className="grid grid-cols-1 gap-4"
                   >
-                    {fulfillment === "delivery" && (
-                      <div>
-                        <label htmlFor="order-address" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{t.formAddress}</label>
-                        <textarea id="order-address" name="address" autoComplete="street-address" rows={2} required placeholder={t.formAddressPh} value={form.address}
-                          onChange={(e) => set("address", e.target.value)}
-                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors resize-none" style={sans} />
-                      </div>
-                    )}
                     <div>
-                      <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "delivery" ? t.formDeliveryTime : t.formPickupTime}</label>
+                      <label htmlFor="order-time" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5" style={sans}>{fulfillment === "dinein" ? t.formVisitTime : t.formPickupTime}</label>
                       <input id="order-time" name="time" type="time" required value={form.time} onChange={(e) => set("time", e.target.value)}
                         className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors" style={sans} />
                     </div>

@@ -2,18 +2,21 @@ import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CheckCircle2, ChevronDown, MapPin, Menu, X } from "lucide-react";
 import { BranchChooser } from "@/app/components/BranchChooser";
+import { LangSwitcher } from "@/app/components/LangSwitcher";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { stripBidi } from "@/app/lib/bidi";
+import { useT } from "@/app/lib/branchCopy";
 import { useBranch } from "@/app/lib/BranchContext";
 import { stripBranchFromPath } from "@/app/lib/branches";
 import { useLang } from "@/app/lib/LangContext";
 import { logoImg } from "@/app/lib/images";
 import { SiteLink, useSiteLocation, type SiteDestination } from "@/app/lib/siteRouter";
 import { sans } from "@/app/lib/styles";
-import { T } from "@/app/lib/translations";
+import { fmt } from "@/app/lib/translations";
 
 export default function Root({ children }: { children: ReactNode }) {
-  const { lang, setLang } = useLang();
-  const t = T[lang];
+  const { lang } = useLang();
+  const t = useT();
   const location = useSiteLocation();
   const { branch, openChooser, pathFor, switchNotice } = useBranch();
   const [navOpen, setNavOpen] = useState(false);
@@ -35,32 +38,33 @@ export default function Root({ children }: { children: ReactNode }) {
   // Branch URLs are indexable separately, so the title and description have to name the
   // branch the visitor actually landed on — otherwise both URLs compete for one snippet.
   useEffect(() => {
-    const sv = lang === "sv";
     const pageName =
       currentPage === "/menu"
-        ? sv
-          ? "Meny"
-          : "Menu"
+        ? t.seoPageMenu
         : currentPage === "/reviews"
-          ? sv
-            ? "Omdömen"
-            : "Reviews"
+          ? t.seoPageReviews
           : null;
     const site = `EuroFisk ${branch.area}`;
 
     document.title = pageName
       ? `${pageName} — ${site} | Malmö`
-      : `${site} | ${sv ? "Färsk fisk och skaldjur i Malmö" : "Fresh fish and seafood in Malmö"}`;
+      : `${site} | ${t.seoHomeTagline}`;
 
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         "content",
-        sv
-          ? `${branch.name} — ${branch.address}. ${branch.hours.summary.sv}. Se menyn och beställ via WhatsApp.`
-          : `${branch.name} — ${branch.address}. ${branch.hours.summary.en}. See the menu and order via WhatsApp.`,
+        // The hours carry invisible bidi isolates for the Arabic layout; crawlers read
+        // meta content as plain text, so they come back out here.
+        stripBidi(
+          fmt(t.seoDescription, {
+            branch: branch.name,
+            address: branch.address,
+            hours: branch.hours.summary[lang],
+          }),
+        ),
       );
-  }, [branch, currentPage, lang]);
+  }, [branch, currentPage, lang, t]);
 
   const contactTo: SiteDestination = { pathname: pathFor(), hash: "#kontakt" };
   const navItems: Array<{ label: string; page: string; to: SiteDestination }> = [
@@ -127,22 +131,14 @@ export default function Root({ children }: { children: ReactNode }) {
               type="button"
               onClick={openChooser}
               className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-white px-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
-              aria-label={`${lang === "sv" ? "Byt plats. Nu vald" : "Change location. Currently selected"}: ${branch.area}`}
+              aria-label={fmt(t.locationChangeAria, { area: branch.area })}
             >
               <MapPin size={15} className="text-primary" aria-hidden="true" />
               {branch.area}
               <ChevronDown size={14} aria-hidden="true" />
             </button>
 
-            <button
-              type="button"
-              onClick={() => setLang(lang === "sv" ? "en" : "sv")}
-              aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
-              className="flex min-h-11 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold text-foreground/60 transition-colors hover:border-primary hover:text-primary"
-            >
-              <span aria-hidden="true">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
-              {lang === "sv" ? "EN" : "SV"}
-            </button>
+            <LangSwitcher />
 
             <SiteLink
               to={contactTo}
@@ -157,37 +153,21 @@ export default function Root({ children }: { children: ReactNode }) {
               type="button"
               onClick={openChooser}
               className="inline-flex min-h-11 min-w-0 items-center gap-1.5 rounded-full border border-border px-2.5 text-xs font-semibold text-foreground"
-              aria-label={`${lang === "sv" ? "Byt plats. Nu vald" : "Change location. Currently selected"}: ${branch.area}`}
+              aria-label={fmt(t.locationChangeAria, { area: branch.area })}
             >
               <MapPin size={14} className="flex-shrink-0 text-primary" aria-hidden="true" />
               {/* No fixed width: the branch name is the only thing here allowed to shrink,
                   so a long area name truncates instead of overflowing narrow phones. */}
               <span className="truncate sm:max-w-32">{branch.area}</span>
             </button>
-            {/* Stays in the header at every width — the flag alone on the narrowest phones,
+            {/* Stays in the header at every width — the globe alone on the narrowest phones,
                 so the language switch never hides behind the hamburger. */}
-            <button
-              type="button"
-              onClick={() => setLang(lang === "sv" ? "en" : "sv")}
-              aria-label={lang === "sv" ? "Switch language to English" : "Byt språk till svenska"}
-              className="flex min-h-11 flex-shrink-0 items-center gap-1 rounded-full border border-border px-2.5 text-xs font-semibold text-foreground/60"
-            >
-              <span aria-hidden="true">{lang === "sv" ? "🇬🇧" : "🇸🇪"}</span>
-              <span className="hidden sm:inline">{lang === "sv" ? "EN" : "SV"}</span>
-            </button>
+            <LangSwitcher compact />
             <button
               type="button"
               className="flex min-h-11 min-w-11 flex-shrink-0 items-center justify-center p-2 text-foreground"
               onClick={() => setNavOpen((open) => !open)}
-              aria-label={
-                navOpen
-                  ? lang === "sv"
-                    ? "Stäng menyn"
-                    : "Close menu"
-                  : lang === "sv"
-                    ? "Öppna menyn"
-                    : "Open menu"
-              }
+              aria-label={navOpen ? t.navClose : t.navOpen}
               aria-expanded={navOpen}
               aria-controls="mobile-navigation"
             >
@@ -212,17 +192,15 @@ export default function Root({ children }: { children: ReactNode }) {
                   setNavOpen(false);
                   openChooser();
                 }}
-                className="mb-5 flex w-full items-center justify-between rounded-xl border border-primary/20 bg-primary/5 p-4 text-left"
+                className="mb-5 flex w-full items-center justify-between rounded-xl border border-primary/20 bg-primary/5 p-4 text-start"
               >
                 <span>
                   <span className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                    {lang === "sv" ? "Vald plats" : "Selected location"}
+                    {t.locationSelectedLabel}
                   </span>
                   <span className="mt-1 block font-semibold text-primary">{branch.name}</span>
                 </span>
-                <span className="text-xs font-bold text-primary">
-                  {lang === "sv" ? "Byt" : "Change"}
-                </span>
+                <span className="text-xs font-bold text-primary">{t.changeShort}</span>
               </button>
 
               <div className="flex flex-col gap-4">
@@ -271,9 +249,7 @@ export default function Root({ children }: { children: ReactNode }) {
               className="mb-5 h-12 w-auto object-contain"
             />
             <p className="text-sm leading-relaxed text-white/70">
-              {lang === "sv"
-                ? `Färsk fisk och skaldjur i ${branch.area}, Malmö. Välkommen till oss!`
-                : `Fresh fish and seafood in ${branch.area}, Malmö. Come visit us!`}
+              {fmt(t.footerTagline, { area: branch.area })}
             </p>
           </div>
           <div>
@@ -315,7 +291,7 @@ export default function Root({ children }: { children: ReactNode }) {
                 onClick={openChooser}
                 className="mt-1 self-start text-sm font-semibold text-[#8CCBFF] underline decoration-white/20 underline-offset-4 hover:text-white"
               >
-                {lang === "sv" ? "Byt plats" : "Change location"}
+                {t.locationChange}
               </button>
             </div>
           </div>
@@ -340,9 +316,7 @@ export default function Root({ children }: { children: ReactNode }) {
             className="fixed bottom-5 left-1/2 z-[70] flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-center gap-3 rounded-xl bg-foreground px-5 py-4 text-sm font-medium text-white shadow-2xl"
           >
             <CheckCircle2 size={19} className="flex-shrink-0 text-[#8CCBFF]" aria-hidden="true" />
-            {lang === "sv"
-              ? `Du visar nu ${switchNotice}.`
-              : `You are now viewing ${switchNotice}.`}
+            {fmt(t.switchNotice, { branch: switchNotice })}
           </motion.div>
         )}
       </AnimatePresence>

@@ -8,6 +8,7 @@ import {
 } from "@/app/components/ui/dialog";
 import { useBranch } from "@/app/lib/BranchContext";
 import { BRANCH_IDS, BRANCHES } from "@/app/lib/branches";
+import { useT } from "@/app/lib/branchCopy";
 import { useLang } from "@/app/lib/LangContext";
 import { display, sans } from "@/app/lib/styles";
 
@@ -20,6 +21,7 @@ export function BranchChooser() {
     setChooserOpen,
   } = useBranch();
   const { lang } = useLang();
+  const t = useT();
 
   return (
     <Dialog open={chooserOpen} onOpenChange={setChooserOpen}>
@@ -36,15 +38,13 @@ export function BranchChooser() {
         <div className="bg-primary px-6 py-7 text-white sm:px-8">
           <DialogHeader>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C7E5FF]" style={sans}>
-              {lang === "sv" ? "Välj plats" : "Choose location"}
+              {t.chooserLabel}
             </p>
             <DialogTitle className="text-3xl font-normal leading-tight sm:text-4xl" style={display}>
-              {lang === "sv" ? "Vilken EuroFisk vill du besöka?" : "Which EuroFisk would you like to visit?"}
+              {t.chooserTitle}
             </DialogTitle>
             <DialogDescription className="max-w-xl text-sm leading-relaxed text-white/80">
-              {lang === "sv"
-                ? "Menyn, öppettiderna och din beställning anpassas efter platsen du väljer."
-                : "The menu, opening hours and your order will match the location you choose."}
+              {t.chooserSub}
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -59,7 +59,7 @@ export function BranchChooser() {
                 key={id}
                 type="button"
                 onClick={() => selectBranch(id)}
-                className={`group min-h-44 rounded-2xl border p-5 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                className={`group min-h-44 rounded-2xl border p-5 text-start transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                   selected
                     ? "border-primary bg-primary/7 shadow-sm"
                     : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg"
@@ -72,7 +72,7 @@ export function BranchChooser() {
                   {selected && (
                     <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
                       <Check size={12} aria-hidden="true" />
-                      {lang === "sv" ? "Vald" : "Selected"}
+                      {t.chooserSelected}
                     </span>
                   )}
                 </div>
@@ -87,8 +87,11 @@ export function BranchChooser() {
                   {option.hours.summary[lang]}
                 </div>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-primary">
-                  {lang === "sv" ? "Välj denna plats" : "Choose this location"}
-                  <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                  {t.chooserChoose}
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
+                  />
                 </span>
               </button>
             );
@@ -96,9 +99,7 @@ export function BranchChooser() {
         </div>
 
         <p className="border-t border-border bg-secondary/50 px-6 py-4 text-center text-xs text-muted-foreground">
-          {lang === "sv"
-            ? "Du kan byta plats när som helst i sidhuvudet."
-            : "You can change location at any time from the header."}
+          {t.chooserFooter}
         </p>
       </DialogContent>
     </Dialog>

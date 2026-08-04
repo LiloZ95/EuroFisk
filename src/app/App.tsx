@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BranchProvider, useBranch } from "./lib/BranchContext";
 import { stripBranchFromPath } from "./lib/branches";
+import { useT } from "./lib/branchCopy";
 import { LangProvider } from "./lib/LangContext";
 import { SiteLink, SiteRouter, useSiteLocation } from "./lib/siteRouter";
 import Root from "./Root";
@@ -11,13 +12,14 @@ const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
 
 function NotFoundPage() {
   const { pathFor } = useBranch();
+  const t = useT();
 
   return (
     <main className="min-h-[70vh] pt-32 px-5 text-center">
-      <h1 className="text-4xl mb-4">Sidan hittades inte</h1>
-      <p className="text-muted-foreground mb-8">The page you requested does not exist.</p>
+      <h1 className="text-4xl mb-4">{t.notFoundTitle}</h1>
+      <p className="text-muted-foreground mb-8">{t.notFoundSub}</p>
       <SiteLink to={pathFor()} className="inline-flex min-h-11 items-center rounded-lg bg-primary px-6 text-white font-semibold">
-        Till startsidan
+        {t.notFoundCta}
       </SiteLink>
     </main>
   );

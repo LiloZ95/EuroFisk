@@ -6,11 +6,21 @@ import {
   shrimpPlatterImg,
 } from "./images";
 
+/** A named price variant of one item, e.g. raw vs prepared on the per-kilo menu. */
+export interface MenuPriceOption {
+  label: string;
+  price: string;
+}
+
 export interface MenuItem {
   name: string;
+  /** Secondary Arabic name shown under the dish. Omitted in the `ar` menu, where
+   *  `name` already is the Arabic one and the second line would just repeat it. */
   arabic?: string;
-  desc: string;
-  price: string;
+  desc?: string;
+  /** Single price. Items priced per variant use `options` instead. */
+  price?: string;
+  options?: MenuPriceOption[];
   tag?: string;
   photo?: string;
   orderable?: boolean;
@@ -20,6 +30,8 @@ export interface MenuCategory {
   id: string;
   label: string;
   note?: string;
+  /** Appended to the WhatsApp order line so "Rå" reads as "Rå (pris per kg)". */
+  priceUnit?: string;
   items: MenuItem[];
 }
 
@@ -27,6 +39,8 @@ const includedSv =
   "Serveras med fattoush & sallad, husets såser och friterat pitabröd.";
 const includedEn =
   "Served with fattoush & salad, house sauces and fried pita bread.";
+const includedAr =
+  "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.";
 
 export const MENU_DATA: Record<Lang, MenuCategory[]> = {
   sv: [
@@ -216,6 +230,95 @@ export const MENU_DATA: Record<Lang, MenuCategory[]> = {
           name: "Fried pita bread",
           desc: "Crispy fried pita bread.",
           price: "Included",
+          orderable: false,
+        },
+      ],
+    },
+  ],
+  ar: [
+    {
+      id: "grillat-friterat",
+      label: "مشاوي / مقالي",
+      note: "اختر مشوي أو مقلي. مقبّلات قائمة الوجبة مشمولة.",
+      items: [
+        {
+          name: "اجاج",
+          desc: includedAr,
+          price: "149 kr",
+          photo: guldsparidCard,
+        },
+        {
+          name: "قاروص",
+          desc: includedAr,
+          price: "149 kr",
+          photo: havsabborreCard,
+        },
+        {
+          name: "روبيان",
+          desc: includedAr,
+          price: "149 kr",
+          photo: shrimpPlatterImg,
+        },
+        {
+          name: "فيليه سلمون",
+          desc: includedAr,
+          price: "149 kr",
+          photo: laxfileCard,
+        },
+      ],
+    },
+    {
+      id: "friterat",
+      label: "مقالي",
+      note: "يُقلى عند الطلب ويُقدَّم مع مقبّلات قائمة الوجبة.",
+      items: [
+        {
+          name: "سلطان إبراهيم",
+          desc: includedAr,
+          price: "149 kr",
+        },
+        {
+          name: "سردين",
+          desc: includedAr,
+          price: "149 kr",
+        },
+        {
+          name: "كاليماري",
+          desc: includedAr,
+          price: "149 kr",
+        },
+      ],
+    },
+    {
+      id: "tillbehor",
+      label: "إضافات",
+      items: [
+        { name: "بطاطا مقلية", desc: "حصة إضافية من البطاطا المقلية.", price: "20 kr" },
+        { name: "حمّص", desc: "حصة إضافية من الحمّص.", price: "20 kr" },
+        { name: "مشروب", desc: "أي مشروب من المتوفّر لدى المطعم.", price: "15 kr" },
+      ],
+    },
+    {
+      id: "ingar",
+      label: "مشمول مع كل وجبة",
+      note: "هذه المقبّلات مشمولة مع كل طبق رئيسي أعلاه.",
+      items: [
+        {
+          name: "فتوش وسلطة",
+          desc: "سلطة طازجة مع الفتوش.",
+          price: "مشمول",
+          orderable: false,
+        },
+        {
+          name: "صلصات المطعم",
+          desc: "تُقدَّم صلصات المطعم مع الوجبة.",
+          price: "مشمول",
+          orderable: false,
+        },
+        {
+          name: "خبز بيتا مقلي",
+          desc: "خبز بيتا مقلي ومقرمش.",
+          price: "مشمول",
           orderable: false,
         },
       ],

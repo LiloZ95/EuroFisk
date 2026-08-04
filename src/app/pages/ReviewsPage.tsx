@@ -1,19 +1,18 @@
 import { ExternalLink, MessageSquareText, Star } from "lucide-react";
+import { ReviewCard } from "@/app/components/ReviewCard";
 import { useBranch } from "@/app/lib/BranchContext";
+import { useT } from "@/app/lib/branchCopy";
 import { useLang } from "@/app/lib/LangContext";
-import { T } from "@/app/lib/translations";
+import { capturedOnLabel, reviewsFor } from "@/app/lib/reviews";
+import { fmt } from "@/app/lib/translations";
 import { display, sans } from "@/app/lib/styles";
 import { FadeUp } from "@/app/lib/animations";
 
 export default function ReviewsPage() {
+  const { branch, branchId } = useBranch();
   const { lang } = useLang();
-  const { branch } = useBranch();
-  const t = T[lang];
-
-  const feedbackTopics =
-    lang === "sv"
-      ? ["Maten och färskheten", "Servicen och väntetiden", "Atmosfären och helhetsupplevelsen"]
-      : ["The food and freshness", "Service and waiting time", "Atmosphere and overall experience"];
+  const t = useT();
+  const reviews = reviewsFor(branchId);
 
   return (
     <div className="pt-16 min-h-screen" style={sans}>
@@ -35,7 +34,7 @@ export default function ReviewsPage() {
                 <Star size={26} aria-hidden="true" />
               </div>
               <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">
-                {lang === "sv" ? "Verifierad källa" : "Verified source"}
+                {t.reviewsVerified}
               </p>
               <h2 className="text-3xl sm:text-4xl font-normal text-foreground mb-4" style={display}>{t.reviewText}</h2>
               <p className="text-muted-foreground leading-relaxed mb-8 max-w-xl">{t.reviewsPageSub}</p>
@@ -45,7 +44,7 @@ export default function ReviewsPage() {
                 rel="noopener noreferrer"
                 className="min-h-12 inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-7 rounded-lg hover:bg-accent transition-colors text-sm"
               >
-                {lang === "sv" ? "Öppna Google Maps" : "Open Google Maps"} <ExternalLink size={15} />
+                {t.reviewsOpenMaps} <ExternalLink size={15} />
               </a>
             </section>
           </FadeUp>
@@ -56,7 +55,7 @@ export default function ReviewsPage() {
               <h2 className="text-3xl font-normal mb-3" style={display}>{t.reviewsCta}</h2>
               <p className="text-white/85 leading-relaxed mb-7">{t.reviewsCtaSub}</p>
               <ul className="space-y-3 mb-8">
-                {feedbackTopics.map((topic) => (
+                {t.reviewsTopics.map((topic) => (
                   <li key={topic} className="flex items-start gap-3 text-sm text-white/90">
                     <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C7E5FF] flex-shrink-0" />
                     {topic}
@@ -69,11 +68,31 @@ export default function ReviewsPage() {
                 rel="noopener noreferrer"
                 className="min-h-12 inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-7 rounded-lg hover:bg-[#EAF4FF] transition-colors text-sm"
               >
-                {lang === "sv" ? "Dela din upplevelse" : "Share your experience"} <ExternalLink size={15} />
+                {t.reviewsShare} <ExternalLink size={15} />
               </a>
             </aside>
           </FadeUp>
         </div>
+
+        {reviews.length > 0 && (
+          <section className="mt-16 lg:mt-24">
+            <FadeUp className="mb-8">
+              <h2 className="text-3xl lg:text-4xl font-normal text-foreground mb-2" style={display}>
+                {t.reviewsListTitle}
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {fmt(t.reviewsSourceNote, { date: capturedOnLabel(lang) })}
+              </p>
+            </FadeUp>
+            {/* CSS columns rather than a grid: reviews vary a lot in length, and this keeps
+                short ones from leaving tall gaps. */}
+            <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+              {reviews.map((review, index) => (
+                <ReviewCard key={`${review.author}-${index}`} review={review} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

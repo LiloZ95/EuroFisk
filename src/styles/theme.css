@@ -193,3 +193,44 @@
     scroll-behavior: auto;
   }
 }
+
+@keyframes review-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.review-marquee-track {
+  animation: review-marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.review-marquee-viewport {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-marquee-viewport {
+    mask-image: none;
+    -webkit-mask-image: none;
+    scrollbar-width: thin;
+  }
+}
+
+/* ── Arabic / right-to-left ─────────────────────────────────────────────────────
+   <html dir> is set by LangProvider. Elements that carry an inline `sans`/`display`
+   style already fall back to Cairo/Amiri; this covers everything that does not. */
+[dir="rtl"] body {
+  font-family: 'Cairo', system-ui, sans-serif;
+}
+
+/* Arrows point the way the reader moves, so they mirror in RTL. Using the standalone
+   `scale` property rather than `transform` leaves Tailwind's translate utilities
+   (e.g. group-hover:translate-x-1) working on the same element. */
+[dir="rtl"] .lucide-arrow-right,
+[dir="rtl"] .lucide-arrow-left,
+[dir="rtl"] .lucide-chevron-right,
+[dir="rtl"] .lucide-chevron-left {
+  scale: -1 1;
+}
