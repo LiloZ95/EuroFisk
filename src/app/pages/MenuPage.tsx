@@ -3,9 +3,9 @@ import { ImageIcon, MapPin, Phone } from "lucide-react";
 import { FadeUp, FadeUpGroup } from "@/app/lib/animations";
 import { useBranch } from "@/app/lib/BranchContext";
 import { useT } from "@/app/lib/branchCopy";
-import { kgCategories } from "@/app/lib/kgMenuData";
+import { menuFor } from "@/app/lib/menuContent";
 import { useLang } from "@/app/lib/LangContext";
-import { MENU_DATA, type MenuCategory, type MenuItem } from "@/app/lib/menuData";
+import { type MenuCategory, type MenuItem } from "@/app/lib/menuData";
 import { SiteLink, type SiteDestination } from "@/app/lib/siteRouter";
 import { display, sans } from "@/app/lib/styles";
 import { type Translation } from "@/app/lib/translations";
@@ -313,8 +313,7 @@ export default function MenuPage() {
   const { branch } = useBranch();
   const { lang } = useLang();
   const t = useT();
-  const categories =
-    branch.menuType === "kg" ? kgCategories(lang, t) : MENU_DATA[lang];
+  const categories = menuFor(branch.menuType, lang, t);
 
   return (
     <div className="min-h-screen pt-16" style={sans}>

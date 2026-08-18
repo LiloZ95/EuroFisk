@@ -12,7 +12,22 @@ This document covers wiring the rebuild up so the owner never has to think about
 `src/content/content.json`. It runs automatically before each build via the `prebuild`
 script in `package.json`.
 
+Locally it defaults to `http://localhost:3000`, so with the CMS running you just need:
+
 ```bash
+npm run build
+```
+
+To point at a deployed CMS, set `CMS_URL` first — note the syntax differs by shell:
+
+```powershell
+# PowerShell (Windows)
+$env:CMS_URL = "https://cms.eurofisk.se"
+npm run build
+```
+
+```bash
+# bash / zsh
 CMS_URL=https://cms.eurofisk.se npm run build
 ```
 

@@ -6,7 +6,11 @@
  * bundle: visitors never talk to the CMS, so the site cannot go down because the CMS is
  * down, and there is no per-visit latency.
  *
- *   CMS_URL=https://cms.eurofisk.se node scripts/fetch-content.mjs
+ * Defaults to http://localhost:3000, so a local CMS needs no configuration. To point at a
+ * deployed one, set CMS_URL first:
+ *
+ *   PowerShell:  $env:CMS_URL = "https://cms.eurofisk.se"; npm run build
+ *   bash:        CMS_URL=https://cms.eurofisk.se npm run build
  *
  * If the CMS is unreachable and a previous content.json exists, the build continues with
  * the old content and warns. That is deliberate: a CMS outage should not break a deploy.
