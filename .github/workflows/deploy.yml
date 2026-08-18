@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Fired by the CMS when the owner saves a change, so edits reach the live site
+  # without anyone touching the repo. See docs/CMS-SETUP.md.
+  repository_dispatch:
+    types: [cms-update]
 
 # Permissions the deploy step needs to publish to Pages
 permissions:
@@ -37,6 +41,14 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          DEPLOY_TARGET: gh-pages
+          # Where to pull the owner's content from. Set under
+          # Settings → Secrets and variables → Actions → Variables.
+          CMS_URL: ${{ vars.CMS_URL }}
+          # Once the CMS is live, a failed fetch should fail the deploy rather than
+          # silently shipping stale content. Leave unset until then.
+          REQUIRE_CMS: ${{ vars.REQUIRE_CMS }}
 
       - name: Add SPA fallback + disable Jekyll
         # 404.html = a copy of index.html so deep links (e.g. /menu) load the

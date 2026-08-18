@@ -9,6 +9,7 @@ import crabsOnIce from "@/imports/ostra-sorgenfri/crabs-on-ice.webp";
 import gurnardSquid from "@/imports/ostra-sorgenfri/gurnard-squid.webp";
 import stallExterior from "@/imports/ostra-sorgenfri/stall-exterior.webp";
 import { useLang, type Lang } from "./LangContext";
+import { cmsBranch, cmsLocale, mediaUrl } from "./cmsContent";
 import { T, type Translation } from "./translations";
 
 type BranchOverrides = Partial<Record<Lang, Partial<Translation>>>;
@@ -136,8 +137,78 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
   },
 };
 
+/**
+ * Overlays whatever the CMS supplies onto the built-in copy.
+ *
+ * Only non-empty CMS values override, so a field the owner has left blank falls through to
+ * the wording that ships in the code rather than blanking out a section of the site.
+ */
+function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translation {
+  const b = cmsBranch(lang, branchId);
+  if (!b) return base;
+
+  const out: Translation = { ...base };
+  const set = <K extends keyof Translation>(key: K, value: unknown) => {
+    if (typeof value === "string" && value.trim() !== "") {
+      out[key] = value as Translation[K];
+    }
+  };
+
+  set("heroBadge", b.hero?.badge);
+  set("heroTitle1", b.hero?.title1);
+  set("heroTitle2", b.hero?.title2);
+  set("heroTitle3", b.hero?.title3);
+  set("heroSub", b.hero?.sub);
+  set("heroMenu", b.hero?.menuCta);
+  set("heroBook", b.hero?.bookCta);
+
+  set("featuredLabel", b.featuredSection?.label);
+  set("featuredTitle", b.featuredSection?.title);
+  set("featuredSub", b.featuredSection?.sub);
+  if (b.featuredSection?.cards?.length) {
+    out.featured = b.featuredSection.cards.map((c, i) => ({
+      img: mediaUrl(c.img, "card") || base.featured[i]?.img || "",
+      name: c.name || base.featured[i]?.name || "",
+      tag: c.tag || base.featured[i]?.tag || "",
+      desc: c.desc || base.featured[i]?.desc || "",
+    }));
+  }
+
+  set("galleryLabel", b.gallerySection?.label);
+  set("galleryTitle", b.gallerySection?.title);
+  if (b.gallery?.length) {
+    out.gallery = b.gallery.map((g, i) => ({
+      img: mediaUrl(g.img, "card") || base.gallery[i]?.img || "",
+      alt: g.caption || g.img?.alt || base.gallery[i]?.alt || "",
+    }));
+  }
+
+  set("aboutLabel", b.about?.label);
+  set("aboutTitle", b.about?.title);
+  set("aboutP1", b.about?.p1);
+  set("aboutP2", b.about?.p2);
+
+  set("menuPageSub", b.menuIntro?.sub);
+  set("menuNote", b.menuIntro?.note);
+  set("menuDishes", b.menuIntro?.dishesWord);
+
+  set("contactSub", b.contact?.sub);
+
+  // Site-wide strings (nav, form labels, WhatsApp wording) live in the global.
+  const settings = cmsLocale(lang)?.settings;
+  if (settings) {
+    for (const [key, value] of Object.entries(settings)) {
+      if (key === "logo") continue;
+      if (key in out) set(key as keyof Translation, value);
+    }
+  }
+
+  return out;
+}
+
 export function copyFor(branchId: BranchId, lang: Lang): Translation {
-  return { ...T[lang], ...BRANCH_COPY[branchId]?.[lang] };
+  const base = { ...T[lang], ...BRANCH_COPY[branchId]?.[lang] } as Translation;
+  return applyCms(base, branchId, lang);
 }
 
 /** The active translation: current language, with the selected branch's overrides applied. */

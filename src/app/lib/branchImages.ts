@@ -1,5 +1,7 @@
 import type { BranchId } from "./branches";
 import { exteriorImg, heroImg, interiorImg } from "./images";
+import { cmsBranch, mediaUrl } from "./cmsContent";
+import type { Lang } from "./LangContext";
 
 // Östra Sorgenfri's own photography — the fish counter, not the grill kitchen.
 import stallExterior from "@/imports/ostra-sorgenfri/stall-exterior.webp";
@@ -18,6 +20,10 @@ export interface BranchImages {
   heroVideo?: string;
 }
 
+/**
+ * The photos that ship in the repo. Used until the CMS has been set up, and as the
+ * fallback for any slot the owner has left empty.
+ */
 export const BRANCH_IMAGES: Record<BranchId, BranchImages> = {
   rosengard: {
     hero: heroImg,
@@ -32,6 +38,23 @@ export const BRANCH_IMAGES: Record<BranchId, BranchImages> = {
   },
 };
 
-export function imagesFor(branchId: BranchId): BranchImages {
-  return BRANCH_IMAGES[branchId];
+/**
+ * Photos for a branch, preferring what the CMS supplies.
+ *
+ * `lang` only affects which locale's media record is read; the files themselves are the
+ * same across languages, so callers that don't care can omit it.
+ */
+export function imagesFor(branchId: BranchId, lang: Lang = "sv"): BranchImages {
+  const fallback = BRANCH_IMAGES[branchId];
+  const b = cmsBranch(lang, branchId);
+  if (!b) return fallback;
+
+  return {
+    hero: mediaUrl(b.photos.hero, "hero") || fallback.hero,
+    exterior: mediaUrl(b.photos.exterior, "hero") || fallback.exterior,
+    interior: mediaUrl(b.photos.interior, "hero") || fallback.interior,
+    // A branch with no video in the CMS genuinely has none — don't resurrect the bundled
+    // one, or Östra Sorgenfri would start showing the Rosengård grill again.
+    heroVideo: mediaUrl(b.photos.heroVideo, "original") || undefined,
+  };
 }

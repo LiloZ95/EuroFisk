@@ -1,0 +1,2423 @@
+{
+  "locales": {
+    "sv": {
+      "branches": [
+        {
+          "slug": "ostra-sorgenfri",
+          "name": "EuroFisk (Östra Sorgenfri)",
+          "area": "Östra Sorgenfri",
+          "address": "Danska vägen 55, 212 29 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a1049f0fd71b:0x4c4b29459ec11c12?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "kg",
+          "serviceHours": {
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "hoursSummary": "Alla dagar ⁦09–18⁩",
+          "hoursRows": [
+            {
+              "days": "Måndag–söndag",
+              "time": "⁦09:00–18:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "alt": "Fiskdisken",
+              "width": 765,
+              "height": 1020
+            },
+            "heroVideo": null,
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "alt": "EuroFisks fiskdisk i Östra Sorgenfri utifrån",
+              "width": 1360,
+              "height": 907
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "alt": "Krabbor och kummel i disken",
+              "width": 765,
+              "height": 1020
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "alt": "Färska räkor ur disken",
+              "width": 675,
+              "height": 900
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "alt": "Röd knorrhane och bläckfisk på is",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Röd knorrhane och bläckfisk på is"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "alt": "Färska sardiner på is",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Färska sardiner på is"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "alt": "Blåkrabbor på is i disken",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Blåkrabbor på is i disken"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "alt": "Färska räkor ur disken",
+                "width": 675,
+                "height": 900
+              },
+              "caption": "Nykokta räkor"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "alt": "EuroFisks fiskdisk i Östra Sorgenfri utifrån",
+                "width": 1360,
+                "height": 907
+              },
+              "caption": "EuroFisks fiskdisk i Östra Sorgenfri utifrån"
+            }
+          ],
+          "hero": {
+            "badge": "Dagens fångst på is",
+            "title1": "Färsk fisk",
+            "title2": "per kilo",
+            "title3": "ur disken",
+            "sub": "Hel fisk och skaldjur på is, levererat färskt varje dag. Välj själv i disken — ta med den rå eller låt oss grilla eller fritera den medan du väntar.",
+            "menuCta": "Se dagens priser",
+            "bookCta": "Beställ mat"
+          },
+          "featuredSection": {
+            "label": "Ur disken",
+            "title": "Dagens färskaste",
+            "sub": "Fångsten kommer in färsk varje dag. Välj din fisk hel på is och betala per kilo.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "alt": "Hel färsk guldsparid på is",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Guldsparid",
+                "tag": "Mild och lättlagad",
+                "desc": "Hel färsk guldsparid på is — köp per kilo, rå eller tillagad"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "alt": "Färsk lax i disken",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Lax",
+                "tag": "Alltid populär",
+                "desc": "Färsk lax i disken — hel eller filead på plats"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "alt": "Färska räkor ur disken",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Räkor",
+                "tag": "Kokta samma dag",
+                "desc": "Färska räkor ur disken — köp per kilo"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "Galleri",
+            "title": "Från vårt kök"
+          },
+          "about": {
+            "label": "Om EuroFisk",
+            "title": "Passion för fisk\nsedan dag ett",
+            "p1": "EuroFisk startade med en enkel idé: att erbjuda Malmö färsk, vällagad fisk till ett rimligt pris. Vi tar stolthet i varje grill, varje krydda och varje gäst vi välkomnar.",
+            "p2": "Vår fisk levereras färsk varje dag. Vi lagar allt på beställning — ingen fisk väntar, allt serveras direkt från grillen till ditt bord."
+          },
+          "menuIntro": {
+            "sub": "Färsk fisk per kilo — välj den rå eller låt oss grilla eller fritera den. Alla priser anges per kilogram.",
+            "note": "Tillgången på färsk fisk kan variera. Kontakta personalen om allergier eller särskilda önskemål.",
+            "dishesWord": "sorter"
+          },
+          "contact": {
+            "sub": "Beställ färsk fisk för avhämtning eller ät hos oss — välj nedan så tar vi hand om resten via WhatsApp."
+          }
+        },
+        {
+          "slug": "rosengard",
+          "name": "EuroFisk (Rosengård)",
+          "area": "Rosengård",
+          "address": "Adlerfelts väg, 213 70 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a102e35188f7:0x83d21f1962b16c08?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "portion",
+          "serviceHours": {
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          "hoursSummary": "Mån–tis ⁦10–19⁩ · Ons–sön ⁦10–20⁩",
+          "hoursRows": [
+            {
+              "days": "Måndag–tisdag",
+              "time": "⁦10:00–19:00⁩"
+            },
+            {
+              "days": "Onsdag–söndag",
+              "time": "⁦10:00–20:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "alt": "EuroFisk grillad fisk",
+              "width": 1023,
+              "height": 1364
+            },
+            "heroVideo": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "alt": "",
+              "width": null,
+              "height": null
+            },
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "alt": "EuroFisk utifrån",
+              "width": 1400,
+              "height": 1050
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "alt": "Restaurangens matsal",
+              "width": 1050,
+              "height": 1400
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "alt": "Räkplanka med såser",
+              "width": 1050,
+              "height": 1400
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "alt": "Grillad fisk och räkor på bord",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Grillad fisk och räkor på bord"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "alt": "Färsk fisk och räkor på fat",
+                "width": 788,
+                "height": 1400
+              },
+              "caption": "Färsk fisk och räkor på fat"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "alt": "Räkplanka med såser",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Räkplanka med såser"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "alt": "Restaurangens matsal",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Restaurangens matsal"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "alt": "EuroFisk utifrån",
+                "width": 1400,
+                "height": 1050
+              },
+              "caption": "EuroFisk utifrån"
+            }
+          ],
+          "hero": {
+            "badge": "Färsk fisk varje dag",
+            "title1": "Äkta",
+            "title2": "havssmaker",
+            "title3": "från havet",
+            "sub": "Grillad fisk, färska räkor och skaldjursplattor — lagade med kärlek och serverade direkt till dig. Välkommen till EuroFisk.",
+            "menuCta": "Se menyn",
+            "bookCta": "Beställ mat"
+          },
+          "featuredSection": {
+            "label": "Signaturrätter",
+            "title": "Våra bästa rätter",
+            "sub": "Tre klassiker från vårt kök — grillat med omsorg, serverat med stolthet.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "alt": "Hel grillad guldsparid",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Guldsparid",
+                "tag": "Om du gillar milda smaker",
+                "desc": "Hel grillad guldsparid med sallad, bröd och sås"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "alt": "Grillad laxfilé",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Laxfilé",
+                "tag": "Om du vill ha en klassiker",
+                "desc": "Grillad laxfilé med färsk sallad och citron"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "alt": "Hel grillad havsabborre",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Havsabborre",
+                "tag": "Om du gillar grillat",
+                "desc": "Hel havsabborre grillad till perfektion"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "Galleri",
+            "title": "Från vårt kök"
+          },
+          "about": {
+            "label": "Om EuroFisk",
+            "title": "Passion för fisk\nsedan dag ett",
+            "p1": "EuroFisk startade med en enkel idé: att erbjuda Malmö färsk, vällagad fisk till ett rimligt pris. Vi tar stolthet i varje grill, varje krydda och varje gäst vi välkomnar.",
+            "p2": "Vår fisk levereras färsk varje dag. Vi lagar allt på beställning — ingen fisk väntar, allt serveras direkt från grillen till ditt bord."
+          },
+          "menuIntro": {
+            "sub": "Välj din favorit — huvudrätterna kostar 149 kr och portionsmenyns tillbehör ingår.",
+            "note": "Har du allergier eller särskilda önskemål? Fråga personalen. Priser inklusive moms.",
+            "dishesWord": "rätter"
+          },
+          "contact": {
+            "sub": "Beställ mat för avhämtning eller ät hos oss — välj nedan så tar vi hand om resten via WhatsApp."
+          }
+        }
+      ],
+      "menu": [
+        {
+          "id": "5",
+          "menuType": "kg",
+          "order": 0,
+          "label": "Fisk per kg",
+          "note": "Välj rå fisk eller låt oss tillaga den grillad eller friterad.",
+          "priceUnit": "pris per kg",
+          "items": [
+            {
+              "name": "Guldsparid",
+              "arabic": "اجاج",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Havsabborre",
+              "arabic": "براق",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "139 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Karp",
+              "arabic": "كارب",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Sardiner",
+              "arabic": "سردين",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Grå multe",
+              "arabic": "بوري",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Kalamari",
+              "arabic": "كالاماري",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Rödpagell",
+              "arabic": "جريدي",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Rödmullet",
+              "arabic": "سلطان إبراهيم",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Lax",
+              "arabic": "سلمون",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Räkor",
+              "arabic": "روبيان",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Rödbraxen",
+              "arabic": "فريدي",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "219 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Barracuda",
+              "arabic": "مليفة",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Oxögonfisk",
+              "arabic": "زوري / غبص",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "149 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Kummel",
+              "arabic": "عرموط",
+              "options": [
+                {
+                  "label": "Rå",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Tillagad",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "1",
+          "menuType": "portion",
+          "order": 0,
+          "label": "Grillat / Friterat",
+          "note": "Välj grillat eller friterat. Tillbehören i vår portionsmeny ingår.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Guldsparid",
+              "arabic": "اجاج",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "Havsabborre",
+              "arabic": "قاروص",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "Räkor",
+              "arabic": "روبيان",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "orderable": true
+            },
+            {
+              "name": "Laxfilé",
+              "arabic": "فيليه سلمون",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "menuType": "portion",
+          "order": 1,
+          "label": "Friterat",
+          "note": "Friteras på beställning och serveras med portionsmenyns tillbehör.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Rödmullet",
+              "arabic": "سلطان إبراهيم",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "Sardiner",
+              "arabic": "سردين",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "Kalamari",
+              "arabic": "كاليماري",
+              "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
+              "price": "149 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "menuType": "portion",
+          "order": 2,
+          "label": "Tillbehör",
+          "note": "",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Pommes",
+              "desc": "Extra portion pommes.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "Hummus",
+              "desc": "Extra portion hummus.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "Dryck",
+              "desc": "Valfri dryck enligt restaurangens utbud.",
+              "price": "15 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "menuType": "portion",
+          "order": 3,
+          "label": "Ingår i varje portion",
+          "note": "Dessa tillbehör ingår i alla huvudrätter ovan.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Fattoush & sallad",
+              "desc": "Färsk sallad med fattoush.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "Husets såser",
+              "desc": "Restaurangens såser serveras till portionen.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "Friterat pitabröd",
+              "desc": "Krispigt friterat pitabröd.",
+              "price": "Ingår",
+              "orderable": false
+            }
+          ]
+        }
+      ],
+      "settings": {
+        "id": 1,
+        "logo": {
+          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
+          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "alt": "EuroFisk",
+          "width": 480,
+          "height": 275
+        },
+        "navHome": "Hem",
+        "navMenu": "Meny",
+        "navReviews": "Recensioner",
+        "navContact": "Kontakt",
+        "navBook": "Beställ mat",
+        "deliveryBadge": "Nyhet",
+        "deliveryTitle": "Gratis hemleverans",
+        "deliveryArea": "Runt hela Malmö",
+        "deliverySub": "Du beställer — vi levererar rakt hem till din dörr.",
+        "deliveryCta": "Tryck för att beställa",
+        "formName": "Namn",
+        "formPhone": "Telefonnummer",
+        "formGuests": "Antal gäster",
+        "formNote": "Meddelande (valfritt)",
+        "formOrder": "Din beställning",
+        "formAddress": "Leveransadress",
+        "formSubmit": "Skicka via WhatsApp",
+        "modeBook": "Boka bord",
+        "modeOrder": "Beställ mat",
+        "fulfillDineIn": "Äta här",
+        "fulfillTakeaway": "Avhämtning",
+        "fulfillDelivery": "Leverans",
+        "waMsgIntro": "Hej EuroFisk! 🐟 Jag vill boka ett bord:",
+        "waMsgIntroTakeaway": "Hej EuroFisk! 🐟 Jag vill göra en avhämtningsbeställning:",
+        "waMsgIntroDineIn": "Hej EuroFisk! 🐟 Jag vill beställa och äta hos er:",
+        "waMsgIntroDelivery": "Hej EuroFisk! 🐟 Jag vill beställa hemleverans:",
+        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "createdAt": "2026-08-18T08:16:17.191Z",
+        "globalType": "site-settings"
+      }
+    },
+    "en": {
+      "branches": [
+        {
+          "slug": "ostra-sorgenfri",
+          "name": "EuroFisk (Östra Sorgenfri)",
+          "area": "Östra Sorgenfri",
+          "address": "Danska vägen 55, 212 29 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a1049f0fd71b:0x4c4b29459ec11c12?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "kg",
+          "serviceHours": {
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "hoursSummary": "Daily ⁦9am–6pm⁩",
+          "hoursRows": [
+            {
+              "days": "Monday–Sunday",
+              "time": "⁦09:00–18:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "alt": "The fish counter",
+              "width": 765,
+              "height": 1020
+            },
+            "heroVideo": null,
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "alt": "The EuroFisk fish counter in Östra Sorgenfri from outside",
+              "width": 1360,
+              "height": 907
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "alt": "Crabs and hake at the counter",
+              "width": 765,
+              "height": 1020
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "alt": "Fresh prawns from the counter",
+              "width": 675,
+              "height": 900
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "alt": "Red gurnard and squid on ice",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Red gurnard and squid on ice"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "alt": "Fresh sardines on ice",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Fresh sardines on ice"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "alt": "Blue crabs on ice at the counter",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "Blue crabs on ice at the counter"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "alt": "Fresh prawns from the counter",
+                "width": 675,
+                "height": 900
+              },
+              "caption": "Freshly cooked prawns"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "alt": "The EuroFisk fish counter in Östra Sorgenfri from outside",
+                "width": 1360,
+                "height": 907
+              },
+              "caption": "The EuroFisk fish counter in Östra Sorgenfri from outside"
+            }
+          ],
+          "hero": {
+            "badge": "Today's catch on ice",
+            "title1": "Fresh fish",
+            "title2": "by the kilo",
+            "title3": "from the ice",
+            "sub": "Whole fish and shellfish on ice, delivered fresh every day. Pick yours at the counter — take it home raw, or let us grill or fry it while you wait.",
+            "menuCta": "See today's prices",
+            "bookCta": "Order food"
+          },
+          "featuredSection": {
+            "label": "From the counter",
+            "title": "Freshest today",
+            "sub": "The catch comes in fresh every day. Pick your fish whole on ice and pay by the kilo.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "alt": "Whole fresh bream on ice",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Gilt-head Bream",
+                "tag": "Mild and easy",
+                "desc": "Whole fresh bream on ice — sold by the kilo, raw or prepared"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "alt": "Fresh salmon at the counter",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Salmon",
+                "tag": "Always a favourite",
+                "desc": "Fresh salmon at the counter — whole or filleted on the spot"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "alt": "Fresh prawns from the counter",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "Prawns",
+                "tag": "Cooked the same day",
+                "desc": "Fresh prawns from the counter — sold by the kilo"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "Gallery",
+            "title": "From our kitchen"
+          },
+          "about": {
+            "label": "About EuroFisk",
+            "title": "A passion for fish\nfrom day one",
+            "p1": "EuroFisk started with a simple idea: to bring Malmö fresh, well-prepared fish at a fair price. We take pride in every grill, every spice and every guest we welcome.",
+            "p2": "Our fish arrives fresh every day. Everything is made to order — nothing waits, everything goes straight from the grill to your table."
+          },
+          "menuIntro": {
+            "sub": "Fresh fish by the kilo — take it raw, or let us grill or fry it for you. All prices are per kilogram.",
+            "note": "Fresh fish availability may vary. Ask the team about allergies or special requests.",
+            "dishesWord": "kinds"
+          },
+          "contact": {
+            "sub": "Order fresh fish for pickup or to eat in — pick below and we'll take care of the rest over WhatsApp."
+          }
+        },
+        {
+          "slug": "rosengard",
+          "name": "EuroFisk (Rosengård)",
+          "area": "Rosengård",
+          "address": "Adlerfelts väg, 213 70 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a102e35188f7:0x83d21f1962b16c08?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "portion",
+          "serviceHours": {
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          "hoursSummary": "Mon–Tue ⁦10am–7pm⁩ · Wed–Sun ⁦10am–8pm⁩",
+          "hoursRows": [
+            {
+              "days": "Monday–Tuesday",
+              "time": "⁦10:00–19:00⁩"
+            },
+            {
+              "days": "Wednesday–Sunday",
+              "time": "⁦10:00–20:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "alt": "EuroFisk grilled fish",
+              "width": 1023,
+              "height": 1364
+            },
+            "heroVideo": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "alt": "",
+              "width": null,
+              "height": null
+            },
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "alt": "EuroFisk exterior",
+              "width": 1400,
+              "height": 1050
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "alt": "Restaurant dining area",
+              "width": 1050,
+              "height": 1400
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "alt": "Prawn platter with sauces",
+              "width": 1050,
+              "height": 1400
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "alt": "Grilled fish and prawns spread",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Grilled fish and prawns spread"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "alt": "Fresh fish and shrimp display",
+                "width": 788,
+                "height": 1400
+              },
+              "caption": "Fresh fish and shrimp display"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "alt": "Prawn platter with sauces",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Prawn platter with sauces"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "alt": "Restaurant dining area",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "Restaurant dining area"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "alt": "EuroFisk exterior",
+                "width": 1400,
+                "height": 1050
+              },
+              "caption": "EuroFisk exterior"
+            }
+          ],
+          "hero": {
+            "badge": "Fresh fish every day",
+            "title1": "Authentic",
+            "title2": "ocean flavours",
+            "title3": "from the sea",
+            "sub": "Grilled fish, fresh prawns and seafood platters — made with love and served straight to you. Welcome to EuroFisk.",
+            "menuCta": "View menu",
+            "bookCta": "Order food"
+          },
+          "featuredSection": {
+            "label": "Signature dishes",
+            "title": "Our finest plates",
+            "sub": "Three classics from our kitchen — grilled with care, served with pride.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "alt": "Whole grilled bream",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Gilt-head Bream",
+                "tag": "If you like mild flavours",
+                "desc": "Whole grilled bream with salad, flatbread and sauce"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "alt": "Grilled salmon fillet",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Salmon Fillet",
+                "tag": "If you want a classic",
+                "desc": "Grilled salmon fillet with fresh salad and lemon"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "alt": "Whole grilled sea bass",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "Sea Bass",
+                "tag": "If you love grilled fish",
+                "desc": "Whole sea bass grilled to perfection"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "Gallery",
+            "title": "From our kitchen"
+          },
+          "about": {
+            "label": "About EuroFisk",
+            "title": "A passion for fish\nfrom day one",
+            "p1": "EuroFisk started with a simple idea: to bring Malmö fresh, well-prepared fish at a fair price. We take pride in every grill, every spice and every guest we welcome.",
+            "p2": "Our fish arrives fresh every day. Everything is made to order — nothing waits, everything goes straight from the grill to your table."
+          },
+          "menuIntro": {
+            "sub": "Choose your favourite — main dishes are 149 kr and the portion-menu accompaniments are included.",
+            "note": "Have allergies or special requests? Ask our staff. Prices include VAT.",
+            "dishesWord": "dishes"
+          },
+          "contact": {
+            "sub": "Order food for takeaway or to eat in — pick below and we'll take care of the rest over WhatsApp."
+          }
+        }
+      ],
+      "menu": [
+        {
+          "id": "5",
+          "menuType": "kg",
+          "order": 0,
+          "label": "Fish by the kg",
+          "note": "Choose raw fish or let us prepare it grilled or fried.",
+          "priceUnit": "price per kg",
+          "items": [
+            {
+              "name": "Gilthead Bream",
+              "arabic": "اجاج",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Sea Bass",
+              "arabic": "براق",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "139 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Carp",
+              "arabic": "كارب",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Sardines",
+              "arabic": "سردين",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Grey Mullet",
+              "arabic": "بوري",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Calamari",
+              "arabic": "كالاماري",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Red Porgy",
+              "arabic": "جريدي",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Red Mullet",
+              "arabic": "سلطان إبراهيم",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Salmon",
+              "arabic": "سلمون",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Prawns",
+              "arabic": "روبيان",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Red Seabream",
+              "arabic": "فريدي",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "219 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Barracuda",
+              "arabic": "مليفة",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Bigeye Fish",
+              "arabic": "زوري / غبص",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "149 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "Hake",
+              "arabic": "عرموط",
+              "options": [
+                {
+                  "label": "Raw",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "Prepared",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "1",
+          "menuType": "portion",
+          "order": 0,
+          "label": "Grilled / Fried",
+          "note": "Choose grilled or fried. The portion-menu accompaniments are included.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Gilthead Bream",
+              "arabic": "اجاج",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "Sea Bass",
+              "arabic": "قاروص",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "Prawns",
+              "arabic": "روبيان",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "orderable": true
+            },
+            {
+              "name": "Salmon Fillet",
+              "arabic": "فيليه سلمون",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "menuType": "portion",
+          "order": 1,
+          "label": "Fried",
+          "note": "Fried to order and served with the portion-menu accompaniments.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Red Mullet",
+              "arabic": "سلطان إبراهيم",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "Sardines",
+              "arabic": "سردين",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "Calamari",
+              "arabic": "كاليماري",
+              "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
+              "price": "149 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "menuType": "portion",
+          "order": 2,
+          "label": "Sides",
+          "note": "",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Fries",
+              "desc": "Extra portion of fries.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "Hummus",
+              "desc": "Extra portion of hummus.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "Drink",
+              "desc": "Any drink from the restaurant's available selection.",
+              "price": "15 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "menuType": "portion",
+          "order": 3,
+          "label": "Included with every portion",
+          "note": "These accompaniments are included with every main dish above.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "Fattoush & salad",
+              "desc": "Fresh salad with fattoush.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "House sauces",
+              "desc": "The restaurant's sauces are served with the portion.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "Fried pita bread",
+              "desc": "Crispy fried pita bread.",
+              "price": "Ingår",
+              "orderable": false
+            }
+          ]
+        }
+      ],
+      "settings": {
+        "id": 1,
+        "logo": {
+          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
+          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "alt": "EuroFisk",
+          "width": 480,
+          "height": 275
+        },
+        "navHome": "Home",
+        "navMenu": "Menu",
+        "navReviews": "Reviews",
+        "navContact": "Contact",
+        "navBook": "Order food",
+        "deliveryBadge": "New",
+        "deliveryTitle": "Free home delivery",
+        "deliveryArea": "Anywhere in Malmö",
+        "deliverySub": "You order — we deliver straight to your door.",
+        "deliveryCta": "Tap to order",
+        "formName": "Name",
+        "formPhone": "Phone number",
+        "formGuests": "Number of guests",
+        "formNote": "Message (optional)",
+        "formOrder": "Your order",
+        "formAddress": "Delivery address",
+        "formSubmit": "Send via WhatsApp",
+        "modeBook": "Book a table",
+        "modeOrder": "Order food",
+        "fulfillDineIn": "Dine in",
+        "fulfillTakeaway": "Takeaway",
+        "fulfillDelivery": "Delivery",
+        "waMsgIntro": "Hi EuroFisk! 🐟 I'd like to book a table:",
+        "waMsgIntroTakeaway": "Hi EuroFisk! 🐟 I'd like to place a takeaway order:",
+        "waMsgIntroDineIn": "Hi EuroFisk! 🐟 I'd like to order and eat in:",
+        "waMsgIntroDelivery": "Hi EuroFisk! 🐟 I'd like to order home delivery:",
+        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "createdAt": "2026-08-18T08:16:17.191Z",
+        "globalType": "site-settings"
+      }
+    },
+    "ar": {
+      "branches": [
+        {
+          "slug": "ostra-sorgenfri",
+          "name": "EuroFisk (Östra Sorgenfri)",
+          "area": "Östra Sorgenfri",
+          "address": "Danska vägen 55, 212 29 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a1049f0fd71b:0x4c4b29459ec11c12?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "kg",
+          "serviceHours": {
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "hoursSummary": "كل الأيام ⁦09–18⁩",
+          "hoursRows": [
+            {
+              "days": "الإثنين–الأحد",
+              "time": "⁦09:00–18:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "alt": "ثلاجة السمك",
+              "width": 765,
+              "height": 1020
+            },
+            "heroVideo": null,
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "alt": "محل EuroFisk للسمك في Östra Sorgenfri من الخارج",
+              "width": 1360,
+              "height": 907
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "alt": "سلطعون وعرموط في الثلاجة",
+              "width": 765,
+              "height": 1020
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "alt": "روبيان طازج من الثلاجة",
+              "width": 675,
+              "height": 900
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "alt": "سمك الحرّ الأحمر والحبار على الثلج",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "سمك الحرّ الأحمر والحبار على الثلج"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "alt": "سردين طازج على الثلج",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "سردين طازج على الثلج"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "alt": "سلطعون أزرق على الثلج في الثلاجة",
+                "width": 765,
+                "height": 1020
+              },
+              "caption": "سلطعون أزرق على الثلج في الثلاجة"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "alt": "روبيان طازج من الثلاجة",
+                "width": 675,
+                "height": 900
+              },
+              "caption": "روبيان مسلوق طازج"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "alt": "محل EuroFisk للسمك في Östra Sorgenfri من الخارج",
+                "width": 1360,
+                "height": 907
+              },
+              "caption": "محل EuroFisk للسمك في Östra Sorgenfri من الخارج"
+            }
+          ],
+          "hero": {
+            "badge": "صيد اليوم على الثلج",
+            "title1": "سمك طازج",
+            "title2": "بالكيلو",
+            "title3": "من الثلج مباشرة",
+            "sub": "سمك كامل ومأكولات بحرية على الثلج، تصلنا طازجة كل يوم. اختر سمكتك بنفسك — خذها نيئة، أو دعنا نشويها أو نقليها لك في الحال.",
+            "menuCta": "شاهد أسعار اليوم",
+            "bookCta": "اطلب طعامك"
+          },
+          "featuredSection": {
+            "label": "من الثلاجة",
+            "title": "الأطزج اليوم",
+            "sub": "يصلنا الصيد طازجاً كل يوم. اختر سمكتك كاملة على الثلج وادفع بالكيلو.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "alt": "سمكة اجاج كاملة طازجة على الثلج",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "اجاج",
+                "tag": "طعم خفيف وسهل",
+                "desc": "سمكة اجاج كاملة طازجة على الثلج — تُباع بالكيلو، نيئة أو محضَّرة"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "alt": "سلمون طازج في الثلاجة",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "سلمون",
+                "tag": "المفضّل دائماً",
+                "desc": "سلمون طازج في الثلاجة — كامل أو مقطّع فيليه أمامك"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "alt": "روبيان طازج من الثلاجة",
+                  "width": 675,
+                  "height": 900
+                },
+                "name": "روبيان",
+                "tag": "مسلوق في نفس اليوم",
+                "desc": "روبيان طازج من الثلاجة — يُباع بالكيلو"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "معرض الصور",
+            "title": "من مطبخنا"
+          },
+          "about": {
+            "label": "عن EuroFisk",
+            "title": "شغف بالسمك\nمنذ اليوم الأول",
+            "p1": "بدأ EuroFisk بفكرة بسيطة: أن نقدّم لأهل مالمو سمكاً طازجاً ومطبوخاً بإتقان وبسعر مناسب. نفخر بكل شواية وكل بهار وكل ضيف نرحّب به.",
+            "p2": "يصلنا السمك طازجاً كل يوم، ونحضّر كل شيء عند الطلب — لا شيء ينتظر، كل طبق يخرج من الشواية إلى طاولتك مباشرة."
+          },
+          "menuIntro": {
+            "sub": "سمك طازج بالكيلو — خذه نيئاً أو دعنا نشويه أو نقليه لك. جميع الأسعار للكيلوغرام الواحد.",
+            "note": "قد يختلف توفّر السمك الطازج. تواصل مع العاملين بخصوص الحساسية أو الطلبات الخاصة.",
+            "dishesWord": "نوعاً"
+          },
+          "contact": {
+            "sub": "اطلب سمكاً طازجاً للاستلام أو لتناوله عندنا — اختر أدناه ونتكفّل بالباقي عبر WhatsApp."
+          }
+        },
+        {
+          "slug": "rosengard",
+          "name": "EuroFisk (Rosengård)",
+          "area": "Rosengård",
+          "address": "Adlerfelts väg, 213 70 Malmö",
+          "mapsUrl": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a102e35188f7:0x83d21f1962b16c08?sa=X&ved=1t:8290&ictx=111",
+          "phoneDisplay": "⁦+46 79 016 48 13⁩",
+          "phoneHref": "tel:+46790164813",
+          "whatsappNumber": "46790164813",
+          "menuType": "portion",
+          "serviceHours": {
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          "hoursSummary": "الإثنين–الثلاثاء ⁦10–19⁩ · الأربعاء–الأحد ⁦10–20⁩",
+          "hoursRows": [
+            {
+              "days": "الإثنين–الثلاثاء",
+              "time": "⁦10:00–19:00⁩"
+            },
+            {
+              "days": "الأربعاء–الأحد",
+              "time": "⁦10:00–20:00⁩"
+            }
+          ],
+          "photos": {
+            "hero": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "alt": "سمك مشوي من EuroFisk",
+              "width": 1023,
+              "height": 1364
+            },
+            "heroVideo": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "alt": "",
+              "width": null,
+              "height": null
+            },
+            "exterior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "alt": "واجهة EuroFisk من الخارج",
+              "width": 1400,
+              "height": 1050
+            },
+            "interior": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "alt": "صالة المطعم من الداخل",
+              "width": 1050,
+              "height": 1400
+            },
+            "menuPlatter": {
+              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "alt": "طبق روبيان مع الصلصات",
+              "width": 1050,
+              "height": 1400
+            }
+          },
+          "gallery": [
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "alt": "سمك مشوي وروبيان على الطاولة",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "سمك مشوي وروبيان على الطاولة"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "alt": "سمك وروبيان طازج معروض",
+                "width": 788,
+                "height": 1400
+              },
+              "caption": "سمك وروبيان طازج معروض"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "alt": "طبق روبيان مع الصلصات",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "طبق روبيان مع الصلصات"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "alt": "صالة المطعم من الداخل",
+                "width": 1050,
+                "height": 1400
+              },
+              "caption": "صالة المطعم من الداخل"
+            },
+            {
+              "img": {
+                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
+                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
+                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "alt": "واجهة EuroFisk من الخارج",
+                "width": 1400,
+                "height": 1050
+              },
+              "caption": "واجهة EuroFisk من الخارج"
+            }
+          ],
+          "hero": {
+            "badge": "سمك طازج كل يوم",
+            "title1": "نكهات",
+            "title2": "البحر",
+            "title3": "الأصيلة",
+            "sub": "سمك مشوي وروبيان طازج وأطباق مأكولات بحرية — تُحضَّر بحب وتُقدَّم إليك مباشرة. أهلاً بك في EuroFisk.",
+            "menuCta": "شاهد القائمة",
+            "bookCta": "اطلب طعامك"
+          },
+          "featuredSection": {
+            "label": "أطباق مميزة",
+            "title": "ألذّ أطباقنا",
+            "sub": "ثلاثة أطباق كلاسيكية من مطبخنا — مشوية بعناية وتُقدَّم بفخر.",
+            "cards": [
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "alt": "سمكة اجاج كاملة مشوية",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "اجاج",
+                "tag": "إن كنت تحب النكهات الخفيفة",
+                "desc": "سمكة اجاج كاملة مشوية مع سلطة وخبز وصلصة"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "alt": "فيليه سلمون مشوي",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "فيليه سلمون",
+                "tag": "إن كنت تريد الطبق الكلاسيكي",
+                "desc": "فيليه سلمون مشوي مع سلطة طازجة وليمون"
+              },
+              {
+                "img": {
+                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
+                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "alt": "سمكة قاروص كاملة مشوية",
+                  "width": 720,
+                  "height": 900
+                },
+                "name": "قاروص",
+                "tag": "إن كنت تحب المشاوي",
+                "desc": "سمكة قاروص كاملة مشوية إلى حدّ الكمال"
+              }
+            ]
+          },
+          "gallerySection": {
+            "label": "معرض الصور",
+            "title": "من مطبخنا"
+          },
+          "about": {
+            "label": "عن EuroFisk",
+            "title": "شغف بالسمك\nمنذ اليوم الأول",
+            "p1": "بدأ EuroFisk بفكرة بسيطة: أن نقدّم لأهل مالمو سمكاً طازجاً ومطبوخاً بإتقان وبسعر مناسب. نفخر بكل شواية وكل بهار وكل ضيف نرحّب به.",
+            "p2": "يصلنا السمك طازجاً كل يوم، ونحضّر كل شيء عند الطلب — لا شيء ينتظر، كل طبق يخرج من الشواية إلى طاولتك مباشرة."
+          },
+          "menuIntro": {
+            "sub": "اختر طبقك المفضّل — الأطباق الرئيسية بـ 149 kr وتشمل مقبّلات قائمة الوجبة.",
+            "note": "لديك حساسية أو طلب خاص؟ اسأل العاملين. الأسعار شاملة الضريبة.",
+            "dishesWord": "أطباق"
+          },
+          "contact": {
+            "sub": "اطلب طعامك للاستلام أو لتناوله عندنا — اختر أدناه ونتكفّل بالباقي عبر WhatsApp."
+          }
+        }
+      ],
+      "menu": [
+        {
+          "id": "5",
+          "menuType": "kg",
+          "order": 0,
+          "label": "السمك بالكيلو",
+          "note": "اختر السمك نيئاً أو دعنا نحضّره لك مشوياً أو مقلياً.",
+          "priceUnit": "السعر لكل كيلوغرام",
+          "items": [
+            {
+              "name": "اجاج",
+              "arabic": "اجاج",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "براق",
+              "arabic": "براق",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "139 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "كارب",
+              "arabic": "كارب",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "سردين",
+              "arabic": "سردين",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "119 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "بوري",
+              "arabic": "بوري",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "129 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "199 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "كالاماري",
+              "arabic": "كالاماري",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "جريدي",
+              "arabic": "جريدي",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "سلطان إبراهيم",
+              "arabic": "سلطان إبراهيم",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "سلمون",
+              "arabic": "سلمون",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "روبيان",
+              "arabic": "روبيان",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "فريدي",
+              "arabic": "فريدي",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "219 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "مليفة",
+              "arabic": "مليفة",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "زوري / غبص",
+              "arabic": "زوري / غبص",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "149 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "219 kr"
+                }
+              ],
+              "orderable": true
+            },
+            {
+              "name": "عرموط",
+              "arabic": "عرموط",
+              "options": [
+                {
+                  "label": "نيء",
+                  "price": "199 kr"
+                },
+                {
+                  "label": "محضَّر",
+                  "price": "299 kr"
+                }
+              ],
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "1",
+          "menuType": "portion",
+          "order": 0,
+          "label": "مشاوي / مقالي",
+          "note": "اختر مشوي أو مقلي. مقبّلات قائمة الوجبة مشمولة.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "اجاج",
+              "arabic": "اجاج",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "قاروص",
+              "arabic": "قاروص",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "orderable": true
+            },
+            {
+              "name": "روبيان",
+              "arabic": "روبيان",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "orderable": true
+            },
+            {
+              "name": "فيليه سلمون",
+              "arabic": "فيليه سلمون",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "menuType": "portion",
+          "order": 1,
+          "label": "مقالي",
+          "note": "يُقلى عند الطلب ويُقدَّم مع مقبّلات قائمة الوجبة.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "سلطان إبراهيم",
+              "arabic": "سلطان إبراهيم",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "سردين",
+              "arabic": "سردين",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "orderable": true
+            },
+            {
+              "name": "كاليماري",
+              "arabic": "كاليماري",
+              "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
+              "price": "149 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "menuType": "portion",
+          "order": 2,
+          "label": "إضافات",
+          "note": "",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "بطاطا مقلية",
+              "desc": "حصة إضافية من البطاطا المقلية.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "حمّص",
+              "desc": "حصة إضافية من الحمّص.",
+              "price": "20 kr",
+              "orderable": true
+            },
+            {
+              "name": "مشروب",
+              "desc": "أي مشروب من المتوفّر لدى المطعم.",
+              "price": "15 kr",
+              "orderable": true
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "menuType": "portion",
+          "order": 3,
+          "label": "مشمول مع كل وجبة",
+          "note": "هذه المقبّلات مشمولة مع كل طبق رئيسي أعلاه.",
+          "priceUnit": "",
+          "items": [
+            {
+              "name": "فتوش وسلطة",
+              "desc": "سلطة طازجة مع الفتوش.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "صلصات المطعم",
+              "desc": "تُقدَّم صلصات المطعم مع الوجبة.",
+              "price": "Ingår",
+              "orderable": false
+            },
+            {
+              "name": "خبز بيتا مقلي",
+              "desc": "خبز بيتا مقلي ومقرمش.",
+              "price": "Ingår",
+              "orderable": false
+            }
+          ]
+        }
+      ],
+      "settings": {
+        "id": 1,
+        "logo": {
+          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
+          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
+          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "alt": "EuroFisk",
+          "width": 480,
+          "height": 275
+        },
+        "navHome": "الرئيسية",
+        "navMenu": "القائمة",
+        "navReviews": "التقييمات",
+        "navContact": "تواصل معنا",
+        "navBook": "اطلب طعامك",
+        "deliveryBadge": "جديد",
+        "deliveryTitle": "توصيل مجاني إلى المنزل",
+        "deliveryArea": "في كل أنحاء مالمو",
+        "deliverySub": "أنت تطلب — ونحن نوصّل إلى باب بيتك مباشرة.",
+        "deliveryCta": "اضغط للطلب",
+        "formName": "الاسم",
+        "formPhone": "رقم الهاتف",
+        "formGuests": "عدد الضيوف",
+        "formNote": "ملاحظة (اختياري)",
+        "formOrder": "طلبك",
+        "formAddress": "عنوان التوصيل",
+        "formSubmit": "أرسل عبر WhatsApp",
+        "modeBook": "احجز طاولة",
+        "modeOrder": "اطلب طعامك",
+        "fulfillDineIn": "تناول في المحل",
+        "fulfillTakeaway": "استلام",
+        "fulfillDelivery": "توصيل",
+        "waMsgIntro": "مرحباً EuroFisk! 🐟 أريد حجز طاولة:",
+        "waMsgIntroTakeaway": "مرحباً EuroFisk! 🐟 أريد تقديم طلب استلام:",
+        "waMsgIntroDineIn": "مرحباً EuroFisk! 🐟 أريد أن أطلب وآكل عندكم:",
+        "waMsgIntroDelivery": "مرحباً EuroFisk! 🐟 أريد طلب توصيل إلى المنزل:",
+        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "createdAt": "2026-08-18T08:16:17.191Z",
+        "globalType": "site-settings"
+      }
+    }
+  },
+  "generatedFrom": "http://localhost:3000"
+}

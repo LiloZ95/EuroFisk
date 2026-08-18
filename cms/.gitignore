@@ -1,0 +1,10 @@
+node_modules
+.next
+.env
+*.tsbuildinfo
+next-env.d.ts
+src/payload-types.ts
+# Generated from payload.config.ts by `payload generate:importmap`, which the predev and
+# prebuild scripts run automatically. Committing it invites a stale map that silently
+# breaks the admin panel.
+src/app/(payload)/admin/importMap.js

@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/fetch-content.mjs",
     "build": "vite build",
+    "content": "node scripts/fetch-content.mjs",
     "dev": "vite",
     "audit": "npm audit --omit=dev",
     "typecheck": "tsc --noEmit",
