@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { image, locText, locArea } from "../fields/localized";
+import { rebuildAfterChange, rebuildAfterDelete } from "../hooks/triggerRebuild";
 
 /**
  * A menu section ("Grilled / Fried", "Fish by the kilo") with its dishes nested inside.
@@ -16,6 +17,11 @@ export const MenuCategories: CollectionConfig = {
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+  // Every save here changes what the public site shows, so it needs a rebuild.
+  hooks: {
+    afterChange: [rebuildAfterChange],
+    afterDelete: [rebuildAfterDelete],
   },
   admin: {
     useAsTitle: "label",

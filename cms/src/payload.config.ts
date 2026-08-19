@@ -63,6 +63,11 @@ export default buildConfig({
               .join("/"),
         },
       },
+      // Vercel caps a serverless request body at 4.5 MB, which a phone photo clears easily.
+      // With this on, the browser PUTs the original straight to R2 and only tells the server
+      // where it landed; the server then pulls it back to run sharp, so the image sizes above
+      // are still generated. Requires the R2 bucket to allow PUT from the admin panel's origin.
+      clientUploads: true,
       bucket: required("R2_BUCKET"),
       config: {
         endpoint: required("R2_ENDPOINT"),

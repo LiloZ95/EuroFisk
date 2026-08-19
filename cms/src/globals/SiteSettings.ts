@@ -1,5 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { image, locText, locArea } from "../fields/localized";
+import { rebuildAfterGlobalChange } from "../hooks/triggerRebuild";
 
 /**
  * Text that is the same on both shops: navigation, the order form, the delivery banner and
@@ -15,6 +16,10 @@ export const SiteSettings: GlobalConfig = {
   access: {
     read: () => true,
     update: ({ req }) => Boolean(req.user),
+  },
+  // Every save here changes what the public site shows, so it needs a rebuild.
+  hooks: {
+    afterChange: [rebuildAfterGlobalChange],
   },
   admin: {
     description: "Wording shared by both shops — menu bar, buttons, order form and WhatsApp messages.",

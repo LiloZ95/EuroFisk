@@ -38,52 +38,96 @@ break a deploy.
 `src/content/content.json` is committed on purpose — it means a fresh clone builds without
 CMS credentials, and the site's content history lives in git.
 
-## 2. Rebuild when the owner hits Save
+## 2. Deploying the CMS to Vercel
 
-Add `CMS_URL` as a repository variable and give the deploy workflow a
-`repository_dispatch` trigger:
+The CMS is a Next.js app with no local state — Postgres lives at Neon, media at R2 — so it
+deploys as-is.
 
-```yaml
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-  repository_dispatch:
-    types: [cms-update]
+1. **Import the repo** at vercel.com → Add New → Project.
+2. **Set Root Directory to `cms`.** This is the one setting that is easy to miss and it
+   fails confusingly if wrong: the repository root is the Vite site, not the CMS.
+   Framework auto-detects as Next.js.
+3. **Add the environment variables** from `cms/.env.example` — for *all* environments
+   (Production, Preview, Development). `payload.config.ts` throws on a missing variable at
+   import time, and Next imports it during `next build`, so an absent value fails the build
+   rather than showing up later at runtime.
+4. **Deploy**, then copy the assigned URL.
+5. **Set `CORS_ORIGINS` to that URL** and redeploy. It is unknown until the first deploy
+   exists, so this second pass is unavoidable. Until it is set the admin panel cannot call
+   its own API.
+
+### Postgres must be the pooled connection
+
+Use the Neon connection string whose host contains `-pooler`. Each serverless invocation
+opens its own connection, and the direct host exhausts its connection limit quickly under
+the admin panel's normal traffic.
+
+### R2 needs a CORS policy
+
+Uploads use `clientUploads` (see below), which means the browser PUTs files straight to the
+bucket. Cloudflare dashboard → R2 → your bucket → Settings → CORS policy:
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://<your-cms>.vercel.app"],
+    "AllowedMethods": ["GET", "PUT"],
+    "AllowedHeaders": ["*"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3600
+  }
+]
 ```
 
-Then in Payload, add an `afterChange` hook that pings GitHub. In
-`cms/src/payload.config.ts`, on the collections the owner edits:
+Without this, uploads fail in the browser with an opaque CORS error while the server logs
+look perfectly healthy.
 
-```ts
-hooks: {
-  afterChange: [
-    async () => {
-      if (!process.env.GITHUB_DISPATCH_TOKEN) return
-      await fetch('https://api.github.com/repos/<owner>/EuroFisk/dispatches', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/vnd.github+json',
-          Authorization: `Bearer ${process.env.GITHUB_DISPATCH_TOKEN}`,
-        },
-        body: JSON.stringify({ event_type: 'cms-update' }),
-      })
-    },
-  ],
-}
-```
+### Why uploads bypass the server
 
-The token needs only the `contents: write` permission on this one repository. Create it as
-a fine-grained personal access token and store it as `GITHUB_DISPATCH_TOKEN` in the CMS
-host's environment.
+Vercel caps a serverless request body at 4.5 MB. A photo straight off a phone is routinely
+larger, so uploading through the function would fail for exactly the files the owner is
+most likely to add. `clientUploads: true` in `payload.config.ts` has the browser PUT the
+original directly to R2 and send the server only a pointer; the server then fetches it back
+to run sharp, so the generated `thumb`/`card`/`hero` sizes and WebP conversion still happen
+as before.
 
-Debounce is worth adding later — an owner editing ten fields in a row will otherwise
-trigger ten builds. A simple approach is to fire the dispatch on a 60-second trailing
-timer.
+### Schema changes need migrations
 
-## 3. Update the deploy workflow
+The Postgres adapter only auto-pushes schema in development. Production expects the tables
+to already exist — they do, from local development against the same Neon database. Any
+*future* change to a collection's fields needs a Payload migration committed alongside it,
+or production will read a schema that no longer matches the config.
 
-`.github/workflows/deploy.yml` needs the fetch step to have the CMS URL:
+## 3. Rebuild when the owner hits Save
+
+This is built, in `cms/src/hooks/triggerRebuild.ts`, and attached to the collections and
+global the owner edits (Branches, MenuCategories, Media, SiteSettings — not Users). After
+each save it POSTs a `repository_dispatch` of type `cms-update`, which
+`.github/workflows/deploy.yml` already listens for.
+
+It is inert unless both `GITHUB_REPO` and `GITHUB_DISPATCH_TOKEN` are set, which is what
+keeps local editing and `npm run seed` from firing real deploys.
+
+Create the token at *GitHub → Settings → Developer settings → Personal access tokens →
+Fine-grained tokens*, scoped to this repository only, with **Contents: read and write** —
+that is the permission `repository_dispatch` requires. Store it on Vercel as
+`GITHUB_DISPATCH_TOKEN`, and set `GITHUB_REPO` to `owner/EuroFisk`.
+
+A failed dispatch is logged and swallowed. The owner's save has already succeeded at that
+point, and reporting an error would be both alarming and untrue; the worst case is the live
+site lags until the next save.
+
+### No debounce, on purpose
+
+Ten quick saves fire ten dispatches. The workflow runs under
+`concurrency: { group: pages, cancel-in-progress: true }`, so the earlier runs are cancelled
+and only the last one publishes — the same outcome a debounce would produce, without any
+state to keep. An in-process timer would not have worked here regardless: Vercel freezes the
+function once the response is sent, so a pending `setTimeout` never fires.
+
+## 4. Point the site at the CMS
+
+`.github/workflows/deploy.yml` already passes these through to the build:
 
 ```yaml
       - name: Build
@@ -91,9 +135,12 @@ timer.
         env:
           DEPLOY_TARGET: gh-pages
           CMS_URL: ${{ vars.CMS_URL }}
+          REQUIRE_CMS: ${{ vars.REQUIRE_CMS }}
 ```
 
-Set `CMS_URL` under *Settings → Secrets and variables → Actions → Variables*.
+Under *Settings → Secrets and variables → Actions → Variables*, set `CMS_URL` to the
+Vercel URL. Once you have seen a deploy fetch content successfully, also set `REQUIRE_CMS`
+to `1` so a failed fetch fails the deploy instead of quietly shipping stale content.
 
 ## Rollback
 

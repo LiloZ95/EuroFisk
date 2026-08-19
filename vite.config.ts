@@ -17,10 +17,11 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  // GitHub Pages serves this project site from https://<user>.github.io/EuroFisk/.
-  // The CI workflow sets DEPLOY_TARGET=gh-pages so assets resolve under /EuroFisk/,
-  // while local dev/build stay at '/'. On a future custom domain, keep this '/'.
-  base: process.env.DEPLOY_TARGET === 'gh-pages' ? '/EuroFisk/' : '/',
+  // Pages serves the site from the root of the custom domain (www.eurofisk.se), so assets
+  // resolve from '/' everywhere. This was '/EuroFisk/' for gh-pages builds back when the
+  // site lived at <user>.github.io/EuroFisk/ — leaving it that way after the domain was
+  // attached pointed every asset at a path that does not exist.
+  base: '/',
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

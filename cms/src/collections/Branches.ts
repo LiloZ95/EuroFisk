@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { image, locText, locArea } from "../fields/localized";
+import { rebuildAfterChange, rebuildAfterDelete } from "../hooks/triggerRebuild";
 
 /**
  * One row per shop. Holds everything that differs between the two locations: contact
@@ -17,6 +18,11 @@ export const Branches: CollectionConfig = {
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+  // Every save here changes what the public site shows, so it needs a rebuild.
+  hooks: {
+    afterChange: [rebuildAfterChange],
+    afterDelete: [rebuildAfterDelete],
   },
   admin: {
     useAsTitle: "name",

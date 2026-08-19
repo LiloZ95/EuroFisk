@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { rebuildAfterChange, rebuildAfterDelete } from "../hooks/triggerRebuild";
 
 /**
  * Every photo and video on the site. Files go to Cloudflare R2 (configured in
@@ -17,6 +18,11 @@ export const Media: CollectionConfig = {
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+  // Every save here changes what the public site shows, so it needs a rebuild.
+  hooks: {
+    afterChange: [rebuildAfterChange],
+    afterDelete: [rebuildAfterDelete],
   },
   admin: {
     description:

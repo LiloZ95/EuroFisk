@@ -9,6 +9,10 @@ import {
   REST_PUT,
 } from "@payloadcms/next/routes";
 
+// Uploads run through here: with clientUploads on, the server pulls the original back from
+// R2 and runs sharp over it, which is the slowest thing this API does. 60s is the Hobby cap.
+export const maxDuration = 60;
+
 export const GET = REST_GET(config);
 export const POST = REST_POST(config);
 export const DELETE = REST_DELETE(config);
