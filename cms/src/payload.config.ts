@@ -20,6 +20,20 @@ function required(name: string): string {
   return value;
 }
 
+/**
+ * Same, for values that must be absolute URLs. A host on its own is the dangerous case:
+ * "media.eurofisk.se/photo.webp" is a perfectly valid *relative* URL, so nothing errors —
+ * the browser just resolves it against the site's own origin and every image 404s. The
+ * trailing slash is trimmed here so callers can join path segments without doubling it.
+ */
+function requiredUrl(name: string): string {
+  const value = required(name);
+  if (!/^https?:\/\//.test(value)) {
+    throw new Error(`Environment variable ${name} must start with https:// — got "${value}"`);
+  }
+  return value.replace(/\/$/, "");
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -58,9 +72,7 @@ export default buildConfig({
           // Files are served from the public R2 URL (or a custom domain bound to the
           // bucket), not proxied through this server.
           generateFileURL: ({ filename, prefix }) =>
-            [required("R2_PUBLIC_URL").replace(/\/$/, ""), prefix, filename]
-              .filter(Boolean)
-              .join("/"),
+            [requiredUrl("R2_PUBLIC_URL"), prefix, filename].filter(Boolean).join("/"),
         },
       },
       // Vercel caps a serverless request body at 4.5 MB, which a phone photo clears easily.
@@ -70,7 +82,7 @@ export default buildConfig({
       clientUploads: true,
       bucket: required("R2_BUCKET"),
       config: {
-        endpoint: required("R2_ENDPOINT"),
+        endpoint: requiredUrl("R2_ENDPOINT"),
         region: "auto",
         forcePathStyle: true,
         credentials: {
