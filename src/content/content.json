@@ -428,11 +428,11 @@
               "options": [
                 {
                   "label": "Rå",
-                  "price": "3123123 kr"
+                  "price": "0 kr"
                 },
                 {
                   "label": "Tillagad",
-                  "price": "30 kr"
+                  "price": "0 kr"
                 }
               ],
               "orderable": true
@@ -1234,11 +1234,11 @@
               "options": [
                 {
                   "label": "Raw",
-                  "price": "3123123 kr"
+                  "price": "0 kr"
                 },
                 {
                   "label": "Prepared",
-                  "price": "30 kr"
+                  "price": "0 kr"
                 }
               ],
               "orderable": true
@@ -2040,11 +2040,11 @@
               "options": [
                 {
                   "label": "نيء",
-                  "price": "3123123 kr"
+                  "price": "0 kr"
                 },
                 {
                   "label": "محضَّر",
-                  "price": "30 kr"
+                  "price": "0 kr"
                 }
               ],
               "orderable": true
