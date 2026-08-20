@@ -50,13 +50,6 @@ jobs:
           # silently shipping stale content. Leave unset until then.
           REQUIRE_CMS: ${{ vars.REQUIRE_CMS }}
 
-      - name: Add SPA fallback + disable Jekyll
-        # 404.html = a copy of index.html so deep links (e.g. /menu) load the
-        # SPA instead of a hard 404; .nojekyll stops Pages from post-processing the build.
-        run: |
-          cp dist/index.html dist/404.html
-          touch dist/.nojekyll
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:

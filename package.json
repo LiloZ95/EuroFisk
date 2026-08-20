@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "node scripts/fetch-content.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/prerender-routes.mjs",
     "content": "node scripts/fetch-content.mjs",
     "dev": "vite",
     "audit": "npm audit --omit=dev",

@@ -39,8 +39,13 @@ function readLocation(): SiteLocation {
       ? browserPath.slice(BASE_PATH.length) || "/"
       : browserPath || "/";
 
+  // Pages serves a directory URL with a trailing slash (/rosengard/menu/), while every
+  // link built inside the app omits it. Canonicalising here — the one place the browser's
+  // path enters the app — means route matching only ever sees one shape.
+  const withLeadingSlash = pathname.startsWith("/") ? pathname : `/${pathname}`;
+
   return {
-    pathname: pathname.startsWith("/") ? pathname : `/${pathname}`,
+    pathname: withLeadingSlash.replace(/\/+$/, "") || "/",
     search: window.location.search,
     hash: window.location.hash,
   };
