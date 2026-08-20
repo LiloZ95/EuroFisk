@@ -15,14 +15,15 @@ permissions:
   pages: write
   id-token: write
 
-# Only run one deployment at a time
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    # A newer save supersedes an older one: the build reads the whole CMS state fresh, so
+    # the latest run already contains every earlier edit. Superseded builds are therefore
+    # pure waste and safe to cancel — ten saves in a row collapse to one published build.
+    concurrency:
+      group: pages-build
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -46,8 +47,8 @@ jobs:
           # Where to pull the owner's content from. Set under
           # Settings → Secrets and variables → Actions → Variables.
           CMS_URL: ${{ vars.CMS_URL }}
-          # Once the CMS is live, a failed fetch should fail the deploy rather than
-          # silently shipping stale content. Leave unset until then.
+          # Set to 1, so a failed fetch fails the deploy instead of silently publishing
+          # the stale content.json committed in the repo.
           REQUIRE_CMS: ${{ vars.REQUIRE_CMS }}
 
       - name: Upload Pages artifact
@@ -58,6 +59,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # Publishing is the one thing that must not be interrupted — cancelling deploy-pages
+    # partway is how a Pages site ends up half-updated. Later deploys queue behind this
+    # one instead of killing it.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
