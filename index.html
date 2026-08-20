@@ -18,14 +18,12 @@
       <meta property="og:title" content="EuroFisk Malmö | Rosengård & Östra Sorgenfri" />
       <meta property="og:description" content="Färsk fisk och skaldjur på två platser i Malmö. Välj Rosengård eller Östra Sorgenfri och se rätt meny." />
       <!--
-        Photos and the hero video are served from Cloudflare R2, so img-src and media-src
-        have to name that origin — 'self' alone blocks every one of them. Both the current
-        r2.dev bucket URL and the custom domain are listed so binding media.eurofisk.se
-        does not black out the site again; drop the r2.dev entry once that switch is done.
+        Photos and the hero video come from Cloudflare R2 via media.eurofisk.se, so img-src
+        and media-src have to name that origin — 'self' alone blocks every one of them.
       -->
       <meta
         http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev https://media.eurofisk.se; media-src 'self' https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev https://media.eurofisk.se; connect-src 'self'; form-action 'self';"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.eurofisk.se; media-src 'self' https://media.eurofisk.se; connect-src 'self'; form-action 'self';"
       />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -25,38 +25,38 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/os-hero.webp",
+              "card": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-hero-400x300.webp",
               "alt": "Fiskdisken",
               "width": 765,
               "height": 1020
             },
             "heroVideo": null,
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-exterior.webp",
+              "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+              "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+              "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
               "alt": "EuroFisks fiskdisk i Östra Sorgenfri utifrån",
               "width": 1360,
               "height": 907
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-interior.webp",
+              "card": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-interior-400x300.webp",
               "alt": "Krabbor och kummel i disken",
               "width": 765,
               "height": 1020
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "url": "https://media.eurofisk.se/os-featured-3.webp",
+              "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
               "alt": "Färska räkor ur disken",
               "width": 675,
               "height": 900
@@ -65,10 +65,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-1.webp",
+                "card": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-1-400x300.webp",
                 "alt": "Röd knorrhane och bläckfisk på is",
                 "width": 765,
                 "height": 1020
@@ -77,10 +77,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-2.webp",
+                "card": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-2-400x300.webp",
                 "alt": "Färska sardiner på is",
                 "width": 765,
                 "height": 1020
@@ -89,10 +89,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-3.webp",
+                "card": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-3-400x300.webp",
                 "alt": "Blåkrabbor på is i disken",
                 "width": 765,
                 "height": 1020
@@ -101,10 +101,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-featured-3.webp",
+                "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                 "alt": "Färska räkor ur disken",
                 "width": 675,
                 "height": 900
@@ -113,10 +113,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/os-exterior.webp",
+                "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+                "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+                "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
                 "alt": "EuroFisks fiskdisk i Östra Sorgenfri utifrån",
                 "width": 1360,
                 "height": 907
@@ -140,10 +140,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-1.webp",
+                  "card": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-1-400x300.webp",
                   "alt": "Hel färsk guldsparid på is",
                   "width": 675,
                   "height": 900
@@ -154,10 +154,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-2.webp",
+                  "card": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-2-400x300.webp",
                   "alt": "Färsk lax i disken",
                   "width": 675,
                   "height": 900
@@ -168,10 +168,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-3.webp",
+                  "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                   "alt": "Färska räkor ur disken",
                   "width": 675,
                   "height": 900
@@ -228,46 +228,46 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-hero.webp",
+              "card": "https://media.eurofisk.se/rosengard-hero-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-hero-1023x1364.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-hero-400x300.webp",
               "alt": "EuroFisk grillad fisk",
               "width": 1023,
               "height": 1364
             },
             "heroVideo": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "url": "https://media.eurofisk.se/hero-video.mp4",
+              "card": "https://media.eurofisk.se/hero-video.mp4",
+              "hero": "https://media.eurofisk.se/hero-video.mp4",
+              "thumb": "https://media.eurofisk.se/hero-video.mp4",
               "alt": "",
               "width": null,
               "height": null
             },
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+              "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+              "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
               "alt": "EuroFisk utifrån",
               "width": 1400,
               "height": 1050
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-interior.webp",
+              "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
               "alt": "Restaurangens matsal",
               "width": 1050,
               "height": 1400
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+              "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
               "alt": "Räkplanka med såser",
               "width": 1050,
               "height": 1400
@@ -276,10 +276,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-1.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-1-400x300.webp",
                 "alt": "Grillad fisk och räkor på bord",
                 "width": 1050,
                 "height": 1400
@@ -288,10 +288,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-2.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-2-400x300.webp",
                 "alt": "Färsk fisk och räkor på fat",
                 "width": 788,
                 "height": 1400
@@ -300,10 +300,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
                 "alt": "Räkplanka med såser",
                 "width": 1050,
                 "height": 1400
@@ -312,10 +312,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-interior.webp",
+                "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
                 "alt": "Restaurangens matsal",
                 "width": 1050,
                 "height": 1400
@@ -324,10 +324,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+                "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+                "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
                 "alt": "EuroFisk utifrån",
                 "width": 1400,
                 "height": 1050
@@ -351,10 +351,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-1.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-1-400x300.webp",
                   "alt": "Hel grillad guldsparid",
                   "width": 720,
                   "height": 900
@@ -365,10 +365,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-2.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-2-400x300.webp",
                   "alt": "Grillad laxfilé",
                   "width": 720,
                   "height": 900
@@ -379,10 +379,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-3.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-3-400x300.webp",
                   "alt": "Hel grillad havsabborre",
                   "width": 720,
                   "height": 900
@@ -428,11 +428,11 @@
               "options": [
                 {
                   "label": "Rå",
-                  "price": "0 kr"
+                  "price": "110 kr"
                 },
                 {
                   "label": "Tillagad",
-                  "price": "0 kr"
+                  "price": "9 kr"
                 }
               ],
               "orderable": true
@@ -647,7 +647,7 @@
               "arabic": "اجاج",
               "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
               "orderable": true
             },
             {
@@ -655,7 +655,7 @@
               "arabic": "قاروص",
               "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
               "orderable": true
             },
             {
@@ -663,7 +663,7 @@
               "arabic": "روبيان",
               "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "photo": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
               "orderable": true
             },
             {
@@ -671,7 +671,7 @@
               "arabic": "فيليه سلمون",
               "desc": "Serveras med fattoush & sallad, husets såser och friterat pitabröd.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
               "orderable": true
             }
           ]
@@ -767,10 +767,10 @@
       "settings": {
         "id": 1,
         "logo": {
-          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
-          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "url": "https://media.eurofisk.se/logo.webp",
+          "card": "https://media.eurofisk.se/logo-480x275.webp",
+          "hero": "https://media.eurofisk.se/logo-480x275.webp",
+          "thumb": "https://media.eurofisk.se/logo-400x300.webp",
           "alt": "EuroFisk",
           "width": 480,
           "height": 275
@@ -801,7 +801,7 @@
         "waMsgIntroTakeaway": "Hej EuroFisk! 🐟 Jag vill göra en avhämtningsbeställning:",
         "waMsgIntroDineIn": "Hej EuroFisk! 🐟 Jag vill beställa och äta hos er:",
         "waMsgIntroDelivery": "Hej EuroFisk! 🐟 Jag vill beställa hemleverans:",
-        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "updatedAt": "2026-08-20T11:17:12.571Z",
         "createdAt": "2026-08-18T08:16:17.191Z",
         "globalType": "site-settings"
       }
@@ -831,38 +831,38 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/os-hero.webp",
+              "card": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-hero-400x300.webp",
               "alt": "The fish counter",
               "width": 765,
               "height": 1020
             },
             "heroVideo": null,
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-exterior.webp",
+              "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+              "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+              "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
               "alt": "The EuroFisk fish counter in Östra Sorgenfri from outside",
               "width": 1360,
               "height": 907
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-interior.webp",
+              "card": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-interior-400x300.webp",
               "alt": "Crabs and hake at the counter",
               "width": 765,
               "height": 1020
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "url": "https://media.eurofisk.se/os-featured-3.webp",
+              "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
               "alt": "Fresh prawns from the counter",
               "width": 675,
               "height": 900
@@ -871,10 +871,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-1.webp",
+                "card": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-1-400x300.webp",
                 "alt": "Red gurnard and squid on ice",
                 "width": 765,
                 "height": 1020
@@ -883,10 +883,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-2.webp",
+                "card": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-2-400x300.webp",
                 "alt": "Fresh sardines on ice",
                 "width": 765,
                 "height": 1020
@@ -895,10 +895,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-3.webp",
+                "card": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-3-400x300.webp",
                 "alt": "Blue crabs on ice at the counter",
                 "width": 765,
                 "height": 1020
@@ -907,10 +907,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-featured-3.webp",
+                "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                 "alt": "Fresh prawns from the counter",
                 "width": 675,
                 "height": 900
@@ -919,10 +919,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/os-exterior.webp",
+                "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+                "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+                "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
                 "alt": "The EuroFisk fish counter in Östra Sorgenfri from outside",
                 "width": 1360,
                 "height": 907
@@ -946,10 +946,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-1.webp",
+                  "card": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-1-400x300.webp",
                   "alt": "Whole fresh bream on ice",
                   "width": 675,
                   "height": 900
@@ -960,10 +960,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-2.webp",
+                  "card": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-2-400x300.webp",
                   "alt": "Fresh salmon at the counter",
                   "width": 675,
                   "height": 900
@@ -974,10 +974,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-3.webp",
+                  "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                   "alt": "Fresh prawns from the counter",
                   "width": 675,
                   "height": 900
@@ -1034,46 +1034,46 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-hero.webp",
+              "card": "https://media.eurofisk.se/rosengard-hero-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-hero-1023x1364.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-hero-400x300.webp",
               "alt": "EuroFisk grilled fish",
               "width": 1023,
               "height": 1364
             },
             "heroVideo": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "url": "https://media.eurofisk.se/hero-video.mp4",
+              "card": "https://media.eurofisk.se/hero-video.mp4",
+              "hero": "https://media.eurofisk.se/hero-video.mp4",
+              "thumb": "https://media.eurofisk.se/hero-video.mp4",
               "alt": "",
               "width": null,
               "height": null
             },
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+              "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+              "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
               "alt": "EuroFisk exterior",
               "width": 1400,
               "height": 1050
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-interior.webp",
+              "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
               "alt": "Restaurant dining area",
               "width": 1050,
               "height": 1400
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+              "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
               "alt": "Prawn platter with sauces",
               "width": 1050,
               "height": 1400
@@ -1082,10 +1082,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-1.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-1-400x300.webp",
                 "alt": "Grilled fish and prawns spread",
                 "width": 1050,
                 "height": 1400
@@ -1094,10 +1094,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-2.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-2-400x300.webp",
                 "alt": "Fresh fish and shrimp display",
                 "width": 788,
                 "height": 1400
@@ -1106,10 +1106,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
                 "alt": "Prawn platter with sauces",
                 "width": 1050,
                 "height": 1400
@@ -1118,10 +1118,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-interior.webp",
+                "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
                 "alt": "Restaurant dining area",
                 "width": 1050,
                 "height": 1400
@@ -1130,10 +1130,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+                "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+                "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
                 "alt": "EuroFisk exterior",
                 "width": 1400,
                 "height": 1050
@@ -1157,10 +1157,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-1.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-1-400x300.webp",
                   "alt": "Whole grilled bream",
                   "width": 720,
                   "height": 900
@@ -1171,10 +1171,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-2.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-2-400x300.webp",
                   "alt": "Grilled salmon fillet",
                   "width": 720,
                   "height": 900
@@ -1185,10 +1185,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-3.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-3-400x300.webp",
                   "alt": "Whole grilled sea bass",
                   "width": 720,
                   "height": 900
@@ -1234,11 +1234,11 @@
               "options": [
                 {
                   "label": "Raw",
-                  "price": "0 kr"
+                  "price": "110 kr"
                 },
                 {
                   "label": "Prepared",
-                  "price": "0 kr"
+                  "price": "9 kr"
                 }
               ],
               "orderable": true
@@ -1453,7 +1453,7 @@
               "arabic": "اجاج",
               "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
               "orderable": true
             },
             {
@@ -1461,7 +1461,7 @@
               "arabic": "قاروص",
               "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
               "orderable": true
             },
             {
@@ -1469,7 +1469,7 @@
               "arabic": "روبيان",
               "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "photo": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
               "orderable": true
             },
             {
@@ -1477,7 +1477,7 @@
               "arabic": "فيليه سلمون",
               "desc": "Served with fattoush & salad, house sauces and fried pita bread.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
               "orderable": true
             }
           ]
@@ -1573,10 +1573,10 @@
       "settings": {
         "id": 1,
         "logo": {
-          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
-          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "url": "https://media.eurofisk.se/logo.webp",
+          "card": "https://media.eurofisk.se/logo-480x275.webp",
+          "hero": "https://media.eurofisk.se/logo-480x275.webp",
+          "thumb": "https://media.eurofisk.se/logo-400x300.webp",
           "alt": "EuroFisk",
           "width": 480,
           "height": 275
@@ -1586,7 +1586,7 @@
         "navReviews": "Reviews",
         "navContact": "Contact",
         "navBook": "Order food",
-        "deliveryBadge": "New",
+        "deliveryBadge": "New NEW NEW",
         "deliveryTitle": "Free home delivery",
         "deliveryArea": "Anywhere in Malmö",
         "deliverySub": "You order — we deliver straight to your door.",
@@ -1607,7 +1607,7 @@
         "waMsgIntroTakeaway": "Hi EuroFisk! 🐟 I'd like to place a takeaway order:",
         "waMsgIntroDineIn": "Hi EuroFisk! 🐟 I'd like to order and eat in:",
         "waMsgIntroDelivery": "Hi EuroFisk! 🐟 I'd like to order home delivery:",
-        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "updatedAt": "2026-08-20T11:17:12.571Z",
         "createdAt": "2026-08-18T08:16:17.191Z",
         "globalType": "site-settings"
       }
@@ -1637,38 +1637,38 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/os-hero.webp",
+              "card": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-hero-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-hero-400x300.webp",
               "alt": "ثلاجة السمك",
               "width": 765,
               "height": 1020
             },
             "heroVideo": null,
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-exterior.webp",
+              "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+              "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+              "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
               "alt": "محل EuroFisk للسمك في Östra Sorgenfri من الخارج",
               "width": 1360,
               "height": 907
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-765x1020.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/os-interior.webp",
+              "card": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "hero": "https://media.eurofisk.se/os-interior-765x1020.webp",
+              "thumb": "https://media.eurofisk.se/os-interior-400x300.webp",
               "alt": "سلطعون وعرموط في الثلاجة",
               "width": 765,
               "height": 1020
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+              "url": "https://media.eurofisk.se/os-featured-3.webp",
+              "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+              "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
               "alt": "روبيان طازج من الثلاجة",
               "width": 675,
               "height": 900
@@ -1677,10 +1677,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-1.webp",
+                "card": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-1-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-1-400x300.webp",
                 "alt": "سمك الحرّ الأحمر والحبار على الثلج",
                 "width": 765,
                 "height": 1020
@@ -1689,10 +1689,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-2.webp",
+                "card": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-2-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-2-400x300.webp",
                 "alt": "سردين طازج على الثلج",
                 "width": 765,
                 "height": 1020
@@ -1701,10 +1701,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-765x1020.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-gallery-3.webp",
+                "card": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "hero": "https://media.eurofisk.se/os-gallery-3-765x1020.webp",
+                "thumb": "https://media.eurofisk.se/os-gallery-3-400x300.webp",
                 "alt": "سلطعون أزرق على الثلج في الثلاجة",
                 "width": 765,
                 "height": 1020
@@ -1713,10 +1713,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                "url": "https://media.eurofisk.se/os-featured-3.webp",
+                "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                 "alt": "روبيان طازج من الثلاجة",
                 "width": 675,
                 "height": 900
@@ -1725,10 +1725,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1000x667.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-1360x907.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/os-exterior.webp",
+                "card": "https://media.eurofisk.se/os-exterior-1000x667.webp",
+                "hero": "https://media.eurofisk.se/os-exterior-1360x907.webp",
+                "thumb": "https://media.eurofisk.se/os-exterior-400x300.webp",
                 "alt": "محل EuroFisk للسمك في Östra Sorgenfri من الخارج",
                 "width": 1360,
                 "height": 907
@@ -1752,10 +1752,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-1.webp",
+                  "card": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-1-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-1-400x300.webp",
                   "alt": "سمكة اجاج كاملة طازجة على الثلج",
                   "width": 675,
                   "height": 900
@@ -1766,10 +1766,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-2.webp",
+                  "card": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-2-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-2-400x300.webp",
                   "alt": "سلمون طازج في الثلاجة",
                   "width": 675,
                   "height": 900
@@ -1780,10 +1780,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-675x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/os-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/os-featured-3.webp",
+                  "card": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "hero": "https://media.eurofisk.se/os-featured-3-675x900.webp",
+                  "thumb": "https://media.eurofisk.se/os-featured-3-400x300.webp",
                   "alt": "روبيان طازج من الثلاجة",
                   "width": 675,
                   "height": 900
@@ -1840,46 +1840,46 @@
           ],
           "photos": {
             "hero": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-1023x1364.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-hero-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-hero.webp",
+              "card": "https://media.eurofisk.se/rosengard-hero-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-hero-1023x1364.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-hero-400x300.webp",
               "alt": "سمك مشوي من EuroFisk",
               "width": 1023,
               "height": 1364
             },
             "heroVideo": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/hero-video.mp4",
+              "url": "https://media.eurofisk.se/hero-video.mp4",
+              "card": "https://media.eurofisk.se/hero-video.mp4",
+              "hero": "https://media.eurofisk.se/hero-video.mp4",
+              "thumb": "https://media.eurofisk.se/hero-video.mp4",
               "alt": "",
               "width": null,
               "height": null
             },
             "exterior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+              "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+              "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
               "alt": "واجهة EuroFisk من الخارج",
               "width": 1400,
               "height": 1050
             },
             "interior": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-interior.webp",
+              "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
               "alt": "صالة المطعم من الداخل",
               "width": 1050,
               "height": 1400
             },
             "menuPlatter": {
-              "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-              "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-              "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-              "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+              "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+              "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+              "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+              "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
               "alt": "طبق روبيان مع الصلصات",
               "width": 1050,
               "height": 1400
@@ -1888,10 +1888,10 @@
           "gallery": [
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-1-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-1.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-1-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-1-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-1-400x300.webp",
                 "alt": "سمك مشوي وروبيان على الطاولة",
                 "width": 1050,
                 "height": 1400
@@ -1900,10 +1900,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-788x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-2-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-2.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-2-788x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-2-400x300.webp",
                 "alt": "سمك وروبيان طازج معروض",
                 "width": 788,
                 "height": 1400
@@ -1912,10 +1912,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-gallery-3.webp",
+                "card": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-gallery-3-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-gallery-3-400x300.webp",
                 "alt": "طبق روبيان مع الصلصات",
                 "width": 1050,
                 "height": 1400
@@ -1924,10 +1924,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1000x1333.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-1050x1400.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-interior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-interior.webp",
+                "card": "https://media.eurofisk.se/rosengard-interior-1000x1333.webp",
+                "hero": "https://media.eurofisk.se/rosengard-interior-1050x1400.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-interior-400x300.webp",
                 "alt": "صالة المطعم من الداخل",
                 "width": 1050,
                 "height": 1400
@@ -1936,10 +1936,10 @@
             },
             {
               "img": {
-                "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior.webp",
-                "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1000x750.webp",
-                "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-1400x1050.webp",
-                "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-exterior-400x300.webp",
+                "url": "https://media.eurofisk.se/rosengard-exterior.webp",
+                "card": "https://media.eurofisk.se/rosengard-exterior-1000x750.webp",
+                "hero": "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
+                "thumb": "https://media.eurofisk.se/rosengard-exterior-400x300.webp",
                 "alt": "واجهة EuroFisk من الخارج",
                 "width": 1400,
                 "height": 1050
@@ -1963,10 +1963,10 @@
             "cards": [
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-1.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-1-400x300.webp",
                   "alt": "سمكة اجاج كاملة مشوية",
                   "width": 720,
                   "height": 900
@@ -1977,10 +1977,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-2.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-2-400x300.webp",
                   "alt": "فيليه سلمون مشوي",
                   "width": 720,
                   "height": 900
@@ -1991,10 +1991,10 @@
               },
               {
                 "img": {
-                  "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3.webp",
-                  "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
-                  "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-400x300.webp",
+                  "url": "https://media.eurofisk.se/rosengard-featured-3.webp",
+                  "card": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "hero": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
+                  "thumb": "https://media.eurofisk.se/rosengard-featured-3-400x300.webp",
                   "alt": "سمكة قاروص كاملة مشوية",
                   "width": 720,
                   "height": 900
@@ -2040,11 +2040,11 @@
               "options": [
                 {
                   "label": "نيء",
-                  "price": "0 kr"
+                  "price": "110 kr"
                 },
                 {
                   "label": "محضَّر",
-                  "price": "0 kr"
+                  "price": "9 kr"
                 }
               ],
               "orderable": true
@@ -2259,7 +2259,7 @@
               "arabic": "اجاج",
               "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-1-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-1-720x900.webp",
               "orderable": true
             },
             {
@@ -2267,7 +2267,7 @@
               "arabic": "قاروص",
               "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-3-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-3-720x900.webp",
               "orderable": true
             },
             {
@@ -2275,7 +2275,7 @@
               "arabic": "روبيان",
               "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-gallery-3-1000x1333.webp",
+              "photo": "https://media.eurofisk.se/rosengard-gallery-3-1000x1333.webp",
               "orderable": true
             },
             {
@@ -2283,7 +2283,7 @@
               "arabic": "فيليه سلمون",
               "desc": "يُقدَّم مع الفتوش والسلطة وصلصات المطعم وخبز البيتا المقلي.",
               "price": "149 kr",
-              "photo": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/rosengard-featured-2-720x900.webp",
+              "photo": "https://media.eurofisk.se/rosengard-featured-2-720x900.webp",
               "orderable": true
             }
           ]
@@ -2379,10 +2379,10 @@
       "settings": {
         "id": 1,
         "logo": {
-          "url": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo.webp",
-          "card": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "hero": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-480x275.webp",
-          "thumb": "https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev/logo-400x300.webp",
+          "url": "https://media.eurofisk.se/logo.webp",
+          "card": "https://media.eurofisk.se/logo-480x275.webp",
+          "hero": "https://media.eurofisk.se/logo-480x275.webp",
+          "thumb": "https://media.eurofisk.se/logo-400x300.webp",
           "alt": "EuroFisk",
           "width": 480,
           "height": 275
@@ -2413,7 +2413,7 @@
         "waMsgIntroTakeaway": "مرحباً EuroFisk! 🐟 أريد تقديم طلب استلام:",
         "waMsgIntroDineIn": "مرحباً EuroFisk! 🐟 أريد أن أطلب وآكل عندكم:",
         "waMsgIntroDelivery": "مرحباً EuroFisk! 🐟 أريد طلب توصيل إلى المنزل:",
-        "updatedAt": "2026-08-18T08:16:18.439Z",
+        "updatedAt": "2026-08-20T11:17:12.571Z",
         "createdAt": "2026-08-18T08:16:17.191Z",
         "globalType": "site-settings"
       }
