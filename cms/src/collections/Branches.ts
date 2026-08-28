@@ -176,6 +176,7 @@ export const Branches: CollectionConfig = {
                 locText({ name: "label", label: "Small label" }),
                 locText({ name: "title", label: "Section heading" }),
                 locArea({ name: "sub", label: "Section description" }),
+                locText({ name: "cta", label: "Button text" }),
                 {
                   name: "cards",
                   type: "array",
@@ -198,6 +199,52 @@ export const Branches: CollectionConfig = {
               fields: [
                 locText({ name: "label", label: "Small label" }),
                 locText({ name: "title", label: "Section heading" }),
+                locArea({ name: "sub", label: "Section description" }),
+              ],
+            },
+            {
+              name: "experience",
+              type: "group",
+              label: "Founder, service & visit sections",
+              admin: {
+                description:
+                  "Branch-specific copy for the founder/service story, visit cards, image labels and supporting text.",
+              },
+              fields: [
+                locText({ name: "staffLabel", label: "Founder section — small label" }),
+                locText({ name: "staffTitle", label: "Founder section — heading" }),
+                locArea({ name: "staffSub", label: "Founder section — introduction" }),
+                locText({ name: "staffRole", label: "Role shown on the image" }),
+                locArea({ name: "staffQuote", label: "Quotation" }),
+                locArea({ name: "staffBio", label: "Biography / story" }),
+                {
+                  name: "facts",
+                  type: "array",
+                  label: "Three service facts",
+                  maxRows: 3,
+                  fields: [
+                    {
+                      name: "icon",
+                      type: "select",
+                      required: true,
+                      options: [
+                        { label: "Fish", value: "fish" },
+                        { label: "Flame", value: "flame" },
+                        { label: "Heart", value: "heart" },
+                      ],
+                    },
+                    locText({ name: "title", label: "Heading", required: true }),
+                    locText({ name: "sub", label: "Supporting text" }),
+                  ],
+                },
+                locText({ name: "placeLabel", label: "Visit section — small label" }),
+                locText({ name: "placeTitle", label: "Visit section — heading" }),
+                locArea({ name: "placeSub", label: "Visit section — introduction" }),
+                locText({ name: "interiorLabel", label: "Interior image label" }),
+                locArea({ name: "interiorSub", label: "Interior image hover/focus text" }),
+                locText({ name: "exteriorLabel", label: "Exterior image label" }),
+                locArea({ name: "exteriorSub", label: "Exterior image hover/focus text" }),
+                locText({ name: "infoLabel", label: "Contact card label" }),
               ],
             },
             {
@@ -210,6 +257,16 @@ export const Branches: CollectionConfig = {
                 locText({ name: "title", label: "Heading", admin: { description: "Press Enter for a line break." } }),
                 locArea({ name: "p1", label: "First paragraph" }),
                 locArea({ name: "p2", label: "Second paragraph" }),
+                {
+                  name: "stats",
+                  type: "array",
+                  label: "Three value statements",
+                  maxRows: 3,
+                  fields: [
+                    locText({ name: "value", label: "Heading", required: true }),
+                    locText({ name: "label", label: "Supporting text", required: true }),
+                  ],
+                },
               ],
             },
             {

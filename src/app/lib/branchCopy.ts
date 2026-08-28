@@ -24,6 +24,46 @@ type BranchOverrides = Partial<Record<Lang, Partial<Translation>>>;
  * story and stays identical on both branches.
  */
 const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
+  rosengard: {
+    sv: {
+      heroBadge: "Från havet till glöden",
+      heroTitle1: "Kolgrillat &",
+      heroTitle2: "friterat",
+      heroTitle3: "fisk och skaldjur",
+      heroSub: "Ät hos oss, beställ för avhämtning eller få maten levererad direkt hem till dig. Välkommen till EuroFisk Rosengård.",
+      heroMenu: "Se menyn",
+      heroBook: "Beställ mat",
+      featuredLabel: "Tre sätt att njuta av havet",
+      featuredTitle: "Från vårt kök",
+      featuredSub: "Från fisk över glödande kol och frasigt friterade favoriter till generösa skaldjursrätter — välj det du är sugen på och njut på plats, beställ för avhämtning eller få maten levererad hem.",
+      featured: [
+        { img: T.sv.featured[0].img, name: "Över glödande kol", tag: "Kolgrillat", desc: "Fisk och skaldjur får möta glöden och tillagas med omsorg för en djupare grillsmak, saftig insida och den karaktär som bara riktig kolgrillning ger." },
+        { img: T.sv.featured[1].img, name: "Krispigt från fritösen", tag: "Friterat", desc: "Frasig fisk och skaldjur, tillagade på beställning och serverade med våra utvalda såser och tillbehör — varmt, krispigt och redo att njutas direkt." },
+        { img: T.sv.featured[2].img, name: "Räkor och skaldjur", tag: "Skaldjur & Seafood Boil", desc: "Grillade räkor, generösa skaldjursrätter och vår Seafood Boil — smaker skapade för att delas, upptäckas och gärna ätas med händerna." },
+      ],
+      viewFullMenu: "Utforska hela menyn",
+      galleryTitle: "Ögonblick från köket",
+      gallerySub: "Kolgrillat, friterat och skaldjur — en glimt av smakerna, hantverket och rätterna som serveras hos EuroFisk Rosengård.",
+      staffLabel: "Om EuroFisk · Rosengård",
+      staffTitle: "Passionen bakom varje rätt",
+      staffSub: "Hos oss börjar allt med råvaran. Sedan tar glöden, hantverket och smaken vid.",
+      staffRole: "Kökschef",
+      staffQuote: "För mig handlar det om att laga mat jag själv hade blivit glad av att få framför mig — varm, generös och full av smak.",
+      staffBio: "Med rötter i fiskhandeln och en stark passion för mat växte EuroFisk fram med ambitionen att göra fisk och skaldjur till något mer än bara en måltid. På Rosengård möter råvaran glöden, fritösen och vårt kök — med fokus på smak, generösa portioner och en upplevelse vi vill att gästen ska vilja återvända till.",
+      facts: [["fish", "Utvalt från havet", "Råvaror vi själva väljer med omsorg."], ["flame", "Över äkta glöd", "Kolgrillat för djupare smak."], ["heart", "Tillagat när du beställer", "Nylagat, varmt och redo att njutas."]],
+      placeLabel: "Besök oss · Rosengård",
+      placeTitle: "Tillagad fisk — på det sätt som passar dig",
+      placeSub: "Ät hos oss, beställ för avhämtning eller få maten levererad hem. Du väljer själv hur du vill njuta av EuroFisk.",
+      placeInteriorLabel: "Ät hos oss",
+      placeExteriorLabel: "Besök oss",
+      placeAtmosphere: "Besök oss",
+      aboutLabel: "Om EuroFisk · Rosengård",
+      aboutTitle: "Smaker man gärna kommer tillbaka till",
+      aboutP1: "Vi tror att riktigt bra fisk börjar långt innan den hamnar på tallriken. Därför lägger vi lika mycket omsorg på råvaran som på tillagningen — från de första förberedelserna till den sista minuten över glöden eller i vårt kök.",
+      aboutP2: "Resultatet ska vara enkelt att känna igen: tydliga smaker, generösa portioner och mat vi själva gärna hade satt oss ner för att äta.",
+      aboutStats: [["Råvaran först", "Grunden i varje rätt."], ["Äkta glöd", "Smaken från kolgrillen."], ["Generöst serverat", "Som vi själva vill ha det."]],
+    },
+  },
   "ostra-sorgenfri": {
     sv: {
       heroBadge: "Dagens fångst på is",
@@ -33,16 +73,39 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
       heroSub:
         "Hel fisk och skaldjur på is, levererat färskt varje dag. Välj själv i disken — ta med den rå eller låt oss grilla eller fritera den medan du väntar.",
       heroMenu: "Se dagens priser",
+      heroBook: "Beställ mat",
 
       featuredLabel: "Ur disken",
       featuredTitle: "Dagens färskaste",
       featuredSub:
-        "Fångsten kommer in färsk varje dag. Välj din fisk hel på is och betala per kilo.",
+        "Upptäck allt från välkända favoriter till mer exotiska fiskarter och skaldjur — välj art och mängd direkt från fiskdisken.",
       featured: [
-        { img: breamOnIce, name: "Guldsparid", tag: "Mild och lättlagad", desc: "Hel färsk guldsparid på is — köp per kilo, rå eller tillagad" },
-        { img: salmonFillets, name: "Lax", tag: "Alltid populär", desc: "Färsk lax i disken — hel eller filead på plats" },
-        { img: prawns, name: "Räkor", tag: "Kokta samma dag", desc: "Färska räkor ur disken — köp per kilo" },
+        { img: breamOnIce, name: "Lokala & klassiska favoriter", tag: "Ur fiskdisken", desc: "Lokala favoriter från våra närmare vatten — välkända arter med självklar plats på middagsbordet." },
+        { img: salmonFillets, name: "Exotiska arter", tag: "Från världens hav", desc: "Upptäck arter som inte alltid finns i den vanliga matbutiken — ett sortiment som förändras efter tillgång." },
+        { img: prawns, name: "Havets delikatesser", tag: "Räkor och skaldjur", desc: "Från saftiga räkor till havets mest uppskattade delikatesser — råvaror som lyfter middagen och passar både vardag och fest." },
       ],
+      viewFullMenu: "Se dagens sortiment",
+      galleryTitle: "Upptäck vår fiskdisk",
+      gallerySub: "Från lokala favoriter till exotiska arter och havets delikatesser — upptäck ett varierande sortiment där vi hjälper dig att hitta din favorit. Vi rensar och kryddar efter dina önskemål, redo att tillagas hemma.",
+      staffLabel: "Om EuroFisk · Östra Sorgenfri",
+      staffTitle: "Kunskapen bakom varje val",
+      staffSub: "Hos oss börjar middagen vid fiskdisken. Med ett brett urval och kunskap om råvaran hjälper vi dig att välja rätt fisk.",
+      staffRole: "Fiskhandlare",
+      staffQuote: "Berätta vad du tänkt laga — så hjälper jag dig att välja rätt fisk och gör den redo för köket.",
+      staffBio: "EuroFisk Östra Sorgenfri bygger på erfarenhet från fiskhandeln och en vilja att erbjuda mer än den traditionella fiskdisken. Här möts välkända favoriter med arter från världens hav — ett varierande sortiment för dig som vet precis vad du söker och för dig som gärna upptäcker något nytt.",
+      facts: [["fish", "Från nära & fjärran", "Lokala favoriter och exotiska arter."], ["flame", "Rensat som du vill ha det", "Förberett efter dina önskemål."], ["heart", "Marinerat & redo", "Klart att tillaga på ditt sätt."]],
+      placeLabel: "Besök oss · Östra Sorgenfri",
+      placeTitle: "Fisk & skaldjur — på det sätt som passar dig",
+      placeSub: "Besök vår fiskdisk, beställ för avhämtning eller få fisk och skaldjur levererat hem. Vi hjälper dig att välja, rensa och marinera efter dina önskemål.",
+      placeInteriorLabel: "Handla i fiskdisken",
+      placeInteriorSub: "Besök oss på Danska vägen, upptäck dagens sortiment och välj själv bland fisk och skaldjur från vår disk.",
+      placeExteriorLabel: "Besök oss",
+      placeAtmosphere: "Besök oss",
+      aboutLabel: "Om EuroFisk · Östra Sorgenfri",
+      aboutTitle: "Förtroende byggs över fiskdisken",
+      aboutP1: "För oss är ett besök hos EuroFisk mer än ett köp över fiskdisken. Det är en stund där kunskap, kvalitet och personlig service möts — så att du kan känna dig trygg i ditt val och inspirerad inför måltiden.",
+      aboutP2: "Vi hjälper dig att hitta rätt fisk för det du vill laga, oavsett om du söker en välkänd favorit eller vill upptäcka något nytt.",
+      aboutStats: [["Rätt för din middag", "Vi hjälper dig att välja rätt."], ["På ditt sätt", "Rensat, marinerat och redo för tillagning."], ["Personlig service", "Hjälp när du behöver den."]],
       gallery: [
         { img: gurnardSquid, alt: "Röd knorrhane och bläckfisk på is" },
         { img: sardinesOnIce, alt: "Färska sardiner på is" },
@@ -50,8 +113,6 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
         { img: prawns, alt: "Nykokta räkor" },
         { img: stallExterior, alt: "EuroFisks fiskdisk i Östra Sorgenfri utifrån" },
       ],
-      viewFullMenu: "Se hela utbudet",
-
       menuPageSub:
         "Färsk fisk per kilo — välj den rå eller låt oss grilla eller fritera den. Alla priser anges per kilogram.",
       menuNote:
@@ -165,6 +226,7 @@ function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translatio
   set("featuredLabel", b.featuredSection?.label);
   set("featuredTitle", b.featuredSection?.title);
   set("featuredSub", b.featuredSection?.sub);
+  set("viewFullMenu", b.featuredSection?.cta);
   if (b.featuredSection?.cards?.length) {
     out.featured = b.featuredSection.cards.map((c, i) => ({
       img: mediaUrl(c.img, "card") || base.featured[i]?.img || "",
@@ -176,6 +238,7 @@ function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translatio
 
   set("galleryLabel", b.gallerySection?.label);
   set("galleryTitle", b.gallerySection?.title);
+  set("gallerySub", b.gallerySection?.sub);
   if (b.gallery?.length) {
     out.gallery = b.gallery.map((g, i) => ({
       img: mediaUrl(g.img, "card") || base.gallery[i]?.img || "",
@@ -187,6 +250,36 @@ function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translatio
   set("aboutTitle", b.about?.title);
   set("aboutP1", b.about?.p1);
   set("aboutP2", b.about?.p2);
+  const translatedStats = Array.isArray(b.about?.stats)
+    ? b.about.stats.filter((item: { value?: string; label?: string }) => typeof item.value === "string" && item.value.trim() !== "")
+    : [];
+  if (translatedStats.length) {
+    out.aboutStats = translatedStats.map((item: { value?: string; label?: string }) => [item.value ?? "", item.label ?? ""]);
+  }
+
+  const experience = b.experience;
+  if (experience) {
+    set("staffLabel", experience.staffLabel);
+    set("staffTitle", experience.staffTitle);
+    set("staffSub", experience.staffSub);
+    set("staffRole", experience.staffRole);
+    set("staffQuote", experience.staffQuote);
+    set("staffBio", experience.staffBio);
+    set("placeLabel", experience.placeLabel);
+    set("placeTitle", experience.placeTitle);
+    set("placeSub", experience.placeSub);
+    set("placeInteriorLabel", experience.interiorLabel);
+    set("placeInteriorSub", experience.interiorSub);
+    set("placeExteriorLabel", experience.exteriorLabel);
+    set("placeExteriorSub", experience.exteriorSub);
+    set("placeAtmosphere", experience.infoLabel);
+    const translatedFacts = Array.isArray(experience.facts)
+      ? experience.facts.filter((item) => typeof item.title === "string" && item.title.trim() !== "")
+      : [];
+    if (translatedFacts.length) {
+      out.facts = translatedFacts.map((item) => [item.icon ?? "fish", item.title ?? "", item.sub ?? ""]);
+    }
+  }
 
   set("menuPageSub", b.menuIntro?.sub);
   set("menuNote", b.menuIntro?.note);
@@ -200,6 +293,12 @@ function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translatio
     for (const [key, value] of Object.entries(settings)) {
       if (key === "logo") continue;
       if (key in out) set(key as keyof Translation, value);
+    }
+    const translatedBenefits = Array.isArray(settings.deliveryBenefits)
+      ? settings.deliveryBenefits.filter((item: { title?: string }) => typeof item.title === "string" && item.title.trim() !== "")
+      : [];
+    if (translatedBenefits.length) {
+      out.deliveryBenefits = translatedBenefits.map((item: { title?: string; sub?: string }) => [item.title ?? "", item.sub ?? ""]);
     }
   }
 

@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start --port ${PORT:-3000}",
     "seed": "tsx src/seed/run.ts",
+    "sync:website-changes": "tsx src/sync/websiteChanges.ts",
     "typecheck": "tsc --noEmit",
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types"

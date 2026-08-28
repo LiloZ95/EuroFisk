@@ -50,9 +50,13 @@ export interface CmsBranch {
     label: string;
     title: string;
     sub: string;
+    cta: string;
     cards: Array<{ img: CmsMedia | null; name: string; tag: string; desc: string }>;
   };
   gallerySection: Record<string, string>;
+  experience: Record<string, unknown> & {
+    facts?: Array<{ icon?: string; title?: string; sub?: string }>;
+  };
   about: Record<string, string>;
   menuIntro: Record<string, string>;
   contact: Record<string, string>;

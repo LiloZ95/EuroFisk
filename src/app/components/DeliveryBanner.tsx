@@ -109,6 +109,14 @@ export function DeliveryBanner({ onSelectDelivery }: { onSelectDelivery: () => v
         </FadeUp>
 
         <FadeUp delay={0.24}>
+          <div className="mx-auto mt-8 grid max-w-3xl gap-3 text-start sm:grid-cols-3">
+            {t.deliveryBenefits.map(([title, sub]) => (
+              <div key={title} className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-sm font-bold uppercase tracking-wide text-white" style={sans}>{title}</p>
+                <p className="mt-1.5 text-xs leading-relaxed text-white/75" style={sans}>{sub}</p>
+              </div>
+            ))}
+          </div>
           <a
             href="#kontakt"
             onClick={onSelectDelivery}
@@ -118,6 +126,7 @@ export function DeliveryBanner({ onSelectDelivery }: { onSelectDelivery: () => v
             <Truck size={18} aria-hidden="true" />
             {t.deliveryCta}
           </a>
+          <p className="mt-3 text-xs text-white/65" style={sans}>{t.deliveryFeeNote}</p>
         </FadeUp>
       </div>
     </section>

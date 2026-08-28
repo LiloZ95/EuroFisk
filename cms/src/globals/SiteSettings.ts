@@ -49,6 +49,17 @@ export const SiteSettings: GlobalConfig = {
             locText({ name: "deliveryArea", label: "Area covered" }),
             locArea({ name: "deliverySub", label: "Description" }),
             locText({ name: "deliveryCta", label: "Button text" }),
+            locText({ name: "deliveryFeeNote", label: "Delivery fee note" }),
+            {
+              name: "deliveryBenefits",
+              type: "array",
+              label: "Three delivery benefits",
+              maxRows: 3,
+              fields: [
+                locText({ name: "title", label: "Heading", required: true }),
+                locArea({ name: "sub", label: "Supporting text", required: true }),
+              ],
+            },
           ],
         },
         {

@@ -40,8 +40,9 @@ const sv = {
   ],
   viewFullMenu: "Visa hela menyn",
 
-  galleryLabel: "Galleri",
+  galleryLabel: "",
   galleryTitle: "Från vårt kök",
+  gallerySub: "Kolgrillat, friterat och skaldjur — en glimt av smakerna, hantverket och rätterna som serveras hos EuroFisk Rosengård.",
   gallery: [
     { img: foodSpreadImg, alt: "Grillad fisk och räkor på bord" },
     { img: rawFishImg, alt: "Färsk fisk och räkor på fat" },
@@ -92,15 +93,21 @@ const sv = {
   waLblPickup: "Avhämtningstid", waLblVisit: "Ankomsttid",
 
   // Free home delivery — the promo strip on the home page and the third fulfillment option.
-  deliveryBadge: "Nyhet",
+  deliveryBadge: "Fri hemleverans från 649 kr",
   deliveryTitle: "Gratis hemleverans",
-  deliveryArea: "Runt hela Malmö",
-  deliverySub: "Du beställer — vi levererar rakt hem till din dörr.",
-  deliveryCta: "Tryck för att beställa",
+  deliveryArea: "Inom Malmö",
+  deliverySub: "Beställ för 649 kr eller mer så bjuder vi på leveransen — kolgrillad fisk, frasiga favoriter och skaldjur, nylagat och levererat hela vägen till din dörr.",
+  deliveryCta: "Beställ hem →",
+  deliveryFeeNote: "Ord. leveransavgift 99 kr",
+  deliveryBenefits: [
+    ["Fri leverans från 649 kr", "Beställ för 649 kr eller mer så bjuder vi på leveransen."],
+    ["2 signatursåser ingår", "Två av våra signatursåser följer med utan extra kostnad."],
+    ["Allergier? Säg till oss", "Meddela oss om allergier innan beställning, så hjälper vi dig att välja rätt."],
+  ] as [string, string][],
   fulfillDelivery: "Leverans",
   formAddress: "Leveransadress", formAddressPh: "Gata och nummer, postnummer",
   formDeliveryTime: "Leveranstid",
-  deliveryFormNote: "Hemleverans är gratis i hela Malmö.",
+  deliveryFormNote: "Fri hemleverans från 649 kr. Ord. leveransavgift 99 kr.",
   waMsgIntroDelivery: "Hej EuroFisk! 🐟 Jag vill beställa hemleverans:",
   waLblAddress: "Adress", waLblDelivery: "Leveranstid",
   formPhoneHint: "7–20 siffror. + , ( ) och mellanslag är tillåtna.",
@@ -132,6 +139,10 @@ const sv = {
   placeTitle: "En plats för alla",
   placeSub: "Välkommen in i en avslappnad och välkomnande miljö där fisken alltid är i centrum.",
   placeAtmosphere: "Atmosfär",
+  placeInteriorLabel: "Ät här",
+  placeInteriorSub: "",
+  placeExteriorLabel: "Avhämtning",
+  placeExteriorSub: "",
 
   menuPageLabel: "Fullständig meny",
   menuPageTitle: "Vår meny",
@@ -233,8 +244,9 @@ const en: Translation = {
   ],
   viewFullMenu: "View full menu",
 
-  galleryLabel: "Gallery",
+  galleryLabel: "",
   galleryTitle: "From our kitchen",
+  gallerySub: "A glimpse of the flavours, craft and dishes served at EuroFisk.",
   gallery: [
     { img: foodSpreadImg, alt: "Grilled fish and prawns spread" },
     { img: rawFishImg, alt: "Fresh fish and shrimp display" },
@@ -289,6 +301,12 @@ const en: Translation = {
   deliveryArea: "Anywhere in Malmö",
   deliverySub: "You order — we deliver straight to your door.",
   deliveryCta: "Tap to order",
+  deliveryFeeNote: "Standard delivery fee: 99 kr",
+  deliveryBenefits: [
+    ["Free delivery from 649 kr", "Spend 649 kr or more and delivery is on us."],
+    ["2 signature sauces included", "Two of our signature sauces are included at no extra cost."],
+    ["Allergies? Tell us", "Let us know before ordering and we will help you choose."],
+  ] as [string, string][],
   fulfillDelivery: "Delivery",
   formAddress: "Delivery address", formAddressPh: "Street and number, postcode",
   formDeliveryTime: "Delivery time",
@@ -324,6 +342,10 @@ const en: Translation = {
   placeTitle: "A place for everyone",
   placeSub: "Step into a relaxed and welcoming space where the fish is always the star.",
   placeAtmosphere: "Atmosphere",
+  placeInteriorLabel: "Dine in",
+  placeInteriorSub: "",
+  placeExteriorLabel: "Pickup",
+  placeExteriorSub: "",
 
   menuPageLabel: "Full menu",
   menuPageTitle: "Our Menu",
@@ -423,8 +445,9 @@ const ar: Translation = {
   ],
   viewFullMenu: "عرض القائمة كاملة",
 
-  galleryLabel: "معرض الصور",
+  galleryLabel: "",
   galleryTitle: "من مطبخنا",
+  gallerySub: "لمحة عن النكهات والحِرفة والأطباق التي نقدّمها في EuroFisk.",
   gallery: [
     { img: foodSpreadImg, alt: "سمك مشوي وروبيان على الطاولة" },
     { img: rawFishImg, alt: "سمك وروبيان طازج معروض" },
@@ -479,6 +502,12 @@ const ar: Translation = {
   deliveryArea: "في كل أنحاء مالمو",
   deliverySub: "أنت تطلب — ونحن نوصّل إلى باب بيتك مباشرة.",
   deliveryCta: "اضغط للطلب",
+  deliveryFeeNote: "رسوم التوصيل العادية 99 كرونة",
+  deliveryBenefits: [
+    ["توصيل مجاني من 649 كرونة", "اطلب بقيمة 649 كرونة أو أكثر والتوصيل علينا."],
+    ["صلصتان مميزتان مشمولتان", "تتضمن الطلبية صلصتين من صلصاتنا المميزة دون تكلفة إضافية."],
+    ["لديك حساسية؟ أخبرنا", "أخبرنا قبل الطلب وسنساعدك على الاختيار المناسب."],
+  ] as [string, string][],
   fulfillDelivery: "توصيل",
   formAddress: "عنوان التوصيل", formAddressPh: "الشارع والرقم والرمز البريدي",
   formDeliveryTime: "وقت التوصيل",
@@ -514,6 +543,10 @@ const ar: Translation = {
   placeTitle: "مكان يتّسع للجميع",
   placeSub: "ادخل إلى أجواء مريحة ومرحّبة يبقى فيها السمك هو النجم.",
   placeAtmosphere: "الأجواء",
+  placeInteriorLabel: "تناول الطعام هنا",
+  placeInteriorSub: "",
+  placeExteriorLabel: "استلام الطلب",
+  placeExteriorSub: "",
 
   menuPageLabel: "القائمة الكاملة",
   menuPageTitle: "قائمتنا",

@@ -76,7 +76,7 @@ async function main() {
 
   // ── Photos ────────────────────────────────────────────────────────────────
   // Upload each source file once and remember its id, so the content below can point at it.
-  const mediaIds = new Map<string, string | number>();
+  const mediaIds = new Map<string, number>();
 
   // Files are uploaded under their slot name ("rosengard-hero.webp") rather than the
   // original camera filename, so the owner can recognise them in the media library. Payload
@@ -130,7 +130,12 @@ async function main() {
     console.log(`  + ${photo.key}`);
   }
 
-  const mediaId = (key?: string) => (key ? mediaIds.get(key) : undefined);
+  function mediaId(key?: string): number | undefined {
+    if (!key) return undefined;
+    const id = mediaIds.get(key);
+    if (id === undefined) throw new Error(`Media seed was not uploaded: ${key}`);
+    return id;
+  }
 
   // ── Locations ─────────────────────────────────────────────────────────────
   for (const branch of BRANCH_SEED as SeedBranch[]) {
@@ -183,8 +188,8 @@ async function main() {
 
       const saved =
         existing.docs.length > 0
-          ? await payload.update({ collection: "branches", id: existing.docs[0].id, locale, data })
-          : await payload.create({ collection: "branches", locale, data });
+          ? await payload.update({ collection: "branches", id: existing.docs[0].id, locale, data: data as never })
+          : await payload.create({ collection: "branches", locale, data: data as never });
 
       if (existing.docs.length === 0) existing.docs.push(saved as never);
 
@@ -242,8 +247,8 @@ async function main() {
 
       const saved =
         existing.docs.length > 0
-          ? await payload.update({ collection: "menu-categories", id: existing.docs[0].id, locale, data })
-          : await payload.create({ collection: "menu-categories", locale, data });
+          ? await payload.update({ collection: "menu-categories", id: existing.docs[0].id, locale, data: data as never })
+          : await payload.create({ collection: "menu-categories", locale, data: data as never });
 
       if (existing.docs.length === 0) existing.docs.push(saved as never);
 

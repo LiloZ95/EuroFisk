@@ -27,7 +27,9 @@ const CMS_URL = (process.env.CMS_URL ?? "http://localhost:3000").replace(/\/$/, 
 const LOCALES = ["sv", "en", "ar"];
 
 async function get(endpoint, locale) {
-  const url = `${CMS_URL}/api/${endpoint}${endpoint.includes("?") ? "&" : "?"}locale=${locale}&depth=2&limit=100`;
+  // Do not let Payload substitute Swedish into untranslated English/Arabic fields.
+  // Empty localized CMS values then fall through to the site's language-specific copy.
+  const url = `${CMS_URL}/api/${endpoint}${endpoint.includes("?") ? "&" : "?"}locale=${locale}&fallback-locale=none&depth=2&limit=100`;
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
   return res.json();
@@ -89,6 +91,7 @@ async function main() {
           label: b.featuredSection?.label ?? "",
           title: b.featuredSection?.title ?? "",
           sub: b.featuredSection?.sub ?? "",
+          cta: b.featuredSection?.cta ?? "",
           cards: (b.featuredSection?.cards ?? []).map((c) => ({
             img: media(c.photo),
             name: c.name,
@@ -97,6 +100,7 @@ async function main() {
           })),
         },
         gallerySection: b.gallerySection ?? {},
+        experience: b.experience ?? {},
         about: b.about ?? {},
         menuIntro: b.menuIntro ?? {},
         contact: b.contact ?? {},

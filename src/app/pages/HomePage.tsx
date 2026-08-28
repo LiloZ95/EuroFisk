@@ -229,15 +229,17 @@ export default function HomePage() {
         >
           <div className="max-w-6xl mx-auto px-5 lg:px-10 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 md:divide-x divide-white/20">
             {([
-              [Clock, t.infoHours, branch.hours.summary[lang]],
-              [MapPin, t.infoAddr, branch.address],
-              [Phone, t.infoPhone, branch.phoneDisplay],
-            ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
+              [Clock, t.infoHours, branch.hours.summary[lang], undefined],
+              [MapPin, t.infoAddr, branch.address, branch.mapsUrl],
+              [Phone, t.infoPhone, branch.phoneDisplay, branch.phoneHref],
+            ] as [React.ElementType, string, string, string | undefined][]).map(([Icon, label, val, href], i) => (
               <div key={i} className="flex items-center gap-3 text-white md:px-6 first:ps-0">
                 <Icon size={17} className="text-sky flex-shrink-0" />
                 <div>
                   <p className="text-white/80 text-xs uppercase tracking-wider" style={sans}>{label}</p>
-                  <p className="text-white text-sm font-medium">{val}</p>
+                  {href ? (
+                    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="text-white text-sm font-medium underline-offset-4 hover:underline">{val}</a>
+                  ) : <p className="text-white text-sm font-medium">{val}</p>}
                 </div>
               </div>
             ))}
@@ -283,8 +285,9 @@ export default function HomePage() {
           and a straight rule across it would undo the tear. */}
       <section id="galleri" className="py-16 lg:py-24 bg-card border-b border-border overflow-hidden">
         <FadeUp className="max-w-6xl mx-auto px-5 lg:px-10 mb-10 text-center">
-          <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.galleryLabel}</p>
+          {t.galleryLabel && <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3" style={sans}>{t.galleryLabel}</p>}
           <h2 className="text-4xl lg:text-5xl font-normal text-foreground" style={display}>{t.galleryTitle}</h2>
+          {t.gallerySub && <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed mt-4" style={sans}>{t.gallerySub}</p>}
         </FadeUp>
 
         {/* Horizontal scroll strip — full bleed, no side padding */}
@@ -404,9 +407,10 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
               <div className="absolute bottom-5 start-5">
                 <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                  <UtensilsCrossed size={14} aria-hidden="true" /> {t.fulfillDineIn}
+                  <UtensilsCrossed size={14} aria-hidden="true" /> {t.placeInteriorLabel}
                 </span>
               </div>
+              {t.placeInteriorSub && <div className="absolute inset-x-5 bottom-16 rounded-xl bg-ink/80 p-4 text-sm leading-relaxed text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100" style={sans}>{t.placeInteriorSub}</div>}
             </FadeUp>
 
             {/* Right column — exterior + info card */}
@@ -422,9 +426,10 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
                 <div className="absolute bottom-5 start-5">
                   <span className="inline-flex items-center gap-2 bg-white/12 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full" style={sans}>
-                    <ShoppingBag size={14} aria-hidden="true" /> {t.fulfillTakeaway}
+                    <ShoppingBag size={14} aria-hidden="true" /> {t.placeExteriorLabel}
                   </span>
                 </div>
+                {t.placeExteriorSub && <div className="absolute inset-x-5 bottom-16 rounded-xl bg-ink/80 p-4 text-sm leading-relaxed text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100" style={sans}>{t.placeExteriorSub}</div>}
               </div>
 
               {/* Info card */}
@@ -432,13 +437,13 @@ export default function HomePage() {
                 <p className="text-sky-soft text-xs font-semibold tracking-widest uppercase mb-2" style={sans}>{t.placeAtmosphere}</p>
                 <div className="flex flex-col gap-3 mt-3">
                   {([
-                    [Clock, branch.hours.summary[lang]],
-                    [MapPin, branch.address],
-                    [Phone, branch.phoneDisplay],
-                  ] as [React.ElementType, string][]).map(([Icon, val], i) => (
+                    [Clock, branch.hours.summary[lang], undefined],
+                    [MapPin, branch.address, branch.mapsUrl],
+                    [Phone, branch.phoneDisplay, branch.phoneHref],
+                  ] as [React.ElementType, string, string | undefined][]).map(([Icon, val, href], i) => (
                     <div key={i} className="flex items-center gap-2.5 text-white/75 text-sm">
                       <Icon size={14} className="text-sky flex-shrink-0" />
-                      <span style={sans}>{val}</span>
+                      {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="underline-offset-4 hover:text-white hover:underline" style={sans}>{val}</a> : <span style={sans}>{val}</span>}
                     </div>
                   ))}
                 </div>
@@ -523,17 +528,17 @@ export default function HomePage() {
             <p className="text-muted-foreground leading-relaxed mb-8" style={sans}>{t.contactSub}</p>
             <div className="flex flex-col gap-5 mb-8">
               {([
-                [MapPin, t.infoAddr, branch.address],
-                [Clock, t.infoHours, branch.hours.rows.map((row) => `${row.days[lang]} ${row.time}`).join("\n")],
-                [Phone, t.infoPhone, branch.phoneDisplay],
-              ] as [React.ElementType, string, string][]).map(([Icon, label, val], i) => (
+                [MapPin, t.infoAddr, branch.address, branch.mapsUrl],
+                [Clock, t.infoHours, branch.hours.rows.map((row) => `${row.days[lang]} ${row.time}`).join("\n"), undefined],
+                [Phone, t.infoPhone, branch.phoneDisplay, branch.phoneHref],
+              ] as [React.ElementType, string, string, string | undefined][]).map(([Icon, label, val, href], i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Icon size={16} className="text-primary" />
                   </div>
                   <div>
                     <p className="text-foreground text-sm font-semibold" style={sans}>{label as string}</p>
-                    <p className="text-muted-foreground text-sm whitespace-pre-line" style={sans}>{val as string}</p>
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="text-muted-foreground text-sm underline-offset-4 hover:text-primary hover:underline" style={sans}>{val}</a> : <p className="text-muted-foreground text-sm whitespace-pre-line" style={sans}>{val}</p>}
                   </div>
                 </div>
               ))}
