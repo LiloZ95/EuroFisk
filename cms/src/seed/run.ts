@@ -76,7 +76,10 @@ async function main() {
 
   // ── Photos ────────────────────────────────────────────────────────────────
   // Upload each source file once and remember its id, so the content below can point at it.
-  const mediaIds = new Map<string, number>();
+  // Payload IDs are numeric with the current Postgres schema, but Payload's clean-build
+  // types deliberately allow either strings or numbers. Keep the seed compatible with
+  // both so Vercel does not depend on locally generated type artifacts.
+  const mediaIds = new Map<string, string | number>();
 
   // Files are uploaded under their slot name ("rosengard-hero.webp") rather than the
   // original camera filename, so the owner can recognise them in the media library. Payload
@@ -130,7 +133,7 @@ async function main() {
     console.log(`  + ${photo.key}`);
   }
 
-  function mediaId(key?: string): number | undefined {
+  function mediaId(key?: string): string | number | undefined {
     if (!key) return undefined;
     const id = mediaIds.get(key);
     if (id === undefined) throw new Error(`Media seed was not uploaded: ${key}`);
