@@ -7,12 +7,32 @@ import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { stripBidi } from "@/app/lib/bidi";
 import { useT } from "@/app/lib/branchCopy";
 import { useBranch } from "@/app/lib/BranchContext";
-import { stripBranchFromPath } from "@/app/lib/branches";
-import { useLang } from "@/app/lib/LangContext";
+import { branchPath, getBranchIdFromPath, stripBranchFromPath } from "@/app/lib/branches";
+import { cmsBranch, mediaUrl } from "@/app/lib/cmsContent";
+import { pathForLang, stripLangFromPath, useLang, type Lang } from "@/app/lib/LangContext";
 import { logoImg, LOGO_SIZE } from "@/app/lib/images";
 import { SiteLink, useSiteLocation, type SiteDestination } from "@/app/lib/siteRouter";
 import { sans } from "@/app/lib/styles";
 import { fmt } from "@/app/lib/translations";
+
+const SITE_URL = "https://www.eurofisk.se";
+const SEO_LANGS: Lang[] = ["sv", "en", "ar"];
+
+function absoluteSiteUrl(lang: Lang, logicalPath: string) {
+  const path = pathForLang(logicalPath, lang);
+  return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}/`;
+}
+
+function publicMediaUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname.endsWith("r2.dev")
+      ? `https://media.eurofisk.se${parsed.pathname}`
+      : parsed.href;
+  } catch {
+    return url;
+  }
+}
 
 export default function Root({ children }: { children: ReactNode }) {
   const { lang } = useLang();
@@ -50,9 +70,14 @@ export default function Root({ children }: { children: ReactNode }) {
 
   const currentPage = stripBranchFromPath(location.pathname);
 
-  // Branch URLs are indexable separately, so the title and description have to name the
-  // branch the visitor actually landed on — otherwise both URLs compete for one snippet.
+  // Keep metadata correct after client-side navigation too. The build writes the same data
+  // into each route's source HTML for crawlers and social-card bots that do not run React.
   useEffect(() => {
+    const pathBranch = getBranchIdFromPath(location.pathname);
+    const currentLogicalPath = stripLangFromPath(location.pathname);
+    const validPage = currentPage === "/" || currentPage === "/menu" || currentPage === "/reviews";
+    const siteLanding = !pathBranch && currentPage === "/";
+    const indexable = validPage && Boolean(pathBranch || siteLanding);
     const pageName =
       currentPage === "/menu"
         ? t.seoPageMenu
@@ -60,26 +85,83 @@ export default function Root({ children }: { children: ReactNode }) {
           ? t.seoPageReviews
           : null;
     const site = `EuroFisk ${branch.area}`;
+    const title = !validPage
+      ? `${t.notFoundTitle} | EuroFisk`
+      : siteLanding
+        ? t.seoSiteTitle
+        : pageName
+          ? `${pageName} — ${site} | Malmö`
+          : `${site} | ${t.seoHomeTagline}`;
+    const description = !validPage
+      ? t.notFoundSub
+      : siteLanding
+        ? t.seoSiteDescription
+        : currentPage === "/menu"
+          ? fmt(t.seoMenuDescription, { branch: branch.name })
+          : currentPage === "/reviews"
+            ? fmt(t.seoReviewsDescription, { branch: branch.name })
+            : fmt(t.seoDescription, {
+                branch: branch.name,
+                address: branch.address,
+                hours: branch.hours.summary[lang],
+              });
 
-    document.title = pageName
-      ? `${pageName} — ${site} | Malmö`
-      : `${site} | ${t.seoHomeTagline}`;
+    // /menu and /reviews without a branch are legacy convenience URLs whose content can
+    // depend on local storage. They stay usable but point crawlers at a deterministic URL.
+    const canonicalLogicalPath = pathBranch || siteLanding || !validPage
+      ? currentLogicalPath
+      : branchPath(branchId, currentPage);
+    const canonical = absoluteSiteUrl(lang, canonicalLogicalPath);
+    const cms = cmsBranch(lang, branchId);
+    const cmsImage = cms?.photos.exterior ?? cms?.photos.hero;
+    const image = publicMediaUrl(
+      mediaUrl(cmsImage, "original") ||
+        `https://media.eurofisk.se/${branchId === "rosengard" ? "rosengard-exterior-1400x1050" : "os-exterior-1360x907"}.webp`,
+    );
+    const imageAlt = siteLanding
+      ? "EuroFisk Rosengård & Östra Sorgenfri, Malmö"
+      : `EuroFisk ${branch.area}, Malmö`;
+
+    document.title = title;
 
     document
       .querySelector('meta[name="description"]')
+      ?.setAttribute("content", stripBidi(description));
+    document
+      .querySelector('meta[name="robots"]')
       ?.setAttribute(
         "content",
-        // The hours carry invisible bidi isolates for the Arabic layout; crawlers read
-        // meta content as plain text, so they come back out here.
-        stripBidi(
-          fmt(t.seoDescription, {
-            branch: branch.name,
-            address: branch.address,
-            hours: branch.hours.summary[lang],
-          }),
-        ),
+        indexable
+          ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+          : "noindex, follow",
       );
-  }, [branch, currentPage, lang, t]);
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
+
+    for (const alternateLang of SEO_LANGS) {
+      document
+        .querySelector(`link[rel="alternate"][hreflang="${alternateLang}"]`)
+        ?.setAttribute("href", absoluteSiteUrl(alternateLang, canonicalLogicalPath));
+    }
+    document
+      .querySelector('link[rel="alternate"][hreflang="x-default"]')
+      ?.setAttribute("href", absoluteSiteUrl("sv", canonicalLogicalPath));
+
+    const socialTags: Array<[string, string]> = [
+      ['meta[property="og:url"]', canonical],
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', stripBidi(description)],
+      ['meta[property="og:image"]', image],
+      ['meta[property="og:image:secure_url"]', image],
+      ['meta[property="og:image:alt"]', imageAlt],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', stripBidi(description)],
+      ['meta[name="twitter:image"]', image],
+      ['meta[name="twitter:image:alt"]', imageAlt],
+    ];
+    for (const [selector, value] of socialTags) {
+      document.querySelector(selector)?.setAttribute("content", value);
+    }
+  }, [branch, branchId, currentPage, lang, location.pathname, t]);
 
   const contactTo: SiteDestination = { pathname: pathFor(), hash: "#kontakt" };
   const navItems: Array<{ label: string; page: string; to: SiteDestination }> = [

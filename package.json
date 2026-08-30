@@ -6,8 +6,9 @@
   "scripts": {
     "prebuild": "node scripts/fetch-content.mjs",
     "build": "vite build",
-    "postbuild": "node scripts/prerender-routes.mjs",
+    "postbuild": "node scripts/prerender-routes.mjs && node scripts/validate-seo.mjs",
     "content": "node scripts/fetch-content.mjs",
+    "seo:check": "node scripts/validate-seo.mjs",
     "dev": "vite",
     "audit": "npm audit --omit=dev",
     "typecheck": "tsc --noEmit",

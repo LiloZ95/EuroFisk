@@ -8,6 +8,7 @@ import {
   type MouseEvent,
   type ReactNode,
 } from "react";
+import { langFromPath, pathForLang } from "./LangContext";
 
 export interface SiteLocation {
   pathname: string;
@@ -78,7 +79,11 @@ function browserHref(to: SiteDestination, current: SiteLocation) {
   }
 
   const normalized = destination.startsWith("/") ? destination : `/${destination}`;
-  return `${BASE_PATH}${normalized}`;
+  const suffixIndex = normalized.search(/[?#]/);
+  const pathname = suffixIndex === -1 ? normalized : normalized.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : normalized.slice(suffixIndex);
+  const localizedPath = pathForLang(pathname, langFromPath(current.pathname));
+  return `${BASE_PATH}${localizedPath}${suffix}`;
 }
 
 export function SiteRouter({ children }: { children: ReactNode }) {

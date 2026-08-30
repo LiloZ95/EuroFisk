@@ -1,5 +1,5 @@
 import { ltr } from "./bidi";
-import type { Lang } from "./LangContext";
+import { stripLangFromPath, type Lang } from "./LangContext";
 
 export type BranchId = "rosengard" | "ostra-sorgenfri";
 export type BranchMenuType = "portion" | "kg";
@@ -95,16 +95,17 @@ export const BRANCHES: Record<BranchId, Branch> = {
 export const BRANCH_IDS = Object.keys(BRANCHES) as BranchId[];
 
 export function getBranchIdFromPath(pathname: string): BranchId | null {
-  const firstSegment = pathname.split("/").filter(Boolean)[0];
+  const firstSegment = stripLangFromPath(pathname).split("/").filter(Boolean)[0];
   return BRANCH_IDS.find((id) => BRANCHES[id].slug === firstSegment) ?? null;
 }
 
 export function stripBranchFromPath(pathname: string) {
-  const branchId = getBranchIdFromPath(pathname);
-  if (!branchId) return pathname || "/";
+  const unprefixedPath = stripLangFromPath(pathname);
+  const branchId = getBranchIdFromPath(unprefixedPath);
+  if (!branchId) return unprefixedPath || "/";
 
   const prefix = `/${BRANCHES[branchId].slug}`;
-  const rest = pathname.slice(prefix.length);
+  const rest = unprefixedPath.slice(prefix.length);
   return rest || "/";
 }
 
