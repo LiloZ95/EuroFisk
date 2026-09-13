@@ -78,9 +78,12 @@ async function main() {
         photos: {
           hero: media(b.heroImage),
           heroVideo: media(b.heroVideo),
+          founder: media(b.founderImage),
           exterior: media(b.exteriorImage),
           interior: media(b.interiorImage),
+          about: media(b.aboutImage),
           menuPlatter: media(b.menuPlatterImage),
+          social: media(b.socialImage),
         },
         gallery: (b.gallery ?? []).map((g) => ({
           img: media(g.photo),

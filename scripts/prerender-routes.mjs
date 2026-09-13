@@ -205,7 +205,7 @@ function publicMediaUrl(url) {
 }
 
 function imageFor(branch) {
-  const media = branch?.photos?.exterior ?? branch?.photos?.hero;
+  const media = branch?.photos?.social ?? branch?.photos?.exterior ?? branch?.photos?.hero;
   return {
     url: publicMediaUrl(media?.url ?? media?.hero ?? media?.card),
     width: media?.width ?? undefined,

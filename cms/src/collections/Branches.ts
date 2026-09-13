@@ -111,7 +111,8 @@ export const Branches: CollectionConfig = {
         // ── Photos ────────────────────────────────────────────────────────────
         {
           label: "Photos",
-          description: "The pictures shown on this shop's pages. Click a box to pick or upload.",
+          description:
+            "Each slot controls the named section only. To replace one slot without changing other uses of the same Media item, choose or upload a different Media item instead of editing the shared file.",
           fields: [
             image("heroImage", "Top background photo", "The big photo behind the headline at the top of the home page. Put the important part in the middle — edges get cropped on phones.", true),
             {
@@ -124,9 +125,24 @@ export const Branches: CollectionConfig = {
                   "A short looping video shown instead of the photo at the top. Leave empty to use the photo. Only add footage that actually shows this shop.",
               },
             },
-            image("exteriorImage", "Outside of the shop", "Shown in the location/contact area.", true),
-            image("interiorImage", "Inside of the shop", "Shown in the 'our place' section.", true),
-            image("menuPlatterImage", "Menu header photo", "Small photo shown on menu section headers."),
+            image(
+              "founderImage",
+              "Founder / chef photo",
+              "Shown only beside the founder or chef story. Initially copied from the top background photo.",
+            ),
+            image("interiorImage", "Visit section — inside photo", "Shown only on the large inside card in the visit section.", true),
+            image("exteriorImage", "Visit section — outside photo", "Shown only on the outside card in the visit section.", true),
+            image(
+              "aboutImage",
+              "About section photo",
+              "Shown only beside the blue About EuroFisk section. Initially copied from the outside photo.",
+            ),
+            image("menuPlatterImage", "Menu page header photo", "Shown only in the header of this shop's menu page."),
+            image(
+              "socialImage",
+              "Social sharing photo",
+              "Used only for link previews and search metadata. Initially copied from the outside photo.",
+            ),
             {
               name: "gallery",
               type: "array",

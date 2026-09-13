@@ -113,7 +113,7 @@ export default function Root({ children }: { children: ReactNode }) {
       : branchPath(branchId, currentPage);
     const canonical = absoluteSiteUrl(lang, canonicalLogicalPath);
     const cms = cmsBranch(lang, branchId);
-    const cmsImage = cms?.photos.exterior ?? cms?.photos.hero;
+    const cmsImage = cms?.photos.social ?? cms?.photos.exterior ?? cms?.photos.hero;
     const image = publicMediaUrl(
       mediaUrl(cmsImage, "original") ||
         `https://media.eurofisk.se/${branchId === "rosengard" ? "rosengard-exterior-1400x1050" : "os-exterior-1360x907"}.webp`,

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ImageIcon, MapPin, Phone } from "lucide-react";
-import { FadeUp, FadeUpGroup } from "@/app/lib/animations";
+import { FadeIn, FadeUp, FadeUpGroup } from "@/app/lib/animations";
 import { useBranch } from "@/app/lib/BranchContext";
+import { imagesFor } from "@/app/lib/branchImages";
 import { useT } from "@/app/lib/branchCopy";
 import { menuFor } from "@/app/lib/menuContent";
 import { useLang } from "@/app/lib/LangContext";
@@ -19,11 +20,16 @@ function MenuHeader({
   subtitle: string;
   label: string;
 }) {
-  const { branch } = useBranch();
+  const { branch, branchId } = useBranch();
+  const menuImage = imagesFor(branchId).menuPlatter;
 
   return (
     <div className="bg-primary py-16 text-white lg:py-24">
-      <div className="mx-auto max-w-6xl px-5 lg:px-10">
+      <div
+        className={`mx-auto max-w-6xl px-5 lg:px-10 ${
+          menuImage ? "grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_360px]" : ""
+        }`}
+      >
         <FadeUp>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-sky-soft" style={sans}>
             {label}
@@ -39,6 +45,19 @@ function MenuHeader({
             {branch.name}
           </div>
         </FadeUp>
+        {menuImage && (
+          <FadeIn delay={0.15}>
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 bg-white/10 shadow-2xl shadow-black/15">
+              <img
+                src={menuImage}
+                alt=""
+                aria-hidden="true"
+                className="h-full w-full object-cover"
+                decoding="async"
+              />
+            </div>
+          </FadeIn>
+        )}
       </div>
     </div>
   );

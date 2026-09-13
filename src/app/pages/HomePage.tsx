@@ -338,7 +338,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-primary/15">
                   <ImageWithFallback
-                    src={media.hero}
+                    src={media.founder}
                     alt="EuroFisk founder"
                     loading="lazy"
                     decoding="async"
@@ -474,7 +474,7 @@ export default function HomePage() {
           <FadeIn delay={0.2}>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <ImageWithFallback src={media.exterior} alt="EuroFisk exterior" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <ImageWithFallback src={media.about} alt="EuroFisk" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <motion.div
                 initial={{ opacity: 0, x: dir === "rtl" ? 20 : -20, y: 10 }}

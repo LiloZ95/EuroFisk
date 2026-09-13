@@ -14,8 +14,14 @@ import heroVideo from "@/imports/hero-grill-salmon.mp4";
 export interface BranchImages {
   /** Full-bleed background behind the hero headline. */
   hero: string;
+  /** Portrait beside the founder / chef story. */
+  founder: string;
   exterior: string;
   interior: string;
+  /** Image beside the blue About section. */
+  about: string;
+  /** Optional image in the menu-page header. */
+  menuPlatter?: string;
   /** Omitted where no footage represents that branch honestly. */
   heroVideo?: string;
 }
@@ -27,14 +33,18 @@ export interface BranchImages {
 export const BRANCH_IMAGES: Record<BranchId, BranchImages> = {
   rosengard: {
     hero: heroImg,
+    founder: heroImg,
     exterior: exteriorImg,
     interior: interiorImg,
+    about: exteriorImg,
     heroVideo,
   },
   "ostra-sorgenfri": {
     hero: counterLong,
+    founder: counterLong,
     exterior: stallExterior,
     interior: counterCrabsHake,
+    about: stallExterior,
   },
 };
 
@@ -51,8 +61,11 @@ export function imagesFor(branchId: BranchId, lang: Lang = "sv"): BranchImages {
 
   return {
     hero: mediaUrl(b.photos.hero, "hero") || fallback.hero,
+    founder: mediaUrl(b.photos.founder, "hero") || mediaUrl(b.photos.hero, "hero") || fallback.founder,
     exterior: mediaUrl(b.photos.exterior, "hero") || fallback.exterior,
     interior: mediaUrl(b.photos.interior, "hero") || fallback.interior,
+    about: mediaUrl(b.photos.about, "hero") || mediaUrl(b.photos.exterior, "hero") || fallback.about,
+    menuPlatter: mediaUrl(b.photos.menuPlatter, "card") || fallback.menuPlatter,
     // A branch with no video in the CMS genuinely has none — don't resurrect the bundled
     // one, or Östra Sorgenfri would start showing the Rosengård grill again.
     heroVideo: mediaUrl(b.photos.heroVideo, "original") || undefined,

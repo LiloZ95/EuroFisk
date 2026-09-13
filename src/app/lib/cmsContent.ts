@@ -40,9 +40,12 @@ export interface CmsBranch {
   photos: {
     hero: CmsMedia | null;
     heroVideo: CmsMedia | null;
+    founder?: CmsMedia | null;
     exterior: CmsMedia | null;
     interior: CmsMedia | null;
+    about?: CmsMedia | null;
     menuPlatter: CmsMedia | null;
+    social?: CmsMedia | null;
   };
   gallery: Array<{ img: CmsMedia | null; caption: string }>;
   hero: Record<string, string>;
