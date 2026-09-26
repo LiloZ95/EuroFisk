@@ -1,4 +1,5 @@
 import type { Lang } from "./LangContext";
+import { kgMenuPhotos } from "./images";
 import type { MenuCategory } from "./menuData";
 import type { Translation } from "./translations";
 
@@ -9,6 +10,7 @@ export interface KgMenuItem {
   arabic?: string;
   rawPrice: string;
   preparedPrice: string;
+  photo: string;
 }
 
 export interface KgMenu {
@@ -19,20 +21,20 @@ export interface KgMenu {
 
 // The Arabic name is required here because the `ar` menu is derived from it.
 const kgItemsSv: Array<KgMenuItem & { arabic: string }> = [
-  { name: "Guldsparid", arabic: "اجاج", rawPrice: "129 kr", preparedPrice: "219 kr" },
-  { name: "Havsabborre", arabic: "براق", rawPrice: "139 kr", preparedPrice: "219 kr" },
-  { name: "Karp", arabic: "كارب", rawPrice: "119 kr", preparedPrice: "199 kr" },
-  { name: "Sardiner", arabic: "سردين", rawPrice: "119 kr", preparedPrice: "199 kr" },
-  { name: "Grå multe", arabic: "بوري", rawPrice: "129 kr", preparedPrice: "199 kr" },
-  { name: "Kalamari", arabic: "كالاماري", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Rödpagell", arabic: "جريدي", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Rödmullet", arabic: "سلطان إبراهيم", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Lax", arabic: "سلمون", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Räkor", arabic: "روبيان", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Rödbraxen", arabic: "فريدي", rawPrice: "219 kr", preparedPrice: "299 kr" },
-  { name: "Barracuda", arabic: "مليفة", rawPrice: "199 kr", preparedPrice: "299 kr" },
-  { name: "Oxögonfisk", arabic: "زوري / غبص", rawPrice: "149 kr", preparedPrice: "219 kr" },
-  { name: "Kummel", arabic: "عرموط", rawPrice: "199 kr", preparedPrice: "299 kr" },
+  { name: "Guldsparid", arabic: "اجاج", rawPrice: "129 kr", preparedPrice: "219 kr", photo: kgMenuPhotos.guldsparid },
+  { name: "Havsabborre", arabic: "براق", rawPrice: "139 kr", preparedPrice: "219 kr", photo: kgMenuPhotos.havsabborre },
+  { name: "Karp", arabic: "كارب", rawPrice: "119 kr", preparedPrice: "199 kr", photo: kgMenuPhotos.karp },
+  { name: "Sardiner", arabic: "سردين", rawPrice: "119 kr", preparedPrice: "199 kr", photo: kgMenuPhotos.sardiner },
+  { name: "Grå multe", arabic: "بوري", rawPrice: "129 kr", preparedPrice: "199 kr", photo: kgMenuPhotos.graMulte },
+  { name: "Kalamari", arabic: "كالاماري", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.kalamari },
+  { name: "Rödpagell", arabic: "جريدي", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.rodpagell },
+  { name: "Rödmullet", arabic: "سلطان إبراهيم", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.rodmullet },
+  { name: "Lax", arabic: "سلمون", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.lax },
+  { name: "Räkor", arabic: "روبيان", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.rakor },
+  { name: "Rödbraxen", arabic: "فريدي", rawPrice: "219 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.rodbraxen },
+  { name: "Barracuda", arabic: "مليفة", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.barracuda },
+  { name: "Oxögonfisk", arabic: "زوري / غبص", rawPrice: "149 kr", preparedPrice: "219 kr", photo: kgMenuPhotos.oxogonfisk },
+  { name: "Kummel", arabic: "عرموط", rawPrice: "199 kr", preparedPrice: "299 kr", photo: kgMenuPhotos.kummel },
 ];
 
 const englishNames = [
@@ -92,6 +94,7 @@ export function kgCategories(lang: Lang, t: Translation): MenuCategory[] {
       items: menu.items.map((item) => ({
         name: item.name,
         arabic: item.arabic,
+        photo: item.photo,
         options: [
           { label: menu.rawLabel, price: item.rawPrice },
           { label: menu.preparedLabel, price: item.preparedPrice },

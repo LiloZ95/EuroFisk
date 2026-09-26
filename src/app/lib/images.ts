@@ -11,9 +11,41 @@ import guldsparidCard from "@/imports/740594412_1303242941796914_123175895918497
 import laxfileCard from "@/imports/737550945_1303242938463581_1649297779520794798_n.webp";
 import havsabborreCard from "@/imports/738040921_1303242945130247_8074259589386338750_n.webp";
 import exteriorImg from "@/imports/566195161_1102427925211751_5067642239529561451_n.webp";
+import kgBarracuda from "@/imports/ostra-sorgenfri/menu/barracuda.webp";
+import kgBigeyeFish from "@/imports/ostra-sorgenfri/menu/bigeye-fish.webp";
+import kgCalamari from "@/imports/ostra-sorgenfri/menu/calamari.webp";
+import kgCarp from "@/imports/ostra-sorgenfri/menu/carp.webp";
+import kgGiltheadBream from "@/imports/ostra-sorgenfri/menu/gilthead-bream.webp";
+import kgGreyMullet from "@/imports/ostra-sorgenfri/menu/grey-mullet.webp";
+import kgHake from "@/imports/ostra-sorgenfri/menu/hake.webp";
+import kgPrawns from "@/imports/ostra-sorgenfri/menu/prawns.webp";
+import kgRedMullet from "@/imports/ostra-sorgenfri/menu/red-mullet.webp";
+import kgRedPorgy from "@/imports/ostra-sorgenfri/menu/red-porgy.webp";
+import kgRedSeabream from "@/imports/ostra-sorgenfri/menu/red-seabream.webp";
+import kgSalmon from "@/imports/ostra-sorgenfri/menu/salmon.webp";
+import kgSardines from "@/imports/ostra-sorgenfri/menu/sardines.webp";
+import kgSeaBass from "@/imports/ostra-sorgenfri/menu/sea-bass.webp";
 
 /** Intrinsic size of the nav/footer logo, so it reserves its box before loading. */
 export const LOGO_SIZE = { width: 480, height: 275 };
+
+/** Item photos for the Östra Sorgenfri fish-by-the-kilo menu. */
+export const kgMenuPhotos = {
+  guldsparid: kgGiltheadBream,
+  havsabborre: kgSeaBass,
+  karp: kgCarp,
+  sardiner: kgSardines,
+  graMulte: kgGreyMullet,
+  kalamari: kgCalamari,
+  rodpagell: kgRedPorgy,
+  rodmullet: kgRedMullet,
+  lax: kgSalmon,
+  rakor: kgPrawns,
+  rodbraxen: kgRedSeabream,
+  barracuda: kgBarracuda,
+  oxogonfisk: kgBigeyeFish,
+  kummel: kgHake,
+} as const;
 
 export {
   logoImg, heroImg, foodSpreadImg, shrimpPlatterImg, interiorImg,

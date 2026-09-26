@@ -188,6 +188,132 @@ export const PHOTO_FILES = [
       "en": "Blue crabs on ice at the counter",
       "ar": "سلطعون أزرق على الثلج في الثلاجة"
     }
+  },
+  {
+    "key": "os-menu-guldsparid",
+    "file": "ostra-sorgenfri/menu/gilthead-bream.webp",
+    "alt": {
+      "sv": "Guldsparid",
+      "en": "Gilthead bream",
+      "ar": "اجاج"
+    }
+  },
+  {
+    "key": "os-menu-havsabborre",
+    "file": "ostra-sorgenfri/menu/sea-bass.webp",
+    "alt": {
+      "sv": "Havsabborre",
+      "en": "Sea bass",
+      "ar": "براق"
+    }
+  },
+  {
+    "key": "os-menu-karp",
+    "file": "ostra-sorgenfri/menu/carp.webp",
+    "alt": {
+      "sv": "Karp",
+      "en": "Carp",
+      "ar": "كارب"
+    }
+  },
+  {
+    "key": "os-menu-sardiner",
+    "file": "ostra-sorgenfri/menu/sardines.webp",
+    "alt": {
+      "sv": "Sardiner",
+      "en": "Sardines",
+      "ar": "سردين"
+    }
+  },
+  {
+    "key": "os-menu-gra-multe",
+    "file": "ostra-sorgenfri/menu/grey-mullet.webp",
+    "alt": {
+      "sv": "Grå multe",
+      "en": "Grey mullet",
+      "ar": "بوري"
+    }
+  },
+  {
+    "key": "os-menu-kalamari",
+    "file": "ostra-sorgenfri/menu/calamari.webp",
+    "alt": {
+      "sv": "Kalamari",
+      "en": "Calamari",
+      "ar": "كالاماري"
+    }
+  },
+  {
+    "key": "os-menu-rodpagell",
+    "file": "ostra-sorgenfri/menu/red-porgy.webp",
+    "alt": {
+      "sv": "Rödpagell",
+      "en": "Red porgy",
+      "ar": "جريدي"
+    }
+  },
+  {
+    "key": "os-menu-rodmullet",
+    "file": "ostra-sorgenfri/menu/red-mullet.webp",
+    "alt": {
+      "sv": "Rödmullet",
+      "en": "Red mullet",
+      "ar": "سلطان إبراهيم"
+    }
+  },
+  {
+    "key": "os-menu-lax",
+    "file": "ostra-sorgenfri/menu/salmon.webp",
+    "alt": {
+      "sv": "Lax",
+      "en": "Salmon",
+      "ar": "سلمون"
+    }
+  },
+  {
+    "key": "os-menu-rakor",
+    "file": "ostra-sorgenfri/menu/prawns.webp",
+    "alt": {
+      "sv": "Räkor",
+      "en": "Prawns",
+      "ar": "روبيان"
+    }
+  },
+  {
+    "key": "os-menu-rodbraxen",
+    "file": "ostra-sorgenfri/menu/red-seabream.webp",
+    "alt": {
+      "sv": "Rödbraxen",
+      "en": "Red seabream",
+      "ar": "فريدي"
+    }
+  },
+  {
+    "key": "os-menu-barracuda",
+    "file": "ostra-sorgenfri/menu/barracuda.webp",
+    "alt": {
+      "sv": "Barracuda",
+      "en": "Barracuda",
+      "ar": "مليفة"
+    }
+  },
+  {
+    "key": "os-menu-oxogonfisk",
+    "file": "ostra-sorgenfri/menu/bigeye-fish.webp",
+    "alt": {
+      "sv": "Oxögonfisk",
+      "en": "Bigeye fish",
+      "ar": "زوري / غبص"
+    }
+  },
+  {
+    "key": "os-menu-kummel",
+    "file": "ostra-sorgenfri/menu/hake.webp",
+    "alt": {
+      "sv": "Kummel",
+      "en": "Hake",
+      "ar": "عرموط"
+    }
   }
 ] as const;
 
@@ -1028,6 +1154,7 @@ export const MENU_SEED = [
             "price": "219 kr"
           }
         ],
+        "photoKey": "os-menu-guldsparid",
         "orderable": true
       },
       {
@@ -1060,6 +1187,7 @@ export const MENU_SEED = [
             "price": "219 kr"
           }
         ],
+        "photoKey": "os-menu-havsabborre",
         "orderable": true
       },
       {
@@ -1092,6 +1220,7 @@ export const MENU_SEED = [
             "price": "199 kr"
           }
         ],
+        "photoKey": "os-menu-karp",
         "orderable": true
       },
       {
@@ -1124,6 +1253,7 @@ export const MENU_SEED = [
             "price": "199 kr"
           }
         ],
+        "photoKey": "os-menu-sardiner",
         "orderable": true
       },
       {
@@ -1156,6 +1286,7 @@ export const MENU_SEED = [
             "price": "199 kr"
           }
         ],
+        "photoKey": "os-menu-gra-multe",
         "orderable": true
       },
       {
@@ -1188,6 +1319,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-kalamari",
         "orderable": true
       },
       {
@@ -1220,6 +1352,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-rodpagell",
         "orderable": true
       },
       {
@@ -1252,6 +1385,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-rodmullet",
         "orderable": true
       },
       {
@@ -1284,6 +1418,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-lax",
         "orderable": true
       },
       {
@@ -1316,6 +1451,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-rakor",
         "orderable": true
       },
       {
@@ -1348,6 +1484,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-rodbraxen",
         "orderable": true
       },
       {
@@ -1380,6 +1517,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-barracuda",
         "orderable": true
       },
       {
@@ -1412,6 +1550,7 @@ export const MENU_SEED = [
             "price": "219 kr"
           }
         ],
+        "photoKey": "os-menu-oxogonfisk",
         "orderable": true
       },
       {
@@ -1444,6 +1583,7 @@ export const MENU_SEED = [
             "price": "299 kr"
           }
         ],
+        "photoKey": "os-menu-kummel",
         "orderable": true
       }
     ]

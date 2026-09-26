@@ -26,19 +26,23 @@ export function menuFor(
 
   if (sections.length === 0) return fallback;
 
-  return sections.map((c) => ({
+  return sections.map((c, categoryIndex) => ({
     id: c.id,
     label: c.label,
     note: c.note || undefined,
     priceUnit: c.priceUnit || undefined,
-    items: c.items.map((i) => ({
+    items: c.items.map((i, itemIndex) => ({
       name: i.name,
       arabic: i.arabic,
       desc: i.desc,
       price: i.price,
       options: i.options,
       tag: i.tag,
-      photo: i.photo,
+      // Keep bundled item art as a resilient fallback while CMS media is being uploaded.
+      photo:
+        i.photo ||
+        fallback[categoryIndex]?.items.find((fallbackItem) => fallbackItem.name === i.name)?.photo ||
+        fallback[categoryIndex]?.items[itemIndex]?.photo,
       orderable: i.orderable,
     })),
   }));

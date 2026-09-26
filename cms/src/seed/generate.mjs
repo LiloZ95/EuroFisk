@@ -77,6 +77,35 @@ const PHOTO_FILES = [
     alt: { sv: "Färska sardiner på is", en: "Fresh sardines on ice", ar: "سردين طازج على الثلج" } },
   { key: "os-gallery-3", file: "ostra-sorgenfri/crabs-on-ice.webp",
     alt: { sv: "Blåkrabbor på is i disken", en: "Blue crabs on ice at the counter", ar: "سلطعون أزرق على الثلج في الثلاجة" } },
+
+  { key: "os-menu-guldsparid", file: "ostra-sorgenfri/menu/gilthead-bream.webp",
+    alt: { sv: "Guldsparid", en: "Gilthead bream", ar: "اجاج" } },
+  { key: "os-menu-havsabborre", file: "ostra-sorgenfri/menu/sea-bass.webp",
+    alt: { sv: "Havsabborre", en: "Sea bass", ar: "براق" } },
+  { key: "os-menu-karp", file: "ostra-sorgenfri/menu/carp.webp",
+    alt: { sv: "Karp", en: "Carp", ar: "كارب" } },
+  { key: "os-menu-sardiner", file: "ostra-sorgenfri/menu/sardines.webp",
+    alt: { sv: "Sardiner", en: "Sardines", ar: "سردين" } },
+  { key: "os-menu-gra-multe", file: "ostra-sorgenfri/menu/grey-mullet.webp",
+    alt: { sv: "Grå multe", en: "Grey mullet", ar: "بوري" } },
+  { key: "os-menu-kalamari", file: "ostra-sorgenfri/menu/calamari.webp",
+    alt: { sv: "Kalamari", en: "Calamari", ar: "كالاماري" } },
+  { key: "os-menu-rodpagell", file: "ostra-sorgenfri/menu/red-porgy.webp",
+    alt: { sv: "Rödpagell", en: "Red porgy", ar: "جريدي" } },
+  { key: "os-menu-rodmullet", file: "ostra-sorgenfri/menu/red-mullet.webp",
+    alt: { sv: "Rödmullet", en: "Red mullet", ar: "سلطان إبراهيم" } },
+  { key: "os-menu-lax", file: "ostra-sorgenfri/menu/salmon.webp",
+    alt: { sv: "Lax", en: "Salmon", ar: "سلمون" } },
+  { key: "os-menu-rakor", file: "ostra-sorgenfri/menu/prawns.webp",
+    alt: { sv: "Räkor", en: "Prawns", ar: "روبيان" } },
+  { key: "os-menu-rodbraxen", file: "ostra-sorgenfri/menu/red-seabream.webp",
+    alt: { sv: "Rödbraxen", en: "Red seabream", ar: "فريدي" } },
+  { key: "os-menu-barracuda", file: "ostra-sorgenfri/menu/barracuda.webp",
+    alt: { sv: "Barracuda", en: "Barracuda", ar: "مليفة" } },
+  { key: "os-menu-oxogonfisk", file: "ostra-sorgenfri/menu/bigeye-fish.webp",
+    alt: { sv: "Oxögonfisk", en: "Bigeye fish", ar: "زوري / غبص" } },
+  { key: "os-menu-kummel", file: "ostra-sorgenfri/menu/hake.webp",
+    alt: { sv: "Kummel", en: "Hake", ar: "عرموط" } },
 ];
 
 // Which photo key fills each slot, per branch.
@@ -176,6 +205,20 @@ const photoUrlToKey = new Map();
   photoUrlToKey.set(images.laxfileCard, "rosengard-featured-2");
   photoUrlToKey.set(images.havsabborreCard, "rosengard-featured-3");
   photoUrlToKey.set(images.shrimpPlatterImg, "rosengard-gallery-3");
+  photoUrlToKey.set(images.kgMenuPhotos.guldsparid, "os-menu-guldsparid");
+  photoUrlToKey.set(images.kgMenuPhotos.havsabborre, "os-menu-havsabborre");
+  photoUrlToKey.set(images.kgMenuPhotos.karp, "os-menu-karp");
+  photoUrlToKey.set(images.kgMenuPhotos.sardiner, "os-menu-sardiner");
+  photoUrlToKey.set(images.kgMenuPhotos.graMulte, "os-menu-gra-multe");
+  photoUrlToKey.set(images.kgMenuPhotos.kalamari, "os-menu-kalamari");
+  photoUrlToKey.set(images.kgMenuPhotos.rodpagell, "os-menu-rodpagell");
+  photoUrlToKey.set(images.kgMenuPhotos.rodmullet, "os-menu-rodmullet");
+  photoUrlToKey.set(images.kgMenuPhotos.lax, "os-menu-lax");
+  photoUrlToKey.set(images.kgMenuPhotos.rakor, "os-menu-rakor");
+  photoUrlToKey.set(images.kgMenuPhotos.rodbraxen, "os-menu-rodbraxen");
+  photoUrlToKey.set(images.kgMenuPhotos.barracuda, "os-menu-barracuda");
+  photoUrlToKey.set(images.kgMenuPhotos.oxogonfisk, "os-menu-oxogonfisk");
+  photoUrlToKey.set(images.kgMenuPhotos.kummel, "os-menu-kummel");
 }
 
 const MENU_SEED = MENU_DATA.sv.map((cat, catIndex) => ({
@@ -218,6 +261,7 @@ const MENU_SEED = MENU_DATA.sv.map((cat, catIndex) => ({
         { label: byLang((l) => KG_MENU_DATA[l].rawLabel), price: item.rawPrice },
         { label: byLang((l) => KG_MENU_DATA[l].preparedLabel), price: item.preparedPrice },
       ],
+      photoKey: photoUrlToKey.get(item.photo),
       orderable: true,
     })),
   });
