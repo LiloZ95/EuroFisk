@@ -3,6 +3,14 @@
   <html lang="sv">
     <head>
       <meta charset="UTF-8" />
+      <!-- Keep CSP before executable scripts. Its hash authorizes only the initializer below. -->
+      <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com 'sha256-SADd6CkTx5zK+SH3J+XEB5MHv9cpDyKQRn0/OMLvuMw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.eurofisk.se https://www.googletagmanager.com https://*.google-analytics.com; media-src 'self' https://media.eurofisk.se; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; form-action 'self';"
+      />
+      <!-- Google tag: container owns the GA4 destination and automatic page views. -->
+      <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NFVG8TKB"></script>
+      <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());</script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <!-- SEO_META_START — replaced per route by scripts/prerender-routes.mjs -->
       <title>EuroFisk Malmö | Färsk fisk i Rosengård & Östra Sorgenfri</title>
@@ -40,14 +48,6 @@
       <meta name="twitter:image" content="https://media.eurofisk.se/rosengard-exterior-1400x1050.webp" />
       <meta name="twitter:image:alt" content="EuroFisk i Malmö" />
       <!-- SEO_META_END -->
-      <!--
-        Photos and the hero video come from Cloudflare R2 via media.eurofisk.se, so img-src
-        and media-src have to name that origin — 'self' alone blocks every one of them.
-      -->
-      <meta
-        http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.eurofisk.se; media-src 'self' https://media.eurofisk.se; connect-src 'self'; form-action 'self';"
-      />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <!-- Weight 300 is never used (no font-light anywhere); 400/500/600/700 are. -->
