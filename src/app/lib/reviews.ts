@@ -179,71 +179,7 @@ export const REVIEWS: Partial<Record<BranchId, Review[]>> = {
     // They are left out on purpose — the site shows the positive ones only.
   ],
 
-  // Östra Sorgenfri. The pull also returned eight star-only ratings with no written
-  // review at all (Saad K, Fadi Chammout, Adam Omeirat, Mohammad Ibrahim, Ibrahim
-  // Kassir, Ahmed Abuhadayed, ibaa barakat, sami abed). There is nothing to quote, so
-  // they are not listed here.
-  "ostra-sorgenfri": [
-    {
-      author: "Abdallah El Alti",
-      meta: "2 reviews",
-      when: "3 days ago",
-      text: "Absolutely amazing!\n\nThe fish and seafood are always super fresh and of the highest quality.",
-      originalLang: "sv",
-      truncated: true,
-    },
-    {
-      author: "Tariq Omar",
-      meta: "1 review",
-      when: "6 days ago",
-      text: "Very good and fresh fish at a very good price too, will be back one hundred percent",
-      originalLang: "sv",
-    },
-    {
-      author: "Jihad Asad",
-      meta: "5 reviews",
-      when: "6 days ago",
-      text: "Fresh fish, always available, and the service is very, very good and respectful in Abdous.",
-      originalLang: "ar",
-    },
-    {
-      author: "Abed Abdul",
-      meta: "1 review",
-      when: "5 days ago",
-      text: "The fish is amazing and the service is fantastic. The best chef, Abu Ali!",
-      originalLang: "ar",
-    },
-    {
-      author: "Raeed Ghazi",
-      meta: "4 reviews",
-      when: "6 days ago",
-      text: "Fresh fish, and the guy was very nice and respectful.",
-      originalLang: "ar",
-    },
-    {
-      author: "hasn kaware",
-      meta: "2 reviews",
-      when: "5 days ago",
-      text: "Abdous's service was excellent, and the fish was very fresh and new.",
-      originalLang: "ar",
-      truncated: true,
-    },
-    {
-      author: "Ghanem Abdullah",
-      meta: "1 review",
-      when: "6 days ago",
-      text: "Fresh fish, sweet Arabian treatment, Abdous",
-      originalLang: "ar",
-    },
-    {
-      author: "George Zainoun",
-      meta: "4 reviews",
-      when: "a month ago",
-      text: "It is usually special.",
-      originalLang: "sv",
-      truncated: true,
-    },
-  ],
+
 };
 
 export function reviewsFor(branchId: BranchId): Review[] {

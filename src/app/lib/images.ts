@@ -29,6 +29,27 @@ import kgSeaBass from "@/imports/ostra-sorgenfri/menu/sea-bass.webp";
 /** Intrinsic size of the nav/footer logo, so it reserves its box before loading. */
 export const LOGO_SIZE = { width: 480, height: 275 };
 
+// Backups for the original CMS uploads. These are used only after a request fails;
+// a new upload or a replacement selected in the CMS always gets the first attempt.
+const bundledPhotos: Record<string, string> = {
+  "rosengard-hero": heroImg,
+  "rosengard-exterior": exteriorImg,
+  "rosengard-interior": interiorImg,
+  "rosengard-featured-1": guldsparidCard,
+  "rosengard-featured-2": laxfileCard,
+  "rosengard-featured-3": havsabborreCard,
+  "rosengard-gallery-1": foodSpreadImg,
+  "rosengard-gallery-2": rawFishImg,
+  "rosengard-gallery-3": shrimpPlatterImg,
+};
+
+export function bundledPhotoFor(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  const filename = url.split(/[?#]/)[0].split("/").pop() ?? "";
+  const name = filename.replace(/(?:-\d+x\d+)?\.(?:webp|png|jpe?g)$/i, "");
+  return bundledPhotos[name];
+}
+
 /** Item photos for the Östra Sorgenfri fish-by-the-kilo menu. */
 export const kgMenuPhotos = {
   guldsparid: kgGiltheadBream,

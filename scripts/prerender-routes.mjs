@@ -25,14 +25,14 @@ const LANGUAGES = {
     prefix: "",
     dir: "ltr",
     ogLocale: "sv_SE",
-    siteTitle: "EuroFisk Malmö | Färsk fisk i Rosengård & Östra Sorgenfri",
+    siteTitle: "EuroFisk Malmö | Färsk fisk i Rosengård",
     siteDescription:
-      "EuroFisk erbjuder färsk, grillad och friterad fisk i Rosengård och Östra Sorgenfri, Malmö. Se menyer, öppettider och kontaktuppgifter.",
+      "EuroFisk erbjuder färsk, grillad och friterad fisk i Rosengård, Malmö. Se menyer, öppettider och kontaktuppgifter.",
     homeTagline: "Färsk fisk och skaldjur i Malmö",
     pages: { "/": "Start", "/menu": "Meny", "/reviews": "Omdömen" },
     homeDescription: (branch) =>
       branch.menuType === "portion"
-        ? `EuroFisk ${branch.area} i Malmö serverar färsk, kolgrillad och friterad fisk. ${branch.address}. ${stripBidi(branch.hoursSummary)}. Se menyn och beställ via WhatsApp.`
+        ? `EuroFisk ${branch.area} i Malmö serverar färsk, kolgrillad och friterad fisk. ${branch.address}. ${stripBidi(branch.hoursSummary)}. Se menyn och beställ online.`
         : `EuroFisk ${branch.area} i Malmö erbjuder färsk fisk per kilo, rå eller tillagad. ${branch.address}. ${stripBidi(branch.hoursSummary)}. Se dagens utbud.`,
     menuDescription: (branch) =>
       `${branch.menuIntro?.sub ?? "Se vår aktuella fiskmeny."} ${branch.address}.`,
@@ -44,14 +44,14 @@ const LANGUAGES = {
     prefix: "/en",
     dir: "ltr",
     ogLocale: "en_GB",
-    siteTitle: "EuroFisk Malmö | Fresh fish in Rosengård & Östra Sorgenfri",
+    siteTitle: "EuroFisk Malmö | Fresh fish in Rosengård",
     siteDescription:
-      "EuroFisk serves fresh, charcoal-grilled and fried fish in Rosengård and Östra Sorgenfri, Malmö. View menus, opening hours and contact details.",
+      "EuroFisk serves fresh, charcoal-grilled and fried fish in Rosengård, Malmö. View menus, opening hours and contact details.",
     homeTagline: "Fresh fish and seafood in Malmö",
     pages: { "/": "Home", "/menu": "Menu", "/reviews": "Reviews" },
     homeDescription: (branch) =>
       branch.menuType === "portion"
-        ? `EuroFisk ${branch.area} in Malmö serves fresh, charcoal-grilled and fried fish. ${branch.address}. ${stripBidi(branch.hoursSummary)}. View the menu and order on WhatsApp.`
+        ? `EuroFisk ${branch.area} in Malmö serves fresh, charcoal-grilled and fried fish. ${branch.address}. ${stripBidi(branch.hoursSummary)}. View the menu and order online.`
         : `EuroFisk ${branch.area} in Malmö offers fresh fish by the kilo, raw or cooked. ${branch.address}. ${stripBidi(branch.hoursSummary)}. See today's selection.`,
     menuDescription: (branch) =>
       `${branch.menuIntro?.sub ?? "Explore our current fish menu."} ${branch.address}.`,
@@ -63,9 +63,9 @@ const LANGUAGES = {
     prefix: "/ar",
     dir: "rtl",
     ogLocale: "ar_AR",
-    siteTitle: "EuroFisk مالمو | سمك طازج في Rosengård وÖstra Sorgenfri",
+    siteTitle: "EuroFisk مالمو | سمك طازج في Rosengård",
     siteDescription:
-      "يقدّم EuroFisk السمك الطازج والمشوي على الفحم والمقلي في Rosengård وÖstra Sorgenfri في مالمو. تصفّح القوائم وساعات العمل وبيانات التواصل.",
+      "يقدّم EuroFisk السمك الطازج والمشوي على الفحم والمقلي في Rosengård في مالمو. تصفّح القوائم وساعات العمل وبيانات التواصل.",
     homeTagline: "سمك ومأكولات بحرية طازجة في مالمو",
     pages: { "/": "الرئيسية", "/menu": "القائمة", "/reviews": "التقييمات" },
     homeDescription: (branch) =>
@@ -94,26 +94,7 @@ const BRANCH_SCHEMA = {
       },
     ],
   },
-  "ostra-sorgenfri": {
-    type: "GroceryStore",
-    streetAddress: "Danska vägen 55",
-    postalCode: "212 29",
-    openingHours: [
-      {
-        days: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "09:00",
-        closes: "18:00",
-      },
-    ],
-  },
+
 };
 
 if (!existsSync(shellPath)) {
@@ -135,7 +116,7 @@ if (!seoMarker.test(shell)) {
 }
 
 // The router is code-owned: generating a 200 page for a CMS slug the app cannot match is
-// worse than returning a real 404, so verify that both sources agree.
+// worse than returning a real 404. CMS records for retired branches may remain archived.
 const branchesSource = readFileSync(join(root, "src/app/lib/branches.ts"), "utf8");
 const slugs = [...branchesSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 if (slugs.length === 0) {
@@ -146,11 +127,9 @@ if (slugs.length === 0) {
 for (const lang of LANGUAGE_ORDER) {
   const cmsSlugs = (content.locales?.[lang]?.branches ?? []).map((branch) => branch.slug);
   const missing = slugs.filter((slug) => !cmsSlugs.includes(slug));
-  const unknown = cmsSlugs.filter((slug) => !slugs.includes(slug));
-  if (missing.length > 0 || unknown.length > 0) {
+  if (missing.length > 0) {
     console.error(
-      `Branch mismatch for ${lang}. Missing in CMS: ${missing.join(", ") || "none"}; ` +
-        `missing in router: ${unknown.join(", ") || "none"}.`,
+      `Public branch missing in CMS for ${lang}: ${missing.join(", ")}.`,
     );
     process.exit(1);
   }
@@ -195,9 +174,6 @@ function publicMediaUrl(url) {
   if (!url) return `${SITE_URL}/apple-touch-icon.png`;
   try {
     const parsed = new URL(url);
-    if (parsed.hostname.endsWith("r2.dev")) {
-      return `https://media.eurofisk.se${parsed.pathname}`;
-    }
     return parsed.href;
   } catch {
     return url;
@@ -218,7 +194,7 @@ function pageMetadata({ lang, pagePath, branch, indexable = true }) {
   const logicalPath = branch ? `/${branch.slug}${pagePath === "/" ? "" : pagePath}` : pagePath;
   const url = canonicalUrl(lang, logicalPath);
   const image = imageFor(branch ?? branchFor(lang, "rosengard"));
-  const imageAlt = locale.imageAlt(branch?.area ?? "Rosengård & Östra Sorgenfri");
+  const imageAlt = locale.imageAlt(branch?.area ?? "Rosengård");
 
   if (!branch) {
     return {
@@ -458,7 +434,7 @@ for (const lang of LANGUAGE_ORDER) {
   writtenRoutes.push(localizedPath(lang, "/"));
 
   // Keep old unscoped menu/review links functional, but do not index them: the visitor's
-  // stored location controls their content, while canonical branch URLs are deterministic.
+  // canonical restaurant URLs are used for indexing.
   for (const pagePath of PAGE_PATHS.slice(1)) {
     const fallbackBranch = branchFor(lang, "rosengard");
     const legacyMeta = pageMetadata({
@@ -471,6 +447,17 @@ for (const lang of LANGUAGE_ORDER) {
     legacyMeta.url = canonicalUrl(lang, `/${fallbackBranch.slug}${pagePath}`);
     writeRoute(localizedPath(lang, pagePath), renderHtml(legacyMeta));
     writtenRoutes.push(localizedPath(lang, pagePath));
+  }
+
+  // GitHub Pages has no server-side redirects. Retired branch links get a noindex
+  // page with a canonical and immediate redirect to the equivalent restaurant page.
+  for (const pagePath of PAGE_PATHS) {
+    const destination = pageMetadata({ lang, pagePath, branch: branchFor(lang, "rosengard"), indexable: false });
+    const retiredPath = `/ostra-sorgenfri${pagePath === "/" ? "" : pagePath}`;
+    const html = renderHtml(destination).replace("</head>",
+      `<meta http-equiv="refresh" content="0;url=${escapeHtml(destination.url)}" /></head>`);
+    writeRoute(localizedPath(lang, retiredPath), html);
+    writtenRoutes.push(localizedPath(lang, retiredPath));
   }
 
   for (const slug of slugs) {
@@ -565,19 +552,16 @@ function menuLines(lang, branch) {
 
 const llms = `# EuroFisk
 
-> EuroFisk is a fish restaurant and fresh-fish counter with two locations in Malmö, Sweden. This file summarizes canonical public facts for search and answer engines.
+> EuroFisk is a fish and seafood restaurant in Rosengård, Malmö, Sweden. This file summarizes canonical public facts for search and answer engines.
 
 ## Locations
 
 - [EuroFisk Rosengård](${SITE_URL}/rosengard/): cooked fish portions, charcoal-grilled and fried fish. Adlerfelts väg, 213 70 Malmö. Monday–Tuesday 10:00–19:00; Wednesday–Sunday 10:00–20:00.
-- [EuroFisk Östra Sorgenfri](${SITE_URL}/ostra-sorgenfri/): fresh fish by the kilogram, available raw, cleaned, marinated, grilled or fried. Danska vägen 55, 212 29 Malmö. Daily 09:00–18:00.
 
 ## Canonical pages
 
 - [Rosengård menu](${SITE_URL}/rosengard/menu/)
 - [Rosengård reviews](${SITE_URL}/rosengard/reviews/)
-- [Östra Sorgenfri menu](${SITE_URL}/ostra-sorgenfri/menu/)
-- [Östra Sorgenfri reviews](${SITE_URL}/ostra-sorgenfri/reviews/)
 - [Full multilingual content](${SITE_URL}/llms-full.txt)
 
 ## Languages
@@ -586,7 +570,7 @@ The complete site is available in Swedish (default), [English](${SITE_URL}/en/) 
 
 ## Contact
 
-Phone and WhatsApp: ${PHONE}. Menu availability and prices may change; the canonical menu pages are the source of truth.
+Phone: ${PHONE}. Order online at https://order.site/eurofisk/sv/swe/malmo/restaurant/eurofisk-rosengrd/items/friterade-ratter-1. Menu availability and prices may change; the ordering site confirms the final order.
 `;
 writeFileSync(join(dist, "llms.txt"), llms);
 

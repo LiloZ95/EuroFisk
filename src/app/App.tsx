@@ -5,6 +5,7 @@ import { useT } from "./lib/branchCopy";
 import { LangProvider } from "./lib/LangContext";
 import { SiteLink, SiteRouter, useSiteLocation } from "./lib/siteRouter";
 import Root from "./Root";
+import { OrderProvider } from "./lib/OrderContext";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const MenuPage = lazy(() => import("./pages/MenuPage"));
@@ -49,7 +50,9 @@ export default function App() {
     <LangProvider>
       <SiteRouter>
         <BranchProvider>
-          <SiteRoutes />
+          <OrderProvider>
+            <SiteRoutes />
+          </OrderProvider>
         </BranchProvider>
       </SiteRouter>
     </LangProvider>

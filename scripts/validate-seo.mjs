@@ -37,8 +37,11 @@ const canonicalUrls = urls.filter((url) => !url.includes("media.eurofisk.se"));
 if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {
   fail("sitemap.xml is missing its XML declaration");
 }
-if (canonicalUrls.length !== 21) {
-  fail(`Expected 21 canonical sitemap URLs, found ${canonicalUrls.length}`);
+if (canonicalUrls.length !== 12) {
+  fail(`Expected 12 canonical sitemap URLs, found ${canonicalUrls.length}`);
+}
+if (canonicalUrls.some((url) => url.includes("ostra-sorgenfri"))) {
+  fail("Retired branch must not appear in the sitemap");
 }
 if (new Set(canonicalUrls).size !== canonicalUrls.length) {
   fail("sitemap.xml contains duplicate canonical URLs");
@@ -112,10 +115,22 @@ for (const legacy of [
   "ar/menu/index.html",
   "ar/reviews/index.html",
   "404.html",
+  ...["", "en/", "ar/"].flatMap((prefix) =>
+    ["", "menu/", "reviews/"].map((page) => `${prefix}ostra-sorgenfri/${page}index.html`)),
 ]) {
   const html = read(legacy);
   if (html && !html.includes('meta name="robots" content="noindex, follow"')) {
     fail(`${legacy} must be noindex, follow`);
+  }
+}
+
+for (const prefix of ["", "en/", "ar/"]) {
+  for (const page of ["", "menu/", "reviews/"]) {
+    const html = read(`${prefix}ostra-sorgenfri/${page}index.html`);
+    const target = `${siteUrl}/${prefix}rosengard/${page}`;
+    if (!html.includes(`http-equiv="refresh" content="0;url=${target}"`)) {
+      fail(`Retired route must redirect to ${target}`);
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
-import { Truck, MapPin, Home } from "lucide-react";
+import { Truck, MapPin } from "lucide-react";
 import { useT } from "@/app/lib/branchCopy";
 import { display, sans } from "@/app/lib/styles";
 import { FadeUp } from "@/app/lib/animations";
@@ -16,15 +16,8 @@ const TORN_EDGE =
   "L940,20 L968,11 L996,21 L1024,9 L1052,18 L1080,13 L1108,22 L1136,10 L1164,19 L1200,12 " +
   "L1200,0 L0,0 Z";
 
-/**
- * Full-bleed promo strip for the free home delivery offer. Sits between two pale sections
- * on the home page, so the solid brand blue plus the torn edges make it impossible to
- * scroll past without noticing.
- *
- * `onSelectDelivery` pre-selects delivery in the order form; the anchor still does the
- * scrolling natively, so the strip keeps working if the handler is ever dropped.
- */
-export function DeliveryBanner({ onSelectDelivery }: { onSelectDelivery: () => void }) {
+/** Compact delivery promotion with the same order entry point as the header. */
+export function DeliveryBanner({ onOrder }: { onOrder: () => void }) {
   const t = useT();
   const reduce = useReducedMotion();
 
@@ -99,33 +92,15 @@ export function DeliveryBanner({ onSelectDelivery }: { onSelectDelivery: () => v
         </FadeUp>
 
         <FadeUp delay={0.16}>
-          <p
-            className="mx-auto mt-6 flex max-w-md flex-wrap items-center justify-center gap-x-2 gap-y-1 text-balance leading-relaxed text-white/85"
-            style={sans}
-          >
-            {t.deliverySub}
-            <Home size={17} aria-hidden="true" className="flex-shrink-0 text-sky" />
-          </p>
-        </FadeUp>
-
-        <FadeUp delay={0.24}>
-          <div className="mx-auto mt-8 grid max-w-3xl gap-3 text-start sm:grid-cols-3">
-            {t.deliveryBenefits.map(([title, sub]) => (
-              <div key={title} className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
-                <p className="text-sm font-bold uppercase tracking-wide text-white" style={sans}>{title}</p>
-                <p className="mt-1.5 text-xs leading-relaxed text-white/75" style={sans}>{sub}</p>
-              </div>
-            ))}
-          </div>
-          <a
-            href="#kontakt"
-            onClick={onSelectDelivery}
+          <button
+            type="button"
+            onClick={onOrder}
             className="mt-9 inline-flex min-h-12 items-center gap-2.5 rounded-full bg-white px-8 text-sm font-bold text-primary shadow-lg shadow-ink/25 transition-transform duration-200 hover:scale-[1.03] active:scale-100"
             style={sans}
           >
             <Truck size={18} aria-hidden="true" />
             {t.deliveryCta}
-          </a>
+          </button>
           <p className="mt-3 text-xs text-white/65" style={sans}>{t.deliveryFeeNote}</p>
         </FadeUp>
       </div>

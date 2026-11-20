@@ -1,7 +1,7 @@
 import { ltr } from "./bidi";
 import { stripLangFromPath, type Lang } from "./LangContext";
 
-export type BranchId = "rosengard" | "ostra-sorgenfri";
+export type BranchId = "rosengard";
 export type BranchMenuType = "portion" | "kg";
 
 export interface Branch {
@@ -26,11 +26,7 @@ export interface Branch {
   };
 }
 
-// Both shops are reached on the same phone/WhatsApp line — the duplicated number below is
-// intentional, not a copy-paste slip. Orders stay distinguishable because the WhatsApp
-// message and the booking form both carry the selected branch name.
-// `menuType` is the only thing deciding which menu a branch shows; swap the two values to
-// swap the menus.
+// Public restaurant configuration. Archived CMS branches are not published.
 export const BRANCHES: Record<BranchId, Branch> = {
   rosengard: {
     id: "rosengard",
@@ -63,33 +59,7 @@ export const BRANCHES: Record<BranchId, Branch> = {
       ],
     },
   },
-  "ostra-sorgenfri": {
-    id: "ostra-sorgenfri",
-    slug: "ostra-sorgenfri",
-    area: "Östra Sorgenfri",
-    name: "EuroFisk (Östra Sorgenfri)",
-    address: "Danska vägen 55, 212 29 Malmö",
-    mapsUrl:
-      "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4653a1049f0fd71b:0x4c4b29459ec11c12?sa=X&ved=1t:8290&ictx=111",
-    phoneDisplay: ltr("+46 79 016 48 13"),
-    phoneHref: "tel:+46790164813",
-    whatsappNumber: "46790164813",
-    menuType: "kg",
-    serviceHours: { opens: "09:00", closes: "18:00" },
-    hours: {
-      summary: {
-        sv: `Alla dagar ${ltr("09–18")}`,
-        en: `Daily ${ltr("9am–6pm")}`,
-        ar: `كل الأيام ${ltr("09–18")}`,
-      },
-      rows: [
-        {
-          days: { sv: "Måndag–söndag", en: "Monday–Sunday", ar: "الإثنين–الأحد" },
-          time: ltr("09:00–18:00"),
-        },
-      ],
-    },
-  },
+
 };
 
 export const BRANCH_IDS = Object.keys(BRANCHES) as BranchId[];
@@ -101,12 +71,9 @@ export function getBranchIdFromPath(pathname: string): BranchId | null {
 
 export function stripBranchFromPath(pathname: string) {
   const unprefixedPath = stripLangFromPath(pathname);
-  const branchId = getBranchIdFromPath(unprefixedPath);
-  if (!branchId) return unprefixedPath || "/";
-
-  const prefix = `/${BRANCHES[branchId].slug}`;
-  const rest = unprefixedPath.slice(prefix.length);
-  return rest || "/";
+  // Recognize the retired path only so old links can redirect to Rosengård.
+  const prefix = unprefixedPath.match(/^\/(?:rosengard|ostra-sorgenfri)(?=\/|$)/)?.[0];
+  return prefix ? unprefixedPath.slice(prefix.length) || "/" : unprefixedPath || "/";
 }
 
 export function branchPath(branchId: BranchId, pagePath = "/") {

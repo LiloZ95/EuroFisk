@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckCircle2, ChevronDown, MapPin, Menu, X } from "lucide-react";
-import { BranchChooser } from "@/app/components/BranchChooser";
+import { MapPin, Menu, X } from "lucide-react";
+import { OrderChooser } from "@/app/components/OrderChooser";
+import { useOrder } from "@/app/lib/OrderContext";
 import { LangSwitcher } from "@/app/components/LangSwitcher";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { stripBidi } from "@/app/lib/bidi";
 import { useT } from "@/app/lib/branchCopy";
 import { useBranch } from "@/app/lib/BranchContext";
 import { branchPath, getBranchIdFromPath, stripBranchFromPath } from "@/app/lib/branches";
-import { cmsBranch, mediaUrl } from "@/app/lib/cmsContent";
+import { cmsBranch, cmsLocale, mediaUrl } from "@/app/lib/cmsContent";
 import { pathForLang, stripLangFromPath, useLang, type Lang } from "@/app/lib/LangContext";
 import { logoImg, LOGO_SIZE } from "@/app/lib/images";
 import { SiteLink, useSiteLocation, type SiteDestination } from "@/app/lib/siteRouter";
@@ -25,10 +26,7 @@ function absoluteSiteUrl(lang: Lang, logicalPath: string) {
 
 function publicMediaUrl(url: string) {
   try {
-    const parsed = new URL(url);
-    return parsed.hostname.endsWith("r2.dev")
-      ? `https://media.eurofisk.se${parsed.pathname}`
-      : parsed.href;
+    return new URL(url).href;
   } catch {
     return url;
   }
@@ -37,9 +35,10 @@ function publicMediaUrl(url: string) {
 export default function Root({ children }: { children: ReactNode }) {
   const { lang } = useLang();
   const t = useT();
+  const siteLogo = mediaUrl(cmsLocale(lang)?.settings.logo, "original") || logoImg;
   const location = useSiteLocation();
-  const { branch, branchId, openChooser, pathFor, selectBranch, switchNotice, showLocationBar, dismissLocationBar } =
-    useBranch();
+  const { branch, branchId, pathFor } = useBranch();
+  const { openOrder } = useOrder();
   const [navOpen, setNavOpen] = useState(false);
   const navToggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -106,8 +105,7 @@ export default function Root({ children }: { children: ReactNode }) {
                 hours: branch.hours.summary[lang],
               });
 
-    // /menu and /reviews without a branch are legacy convenience URLs whose content can
-    // depend on local storage. They stay usable but point crawlers at a deterministic URL.
+    // /menu and /reviews remain usable aliases; crawlers use the restaurant URL.
     const canonicalLogicalPath = pathBranch || siteLanding || !validPage
       ? currentLogicalPath
       : branchPath(branchId, currentPage);
@@ -116,10 +114,10 @@ export default function Root({ children }: { children: ReactNode }) {
     const cmsImage = cms?.photos.social ?? cms?.photos.exterior ?? cms?.photos.hero;
     const image = publicMediaUrl(
       mediaUrl(cmsImage, "original") ||
-        `https://media.eurofisk.se/${branchId === "rosengard" ? "rosengard-exterior-1400x1050" : "os-exterior-1360x907"}.webp`,
+        "https://media.eurofisk.se/rosengard-exterior-1400x1050.webp",
     );
     const imageAlt = siteLanding
-      ? "EuroFisk Rosengård & Östra Sorgenfri, Malmö"
+      ? "EuroFisk Rosengård, Malmö"
       : `EuroFisk ${branch.area}, Malmö`;
 
     document.title = title;
@@ -198,7 +196,8 @@ export default function Root({ children }: { children: ReactNode }) {
             aria-label={`EuroFisk ${branch.area}`}
           >
             <ImageWithFallback
-              src={logoImg}
+              src={siteLogo}
+              fallbackSrc={logoImg}
               alt="EuroFisk"
               width={LOGO_SIZE.width}
               height={LOGO_SIZE.height}
@@ -233,38 +232,22 @@ export default function Root({ children }: { children: ReactNode }) {
 
             <div className="h-6 w-px bg-border" aria-hidden="true" />
 
-            <button
-              type="button"
-              onClick={openChooser}
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-white px-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
-              aria-label={fmt(t.locationChangeAria, { area: branch.area })}
-            >
-              <MapPin size={15} className="text-primary" aria-hidden="true" />
-              {branch.area}
-              <ChevronDown size={14} aria-hidden="true" />
-            </button>
+            <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+              <MapPin size={15} aria-hidden="true" /> {branch.area}
+            </span>
 
             <LangSwitcher />
 
-            <SiteLink
-              to={contactTo}
-              className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-accent"
-            >
+            <button type="button" data-order-trigger onClick={openOrder}
+              className="inline-flex min-h-11 items-center rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground transition-colors hover:bg-accent">
               {t.navBook}
-            </SiteLink>
+            </button>
           </div>
 
           <div className="flex min-w-0 items-center gap-1.5 lg:hidden">
-            <button
-              type="button"
-              onClick={openChooser}
-              className="inline-flex min-h-11 min-w-0 items-center gap-1.5 rounded-full border border-border px-2.5 text-xs font-semibold text-foreground"
-              aria-label={fmt(t.locationChangeAria, { area: branch.area })}
-            >
-              <MapPin size={14} className="flex-shrink-0 text-primary" aria-hidden="true" />
-              {/* No fixed width: the branch name is the only thing here allowed to shrink,
-                  so a long area name truncates instead of overflowing narrow phones. */}
-              <span className="truncate sm:max-w-32">{branch.area}</span>
+            <button type="button" data-order-trigger onClick={openOrder}
+              className="inline-flex min-h-11 items-center rounded-full bg-primary px-4 text-xs font-bold text-white">
+              {t.navBook}
             </button>
             {/* Stays in the header at every width — the globe alone on the narrowest phones,
                 so the language switch never hides behind the hamburger. */}
@@ -293,23 +276,6 @@ export default function Root({ children }: { children: ReactNode }) {
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden border-t border-border bg-white px-5 py-5 lg:hidden"
             >
-              <button
-                type="button"
-                onClick={() => {
-                  setNavOpen(false);
-                  openChooser();
-                }}
-                className="mb-5 flex w-full items-center justify-between rounded-xl border border-primary/20 bg-primary/5 p-4 text-start"
-              >
-                <span>
-                  <span className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                    {t.locationSelectedLabel}
-                  </span>
-                  <span className="mt-1 block font-semibold text-primary">{branch.name}</span>
-                </span>
-                <span className="text-xs font-bold text-primary">{t.changeShort}</span>
-              </button>
-
               <div className="flex flex-col gap-4">
                 {navItems.map((item) => (
                   <SiteLink
@@ -325,13 +291,11 @@ export default function Root({ children }: { children: ReactNode }) {
                     {item.label}
                   </SiteLink>
                 ))}
-                <SiteLink
-                  to={contactTo}
-                  className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground"
-                  onClick={() => setNavOpen(false)}
-                >
+                <button type="button"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-bold text-primary-foreground"
+                  onClick={() => { setNavOpen(false); openOrder(); }}>
                   {t.navBook}
-                </SiteLink>
+                </button>
               </div>
             </motion.div>
           )}
@@ -352,7 +316,8 @@ export default function Root({ children }: { children: ReactNode }) {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-3 lg:px-10">
           <div>
             <ImageWithFallback
-              src={logoImg}
+              src={siteLogo}
+              fallbackSrc={logoImg}
               alt="EuroFisk"
               width={LOGO_SIZE.width}
               height={LOGO_SIZE.height}
@@ -399,10 +364,10 @@ export default function Root({ children }: { children: ReactNode }) {
               <span>{branch.hours.summary[lang]}</span>
               <button
                 type="button"
-                onClick={openChooser}
+                onClick={openOrder}
                 className="mt-1 self-start text-sm font-semibold text-sky-link underline decoration-white/20 underline-offset-4 hover:text-white"
               >
-                {t.locationChange}
+                {t.navBook}
               </button>
             </div>
           </div>
@@ -414,70 +379,7 @@ export default function Root({ children }: { children: ReactNode }) {
         </div>
       </footer>
 
-      <BranchChooser />
-
-      {/* Replaces the old blocking modal. The page renders on the default branch straight
-          away; this only asks the visitor to confirm, and it can be ignored or dismissed. */}
-      <AnimatePresence>
-        {showLocationBar && (
-          <motion.div
-            role="region"
-            aria-label={t.locationChange}
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-white shadow-[0_-8px_30px_rgba(13,31,60,0.12)]"
-          >
-            <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:px-10">
-              <MapPin size={16} className="flex-shrink-0 text-primary" aria-hidden="true" />
-              <p className="min-w-0 flex-1 text-sm text-foreground">
-                {fmt(t.locationBarText, { area: branch.area })}
-              </p>
-              <button
-                type="button"
-                onClick={() => selectBranch(branchId)}
-                className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-accent"
-              >
-                {t.locationBarConfirm}
-              </button>
-              <button
-                type="button"
-                onClick={openChooser}
-                className="min-h-11 px-2 text-sm font-semibold text-primary underline underline-offset-4"
-              >
-                {t.locationChange}
-              </button>
-              <button
-                type="button"
-                onClick={dismissLocationBar}
-                aria-label={t.locationBarDismiss}
-                className="flex min-h-11 min-w-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <X size={16} aria-hidden="true" />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {switchNotice && (
-          <motion.div
-            role="status"
-            aria-live="polite"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            className={`fixed left-1/2 z-[70] flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-center gap-3 rounded-xl bg-foreground px-5 py-4 text-sm font-medium text-white shadow-2xl ${
-              showLocationBar ? "bottom-24" : "bottom-5"
-            }`}
-          >
-            <CheckCircle2 size={19} className="flex-shrink-0 text-sky-link" aria-hidden="true" />
-            {fmt(t.switchNotice, { branch: switchNotice })}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <OrderChooser />
     </div>
   );
 }

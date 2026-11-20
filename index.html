@@ -4,17 +4,18 @@
     <head>
       <meta charset="UTF-8" />
       <!-- Keep CSP before executable scripts. Its hash authorizes only the initializer below. -->
+      <!-- Both CMS media hosts stay allowed so uploaded photos and videos retain their original URLs. -->
       <meta
         http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com 'sha256-SADd6CkTx5zK+SH3J+XEB5MHv9cpDyKQRn0/OMLvuMw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.eurofisk.se https://www.googletagmanager.com https://*.google-analytics.com; media-src 'self' https://media.eurofisk.se; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; form-action 'self';"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com 'sha256-SADd6CkTx5zK+SH3J+XEB5MHv9cpDyKQRn0/OMLvuMw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.eurofisk.se https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev https://www.googletagmanager.com https://*.google-analytics.com; media-src 'self' https://media.eurofisk.se https://pub-27ebb0d7e34a4e2cbbd3473981092938.r2.dev; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; form-action 'self';"
       />
       <!-- Google tag: container owns the GA4 destination and automatic page views. -->
       <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NFVG8TKB"></script>
       <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());</script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <!-- SEO_META_START — replaced per route by scripts/prerender-routes.mjs -->
-      <title>EuroFisk Malmö | Färsk fisk i Rosengård & Östra Sorgenfri</title>
-      <meta name="description" content="EuroFisk erbjuder färsk, grillad och friterad fisk i Rosengård och Östra Sorgenfri, Malmö. Se menyer, öppettider och kontaktuppgifter." />
+      <title>EuroFisk Malmö | Färsk fisk i Rosengård</title>
+      <meta name="description" content="EuroFisk erbjuder färsk, grillad och friterad fisk i Rosengård, Malmö. Se menyer, öppettider och kontaktuppgifter." />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <link rel="canonical" href="https://www.eurofisk.se/" />
       <link rel="alternate" hreflang="sv" href="https://www.eurofisk.se/" />
@@ -34,8 +35,8 @@
       <meta property="og:locale:alternate" content="en_GB" />
       <meta property="og:locale:alternate" content="ar_AR" />
       <meta property="og:url" content="https://www.eurofisk.se/" />
-      <meta property="og:title" content="EuroFisk Malmö | Färsk fisk i Rosengård & Östra Sorgenfri" />
-      <meta property="og:description" content="Färsk fisk och skaldjur på två platser i Malmö. Se menyer, öppettider och kontaktuppgifter." />
+      <meta property="og:title" content="EuroFisk Malmö | Färsk fisk i Rosengård" />
+      <meta property="og:description" content="Färsk fisk och skaldjur i Rosengård, Malmö. Se menyer, öppettider och kontaktuppgifter." />
       <meta property="og:image" content="https://media.eurofisk.se/rosengard-exterior-1400x1050.webp" />
       <meta property="og:image:secure_url" content="https://media.eurofisk.se/rosengard-exterior-1400x1050.webp" />
       <meta property="og:image:type" content="image/webp" />
@@ -43,17 +44,17 @@
       <meta property="og:image:height" content="1050" />
       <meta property="og:image:alt" content="EuroFisk i Malmö" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="EuroFisk Malmö | Färsk fisk i Rosengård & Östra Sorgenfri" />
-      <meta name="twitter:description" content="Färsk fisk och skaldjur på två platser i Malmö. Se menyer, öppettider och kontaktuppgifter." />
+      <meta name="twitter:title" content="EuroFisk Malmö | Färsk fisk i Rosengård" />
+      <meta name="twitter:description" content="Färsk fisk och skaldjur i Rosengård, Malmö. Se menyer, öppettider och kontaktuppgifter." />
       <meta name="twitter:image" content="https://media.eurofisk.se/rosengard-exterior-1400x1050.webp" />
       <meta name="twitter:image:alt" content="EuroFisk i Malmö" />
       <!-- SEO_META_END -->
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <!-- Weight 300 is never used (no font-light anywhere); 400/500/600/700 are. -->
+      <!-- Poppins headings and body text, with Cairo for Arabic. -->
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap"
       />
       <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
     </head>

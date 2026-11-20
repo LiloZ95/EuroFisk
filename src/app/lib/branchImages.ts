@@ -1,14 +1,8 @@
 import type { BranchId } from "./branches";
-import { exteriorImg, heroImg, interiorImg } from "./images";
+import { exteriorImg, heroImg, interiorImg, foodSpreadImg } from "./images";
 import { cmsBranch, mediaUrl } from "./cmsContent";
 import type { Lang } from "./LangContext";
 
-// Östra Sorgenfri's own photography — the fish counter, not the grill kitchen.
-import stallExterior from "@/imports/ostra-sorgenfri/stall-exterior.webp";
-import counterLong from "@/imports/ostra-sorgenfri/counter-long.webp";
-import counterCrabsHake from "@/imports/ostra-sorgenfri/counter-crabs-hake.webp";
-
-// Grilling footage: only true of the Rosengård kitchen. The counter branch shows a still.
 import heroVideo from "@/imports/hero-grill-salmon.mp4";
 
 export interface BranchImages {
@@ -37,15 +31,10 @@ export const BRANCH_IMAGES: Record<BranchId, BranchImages> = {
     exterior: exteriorImg,
     interior: interiorImg,
     about: exteriorImg,
+    menuPlatter: foodSpreadImg,
     heroVideo,
   },
-  "ostra-sorgenfri": {
-    hero: counterLong,
-    founder: counterLong,
-    exterior: stallExterior,
-    interior: counterCrabsHake,
-    about: stallExterior,
-  },
+
 };
 
 /**
@@ -67,7 +56,7 @@ export function imagesFor(branchId: BranchId, lang: Lang = "sv"): BranchImages {
     about: mediaUrl(b.photos.about, "hero") || mediaUrl(b.photos.exterior, "hero") || fallback.about,
     menuPlatter: mediaUrl(b.photos.menuPlatter, "card") || fallback.menuPlatter,
     // A branch with no video in the CMS genuinely has none — don't resurrect the bundled
-    // one, or Östra Sorgenfri would start showing the Rosengård grill again.
+    // one if the owner has removed it.
     heroVideo: mediaUrl(b.photos.heroVideo, "original") || undefined,
   };
 }

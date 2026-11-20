@@ -125,6 +125,6 @@ export function mediaUrl(
   size: "hero" | "card" | "thumb" | "original" = "card",
 ): string {
   if (!m) return "";
-  if (size === "original") return m.url ?? "";
-  return m[size] ?? m.url ?? "";
+  // The CMS owns the media origin; a custom domain is not interchangeable with R2.
+  return size === "original" ? m.url ?? "" : m[size] ?? m.url ?? "";
 }

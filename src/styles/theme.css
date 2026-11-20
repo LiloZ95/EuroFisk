@@ -87,6 +87,7 @@
 }
 
 @theme inline {
+  --font-sans: 'Poppins', 'Cairo', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -237,7 +238,7 @@
 
 /* ── Arabic / right-to-left ─────────────────────────────────────────────────────
    <html dir> is set by LangProvider. Elements that carry an inline `sans`/`display`
-   style already fall back to Cairo/Amiri; this covers everything that does not. */
+   style already fall back to Cairo; this covers everything that does not. */
 [dir="rtl"] body {
   font-family: 'Cairo', system-ui, sans-serif;
 }

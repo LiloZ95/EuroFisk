@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ImageIcon, MapPin, Phone } from "lucide-react";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { bundledPhotoFor, foodSpreadImg } from "@/app/lib/images";
 import { FadeIn, FadeUp, FadeUpGroup } from "@/app/lib/animations";
 import { useBranch } from "@/app/lib/BranchContext";
 import { imagesFor } from "@/app/lib/branchImages";
@@ -7,7 +9,7 @@ import { useT } from "@/app/lib/branchCopy";
 import { menuFor } from "@/app/lib/menuContent";
 import { useLang } from "@/app/lib/LangContext";
 import { type MenuCategory, type MenuItem } from "@/app/lib/menuData";
-import { SiteLink, type SiteDestination } from "@/app/lib/siteRouter";
+import { useOrder } from "@/app/lib/OrderContext";
 import { display, sans } from "@/app/lib/styles";
 import { type Translation } from "@/app/lib/translations";
 
@@ -21,7 +23,8 @@ function MenuHeader({
   label: string;
 }) {
   const { branch, branchId } = useBranch();
-  const menuImage = imagesFor(branchId).menuPlatter;
+  const { lang } = useLang();
+  const menuImage = imagesFor(branchId, lang).menuPlatter;
 
   return (
     <div className="bg-primary py-16 text-white lg:py-24">
@@ -48,8 +51,9 @@ function MenuHeader({
         {menuImage && (
           <FadeIn delay={0.15}>
             <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 bg-white/10 shadow-2xl shadow-black/15">
-              <img
+              <ImageWithFallback
                 src={menuImage}
+                fallbackSrc={foodSpreadImg}
                 alt=""
                 aria-hidden="true"
                 className="h-full w-full object-cover"
@@ -61,15 +65,6 @@ function MenuHeader({
       </div>
     </div>
   );
-}
-
-/** Prefills the order field on the home page's WhatsApp form. */
-function orderDestination(pathname: string, orderText: string): SiteDestination {
-  return {
-    pathname,
-    search: `?order=${encodeURIComponent(orderText)}`,
-    hash: "#kontakt",
-  };
 }
 
 function MenuItemCard({
@@ -85,7 +80,7 @@ function MenuItemCard({
   showPhoto: boolean;
   t: Translation;
 }) {
-  const { pathFor } = useBranch();
+  const { openOrder } = useOrder();
   const orderable = item.orderable !== false;
 
   return (
@@ -111,20 +106,15 @@ function MenuItemCard({
         )}
 
         {item.options ? (
-          // Priced per variant: each variant is its own order link, so the card keeps the
-          // same footprint as a single-price one.
+          // Each variant opens the same online-order entry point.
           <div className="flex flex-wrap gap-2">
             {item.options.map((option) => {
-              const orderText = priceUnit
-                ? `${item.name} — ${option.label} (${priceUnit})`
-                : `${item.name} — ${option.label}`;
-
               // basis-24 + flex-1: the variants sit side by side when the card is wide
               // enough and wrap onto their own lines when it is not.
               return (
-                <SiteLink
+                <button
                   key={option.label}
-                  to={orderDestination(pathFor(), orderText)}
+                  type="button" onClick={openOrder}
                   className="group/price flex min-h-11 min-w-0 flex-1 basis-24 flex-col justify-center rounded-xl border border-border bg-secondary/55 px-3 py-2 transition-colors hover:border-primary hover:bg-primary hover:text-white"
                   aria-label={`${t.orderCta} ${item.name}, ${option.label}`}
                 >
@@ -134,7 +124,7 @@ function MenuItemCard({
                   <strong className="mt-0.5 block text-sm text-primary transition-colors group-hover/price:text-white">
                     {option.price}
                   </strong>
-                </SiteLink>
+                </button>
               );
             })}
           </div>
@@ -142,13 +132,13 @@ function MenuItemCard({
           <div className="flex items-center justify-between gap-3">
             <span className="text-sm font-bold text-primary">{item.price}</span>
             {orderable && (
-              <SiteLink
-                to={orderDestination(pathFor(), item.name)}
+              <button
+                type="button" onClick={openOrder}
                 className="inline-flex min-h-11 items-center justify-center rounded-lg border border-primary/25 px-3 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
                 aria-label={`${t.orderCta} ${item.name}`}
               >
                 {t.orderCta}
-              </SiteLink>
+              </button>
             )}
           </div>
         )}
@@ -156,8 +146,9 @@ function MenuItemCard({
 
       {!showPhoto ? null : item.photo ? (
         <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-border shadow-sm transition-colors group-hover:border-primary/30 lg:h-24 lg:w-24">
-          <img
+          <ImageWithFallback
             src={item.photo}
+            fallbackSrc={bundledPhotoFor(item.photo)}
             alt={item.name}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"

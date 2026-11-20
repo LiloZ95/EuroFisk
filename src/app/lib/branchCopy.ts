@@ -1,28 +1,14 @@
 import { useMemo } from "react";
 import { useBranch } from "./BranchContext";
 import type { BranchId } from "./branches";
-import breamOnIce from "@/imports/ostra-sorgenfri/bream-on-ice.webp";
-import salmonFillets from "@/imports/ostra-sorgenfri/salmon-fillets.webp";
-import prawns from "@/imports/ostra-sorgenfri/prawns.webp";
-import sardinesOnIce from "@/imports/ostra-sorgenfri/sardines-on-ice.webp";
-import crabsOnIce from "@/imports/ostra-sorgenfri/crabs-on-ice.webp";
-import gurnardSquid from "@/imports/ostra-sorgenfri/gurnard-squid.webp";
-import stallExterior from "@/imports/ostra-sorgenfri/stall-exterior.webp";
 import { useLang, type Lang } from "./LangContext";
 import { cmsBranch, cmsLocale, mediaUrl } from "./cmsContent";
 import { T, type Translation } from "./translations";
+import { RESTAURANT_COPY } from "./restaurantCopy";
 
 type BranchOverrides = Partial<Record<Lang, Partial<Translation>>>;
 
-/**
- * Östra Sorgenfri is a fresh fish counter, not a grill kitchen: the fish lies whole on ice,
- * you pick it yourself and pay by the kilo, and cooking it is optional. Only the keys that
- * actually describe that offer are overridden here — everything else falls through to the
- * shared copy in translations.ts, so a wording fix there still reaches both branches.
- *
- * The "Passion för fisk" / about section is deliberately NOT overridden: it is the brand
- * story and stays identical on both branches.
- */
+/** Restaurant-specific copy, with CMS overrides below. */
 const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
   rosengard: {
     sv: {
@@ -64,138 +50,7 @@ const BRANCH_COPY: Partial<Record<BranchId, BranchOverrides>> = {
       aboutStats: [["Råvaran först", "Grunden i varje rätt."], ["Äkta glöd", "Smaken från kolgrillen."], ["Generöst serverat", "Som vi själva vill ha det."]],
     },
   },
-  "ostra-sorgenfri": {
-    sv: {
-      heroBadge: "Dagens fångst på is",
-      heroTitle1: "Färsk fisk",
-      heroTitle2: "per kilo",
-      heroTitle3: "ur disken",
-      heroSub:
-        "Hel fisk och skaldjur på is, levererat färskt varje dag. Välj själv i disken — ta med den rå eller låt oss grilla eller fritera den medan du väntar.",
-      heroMenu: "Se dagens priser",
-      heroBook: "Beställ mat",
 
-      featuredLabel: "Ur disken",
-      featuredTitle: "Dagens färskaste",
-      featuredSub:
-        "Upptäck allt från välkända favoriter till mer exotiska fiskarter och skaldjur — välj art och mängd direkt från fiskdisken.",
-      featured: [
-        { img: breamOnIce, name: "Lokala & klassiska favoriter", tag: "Ur fiskdisken", desc: "Lokala favoriter från våra närmare vatten — välkända arter med självklar plats på middagsbordet." },
-        { img: salmonFillets, name: "Exotiska arter", tag: "Från världens hav", desc: "Upptäck arter som inte alltid finns i den vanliga matbutiken — ett sortiment som förändras efter tillgång." },
-        { img: prawns, name: "Havets delikatesser", tag: "Räkor och skaldjur", desc: "Från saftiga räkor till havets mest uppskattade delikatesser — råvaror som lyfter middagen och passar både vardag och fest." },
-      ],
-      viewFullMenu: "Se dagens sortiment",
-      galleryTitle: "Upptäck vår fiskdisk",
-      gallerySub: "Från lokala favoriter till exotiska arter och havets delikatesser — upptäck ett varierande sortiment där vi hjälper dig att hitta din favorit. Vi rensar och kryddar efter dina önskemål, redo att tillagas hemma.",
-      staffLabel: "Om EuroFisk · Östra Sorgenfri",
-      staffTitle: "Kunskapen bakom varje val",
-      staffSub: "Hos oss börjar middagen vid fiskdisken. Med ett brett urval och kunskap om råvaran hjälper vi dig att välja rätt fisk.",
-      staffRole: "Fiskhandlare",
-      staffQuote: "Berätta vad du tänkt laga — så hjälper jag dig att välja rätt fisk och gör den redo för köket.",
-      staffBio: "EuroFisk Östra Sorgenfri bygger på erfarenhet från fiskhandeln och en vilja att erbjuda mer än den traditionella fiskdisken. Här möts välkända favoriter med arter från världens hav — ett varierande sortiment för dig som vet precis vad du söker och för dig som gärna upptäcker något nytt.",
-      facts: [["fish", "Från nära & fjärran", "Lokala favoriter och exotiska arter."], ["flame", "Rensat som du vill ha det", "Förberett efter dina önskemål."], ["heart", "Marinerat & redo", "Klart att tillaga på ditt sätt."]],
-      placeLabel: "Besök oss · Östra Sorgenfri",
-      placeTitle: "Fisk & skaldjur — på det sätt som passar dig",
-      placeSub: "Besök vår fiskdisk, beställ för avhämtning eller få fisk och skaldjur levererat hem. Vi hjälper dig att välja, rensa och marinera efter dina önskemål.",
-      placeInteriorLabel: "Handla i fiskdisken",
-      placeInteriorSub: "Besök oss på Danska vägen, upptäck dagens sortiment och välj själv bland fisk och skaldjur från vår disk.",
-      placeExteriorLabel: "Besök oss",
-      placeAtmosphere: "Besök oss",
-      aboutLabel: "Om EuroFisk · Östra Sorgenfri",
-      aboutTitle: "Förtroende byggs över fiskdisken",
-      aboutP1: "För oss är ett besök hos EuroFisk mer än ett köp över fiskdisken. Det är en stund där kunskap, kvalitet och personlig service möts — så att du kan känna dig trygg i ditt val och inspirerad inför måltiden.",
-      aboutP2: "Vi hjälper dig att hitta rätt fisk för det du vill laga, oavsett om du söker en välkänd favorit eller vill upptäcka något nytt.",
-      aboutStats: [["Rätt för din middag", "Vi hjälper dig att välja rätt."], ["På ditt sätt", "Rensat, marinerat och redo för tillagning."], ["Personlig service", "Hjälp när du behöver den."]],
-      gallery: [
-        { img: gurnardSquid, alt: "Röd knorrhane och bläckfisk på is" },
-        { img: sardinesOnIce, alt: "Färska sardiner på is" },
-        { img: crabsOnIce, alt: "Blåkrabbor på is i disken" },
-        { img: prawns, alt: "Nykokta räkor" },
-        { img: stallExterior, alt: "EuroFisks fiskdisk i Östra Sorgenfri utifrån" },
-      ],
-      menuPageSub:
-        "Färsk fisk per kilo — välj den rå eller låt oss grilla eller fritera den. Alla priser anges per kilogram.",
-      menuNote:
-        "Tillgången på färsk fisk kan variera. Kontakta personalen om allergier eller särskilda önskemål.",
-      menuDishes: "sorter",
-
-      contactSub:
-        "Beställ färsk fisk för avhämtning eller ät hos oss — välj nedan så tar vi hand om resten via WhatsApp.",
-    },
-    en: {
-      heroBadge: "Today's catch on ice",
-      heroTitle1: "Fresh fish",
-      heroTitle2: "by the kilo",
-      // Kept as short as the line it replaces ("from the sea") — the h1 clamps up to
-      // 5.5rem inside a max-w-xl block, so a longer line wraps on wide screens.
-      heroTitle3: "from the ice",
-      heroSub:
-        "Whole fish and shellfish on ice, delivered fresh every day. Pick yours at the counter — take it home raw, or let us grill or fry it while you wait.",
-      heroMenu: "See today's prices",
-
-      featuredLabel: "From the counter",
-      featuredTitle: "Freshest today",
-      featuredSub:
-        "The catch comes in fresh every day. Pick your fish whole on ice and pay by the kilo.",
-      featured: [
-        { img: breamOnIce, name: "Gilt-head Bream", tag: "Mild and easy", desc: "Whole fresh bream on ice — sold by the kilo, raw or prepared" },
-        { img: salmonFillets, name: "Salmon", tag: "Always a favourite", desc: "Fresh salmon at the counter — whole or filleted on the spot" },
-        { img: prawns, name: "Prawns", tag: "Cooked the same day", desc: "Fresh prawns from the counter — sold by the kilo" },
-      ],
-      gallery: [
-        { img: gurnardSquid, alt: "Red gurnard and squid on ice" },
-        { img: sardinesOnIce, alt: "Fresh sardines on ice" },
-        { img: crabsOnIce, alt: "Blue crabs on ice at the counter" },
-        { img: prawns, alt: "Freshly cooked prawns" },
-        { img: stallExterior, alt: "The EuroFisk fish counter in Östra Sorgenfri from outside" },
-      ],
-      viewFullMenu: "See the full counter",
-
-      menuPageSub:
-        "Fresh fish by the kilo — take it raw, or let us grill or fry it for you. All prices are per kilogram.",
-      menuNote:
-        "Fresh fish availability may vary. Ask the team about allergies or special requests.",
-      menuDishes: "kinds",
-
-      contactSub:
-        "Order fresh fish for pickup or to eat in — pick below and we'll take care of the rest over WhatsApp.",
-    },
-    ar: {
-      heroBadge: "صيد اليوم على الثلج",
-      heroTitle1: "سمك طازج",
-      heroTitle2: "بالكيلو",
-      heroTitle3: "من الثلج مباشرة",
-      heroSub:
-        "سمك كامل ومأكولات بحرية على الثلج، تصلنا طازجة كل يوم. اختر سمكتك بنفسك — خذها نيئة، أو دعنا نشويها أو نقليها لك في الحال.",
-      heroMenu: "شاهد أسعار اليوم",
-
-      featuredLabel: "من الثلاجة",
-      featuredTitle: "الأطزج اليوم",
-      featuredSub: "يصلنا الصيد طازجاً كل يوم. اختر سمكتك كاملة على الثلج وادفع بالكيلو.",
-      featured: [
-        { img: breamOnIce, name: "اجاج", tag: "طعم خفيف وسهل", desc: "سمكة اجاج كاملة طازجة على الثلج — تُباع بالكيلو، نيئة أو محضَّرة" },
-        { img: salmonFillets, name: "سلمون", tag: "المفضّل دائماً", desc: "سلمون طازج في الثلاجة — كامل أو مقطّع فيليه أمامك" },
-        { img: prawns, name: "روبيان", tag: "مسلوق في نفس اليوم", desc: "روبيان طازج من الثلاجة — يُباع بالكيلو" },
-      ],
-      gallery: [
-        { img: gurnardSquid, alt: "سمك الحرّ الأحمر والحبار على الثلج" },
-        { img: sardinesOnIce, alt: "سردين طازج على الثلج" },
-        { img: crabsOnIce, alt: "سلطعون أزرق على الثلج في الثلاجة" },
-        { img: prawns, alt: "روبيان مسلوق طازج" },
-        { img: stallExterior, alt: "محل EuroFisk للسمك في Östra Sorgenfri من الخارج" },
-      ],
-      viewFullMenu: "شاهد كل المتوفّر",
-
-      menuPageSub:
-        "سمك طازج بالكيلو — خذه نيئاً أو دعنا نشويه أو نقليه لك. جميع الأسعار للكيلوغرام الواحد.",
-      menuNote:
-        "قد يختلف توفّر السمك الطازج. تواصل مع العاملين بخصوص الحساسية أو الطلبات الخاصة.",
-      menuDishes: "نوعاً",
-
-      contactSub:
-        "اطلب سمكاً طازجاً للاستلام أو لتناوله عندنا — اختر أدناه ونتكفّل بالباقي عبر WhatsApp.",
-    },
-  },
 };
 
 /**
@@ -306,7 +161,16 @@ function applyCms(base: Translation, branchId: BranchId, lang: Lang): Translatio
 }
 
 export function copyFor(branchId: BranchId, lang: Lang): Translation {
-  const base = { ...T[lang], ...BRANCH_COPY[branchId]?.[lang] } as Translation;
+  const concise = RESTAURANT_COPY[lang];
+  // Shorter local defaults stay below CMS edits in the precedence order.
+  const base = {
+    ...T[lang], ...BRANCH_COPY[branchId]?.[lang],
+    heroSub: concise.heroSub,
+    aboutTitle: concise.aboutTitle,
+    aboutP1: concise.aboutBody,
+    contactTitle: concise.contactTitle,
+    contactSub: concise.contactSub,
+  } as Translation;
   return applyCms(base, branchId, lang);
 }
 

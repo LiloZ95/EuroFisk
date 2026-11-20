@@ -22,6 +22,11 @@ export default defineConfig({
   // site lived at <user>.github.io/EuroFisk/ — leaving it that way after the domain was
   // attached pointed every asset at a path that does not exist.
   base: '/',
+  server: {
+    host: '127.0.0.1',
+    port: 5177,
+    strictPort: true,
+  },
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
