@@ -5,6 +5,9 @@ import { useLang, type Lang } from "./LangContext";
 import { cmsBranch, cmsLocale, mediaUrl } from "./cmsContent";
 import { T, type Translation } from "./translations";
 import { RESTAURANT_COPY } from "./restaurantCopy";
+import legacyMenuCopyReplacements from "./legacyMenuCopy.json";
+
+const legacyMenuCopy = new Map(Object.entries(legacyMenuCopyReplacements));
 
 type BranchOverrides = Partial<Record<Lang, Partial<Translation>>>;
 
@@ -171,7 +174,12 @@ export function copyFor(branchId: BranchId, lang: Lang): Translation {
     contactTitle: concise.contactTitle,
     contactSub: concise.contactSub,
   } as Translation;
-  return applyCms(base, branchId, lang);
+  const out = applyCms(base, branchId, lang);
+  // Retire the old price promotion without rewriting CMS records. Custom menu copy
+  // and subsequent CMS edits continue to take priority over the built-in defaults.
+  out.menuPageSub = legacyMenuCopy.get(out.menuPageSub) ?? out.menuPageSub;
+  out.menuNote = legacyMenuCopy.get(out.menuNote) ?? out.menuNote;
+  return out;
 }
 
 /** The active translation: current language, with the selected branch's overrides applied. */

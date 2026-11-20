@@ -146,8 +146,8 @@ const sv = {
 
   menuPageLabel: "Fullständig meny",
   menuPageTitle: "Vår meny",
-  menuPageSub: "Välj din favorit — huvudrätterna kostar 149 kr och portionsmenyns tillbehör ingår.",
-  menuNote: "Har du allergier eller särskilda önskemål? Fråga personalen. Priser inklusive moms.",
+  menuPageSub: "Välj din favorit — portionsmenyns tillbehör ingår.",
+  menuNote: "Har du allergier eller särskilda önskemål? Fråga personalen.",
   menuDishes: "rätter",
   menuCategoriesAria: "Menykategorier",
   orderCta: "Beställ",
@@ -204,7 +204,7 @@ const sv = {
   seoSiteTitle: "EuroFisk Malmö | Färsk fisk i Rosengård",
   seoSiteDescription: "EuroFisk erbjuder färsk, grillad och friterad fisk i Rosengård, Malmö. Se menyer, öppettider och kontaktuppgifter.",
   seoDescription: "{branch} — {address}. {hours}. Se menyn och beställ online.",
-  seoMenuDescription: "Se menyn för {branch} i Malmö. Färsk, grillad och friterad fisk, aktuella priser och information om beställning.",
+  seoMenuDescription: "Se menyn för {branch} i Malmö. Utforska våra fiskrätter, skaldjur och tillbehör.",
   seoReviewsDescription: "Läs vad gäster säger om {branch} i Malmö. Se även meny, öppettider och kontaktuppgifter.",
 
   footerNav: "Navigera", footerContact: "Kontakt",
@@ -353,8 +353,8 @@ const en: Translation = {
 
   menuPageLabel: "Full menu",
   menuPageTitle: "Our Menu",
-  menuPageSub: "Choose your favourite — main dishes are 149 kr and the portion-menu accompaniments are included.",
-  menuNote: "Have allergies or special requests? Ask our staff. Prices include VAT.",
+  menuPageSub: "Choose your favourite — the portion-menu accompaniments are included.",
+  menuNote: "Have allergies or special requests? Ask our staff.",
   menuDishes: "dishes",
   menuCategoriesAria: "Menu categories",
   orderCta: "Order",
@@ -411,7 +411,7 @@ const en: Translation = {
   seoSiteTitle: "EuroFisk Malmö | Fresh fish in Rosengård",
   seoSiteDescription: "EuroFisk serves fresh, charcoal-grilled and fried fish in Rosengård, Malmö. View menus, opening hours and contact details.",
   seoDescription: "{branch} — {address}. {hours}. See the menu and order online.",
-  seoMenuDescription: "View the menu for {branch} in Malmö, including fresh, charcoal-grilled and fried fish, current prices and ordering information.",
+  seoMenuDescription: "View the menu for {branch} in Malmö. Explore our fish dishes, seafood and sides.",
   seoReviewsDescription: "Read what guests say about {branch} in Malmö. You can also view the menu, opening hours and contact details.",
 
   footerNav: "Navigate", footerContact: "Contact",
@@ -558,8 +558,8 @@ const ar: Translation = {
 
   menuPageLabel: "القائمة الكاملة",
   menuPageTitle: "قائمتنا",
-  menuPageSub: "اختر طبقك المفضّل — الأطباق الرئيسية بـ 149 kr وتشمل مقبّلات قائمة الوجبة.",
-  menuNote: "لديك حساسية أو طلب خاص؟ اسأل العاملين. الأسعار شاملة الضريبة.",
+  menuPageSub: "اختر طبقك المفضّل — مقبّلات قائمة الوجبة مشمولة.",
+  menuNote: "لديك حساسية أو طلب خاص؟ اسأل العاملين.",
   menuDishes: "أطباق",
   menuCategoriesAria: "أقسام القائمة",
   orderCta: "اطلب",
@@ -616,7 +616,7 @@ const ar: Translation = {
   seoSiteTitle: "EuroFisk مالمو | سمك طازج في Rosengård",
   seoSiteDescription: "يقدّم EuroFisk السمك الطازج والمشوي على الفحم والمقلي في Rosengård في مالمو. تصفّح القوائم وساعات العمل وبيانات التواصل.",
   seoDescription: "{branch} — {address}. {hours}. اطّلع على القائمة واطلب أونلاين.",
-  seoMenuDescription: "تصفّح قائمة {branch} في مالمو، بما فيها السمك الطازج والمشوي على الفحم والمقلي والأسعار الحالية ومعلومات الطلب.",
+  seoMenuDescription: "تصفّح قائمة {branch} في مالمو. اكتشف أطباق السمك والمأكولات البحرية والأطباق الجانبية.",
   seoReviewsDescription: "اقرأ آراء الزوّار حول {branch} في مالمو. ويمكنك أيضاً الاطلاع على القائمة وساعات العمل وبيانات التواصل.",
 
   footerNav: "تصفّح", footerContact: "تواصل",

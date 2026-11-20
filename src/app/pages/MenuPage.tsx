@@ -9,7 +9,6 @@ import { useT } from "@/app/lib/branchCopy";
 import { menuFor } from "@/app/lib/menuContent";
 import { useLang } from "@/app/lib/LangContext";
 import { type MenuCategory, type MenuItem } from "@/app/lib/menuData";
-import { useOrder } from "@/app/lib/OrderContext";
 import { display, sans } from "@/app/lib/styles";
 import { type Translation } from "@/app/lib/translations";
 
@@ -69,22 +68,17 @@ function MenuHeader({
 
 function MenuItemCard({
   item,
-  priceUnit,
   showPhoto,
   t,
 }: {
   item: MenuItem;
-  priceUnit?: string;
   /** False when no item in the category has a photo — 14 identical dashed circles
    *  is noise, not a signal. */
   showPhoto: boolean;
   t: Translation;
 }) {
-  const { openOrder } = useOrder();
-  const orderable = item.orderable !== false;
-
   return (
-    <div className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md hover:shadow-primary/8">
+    <div className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4">
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex flex-wrap items-center gap-2">
           <span className="text-sm font-semibold leading-tight text-foreground lg:text-base">
@@ -102,55 +96,23 @@ function MenuItemCard({
           </p>
         )}
         {item.desc && (
-          <p className="mb-3 text-xs leading-relaxed text-muted-foreground">{item.desc}</p>
+          <p className="text-xs leading-relaxed text-muted-foreground">{item.desc}</p>
         )}
 
-        {item.options ? (
-          // Each variant opens the same online-order entry point.
-          <div className="flex flex-wrap gap-2">
-            {item.options.map((option) => {
-              // basis-24 + flex-1: the variants sit side by side when the card is wide
-              // enough and wrap onto their own lines when it is not.
-              return (
-                <button
-                  key={option.label}
-                  type="button" onClick={openOrder}
-                  className="group/price flex min-h-11 min-w-0 flex-1 basis-24 flex-col justify-center rounded-xl border border-border bg-secondary/55 px-3 py-2 transition-colors hover:border-primary hover:bg-primary hover:text-white"
-                  aria-label={`${t.orderCta} ${item.name}, ${option.label}`}
-                >
-                  <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground transition-colors group-hover/price:text-white/70">
-                    {option.label}
-                  </span>
-                  <strong className="mt-0.5 block text-sm text-primary transition-colors group-hover/price:text-white">
-                    {option.price}
-                  </strong>
-                </button>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-sm font-bold text-primary">{item.price}</span>
-            {orderable && (
-              <button
-                type="button" onClick={openOrder}
-                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-primary/25 px-3 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
-                aria-label={`${t.orderCta} ${item.name}`}
-              >
-                {t.orderCta}
-              </button>
-            )}
-          </div>
-        )}
+        {item.options?.length ? (
+          <p className="mt-3 text-xs text-muted-foreground">
+            {item.options.map((option) => option.label).join(" · ")}
+          </p>
+        ) : null}
       </div>
 
       {!showPhoto ? null : item.photo ? (
-        <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-border shadow-sm transition-colors group-hover:border-primary/30 lg:h-24 lg:w-24">
+        <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-border shadow-sm lg:h-24 lg:w-24">
           <ImageWithFallback
             src={item.photo}
             fallbackSrc={bundledPhotoFor(item.photo)}
             alt={item.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="h-full w-full object-cover"
             loading="lazy"
             decoding="async"
           />
@@ -167,11 +129,7 @@ function MenuItemCard({
   );
 }
 
-/**
- * One layout for both branches. The per-kilo price list is adapted into the same
- * category/item shape (see kgCategories), so the only thing that differs between the two
- * menus is the data and the copy — never the page structure.
- */
+/** Browse CMS menu categories and dishes; ordering happens on the external order site. */
 function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translation }) {
   const { branch } = useBranch();
   const [activeId, setActiveId] = useState(categories[0].id);
@@ -299,7 +257,6 @@ function MenuView({ categories, t }: { categories: MenuCategory[]; t: Translatio
                     <MenuItemCard
                       key={item.name}
                       item={item}
-                      priceUnit={category.priceUnit}
                       showPhoto={category.items.some((entry) => entry.photo)}
                       t={t}
                     />

@@ -108,6 +108,9 @@ if (!existsSync(contentPath)) {
 
 const shell = readFileSync(shellPath, "utf8");
 const content = JSON.parse(readFileSync(contentPath, "utf8"));
+const legacyMenuCopy = new Map(Object.entries(JSON.parse(
+  readFileSync(join(root, "src/app/lib/legacyMenuCopy.json"), "utf8"),
+)));
 const seoMarker = /<!-- SEO_META_START[\s\S]*?SEO_META_END -->/;
 
 if (!seoMarker.test(shell)) {
@@ -167,7 +170,17 @@ function canonicalUrl(lang, logicalPath) {
 }
 
 function branchFor(lang, slug) {
-  return content.locales[lang].branches.find((branch) => branch.slug === slug);
+  const branch = content.locales[lang].branches.find((branch) => branch.slug === slug);
+  if (!branch) return branch;
+  // Keep metadata and crawler copy consistent with the public menu, preserving CMS data.
+  return {
+    ...branch,
+    menuIntro: {
+      ...branch.menuIntro,
+      sub: legacyMenuCopy.get(branch.menuIntro?.sub) ?? branch.menuIntro?.sub,
+      note: legacyMenuCopy.get(branch.menuIntro?.note) ?? branch.menuIntro?.note,
+    },
+  };
 }
 
 function publicMediaUrl(url) {
@@ -540,10 +553,8 @@ function menuLines(lang, branch) {
       `### ${category.label}`,
       category.note ? category.note : null,
       ...category.items.map((item) => {
-        const prices = item.options?.length
-          ? item.options.map((option) => `${option.label}: ${option.price}`).join("; ")
-          : item.price;
-        return `- ${item.name}${item.desc ? ` — ${item.desc}` : ""}${prices ? ` (${prices})` : ""}`;
+        const options = item.options?.map((option) => option.label).join("; ");
+        return `- ${item.name}${item.desc ? ` — ${item.desc}` : ""}${options ? ` (${options})` : ""}`;
       }),
       "",
     ])
